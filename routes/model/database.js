@@ -10,7 +10,7 @@ const con = mysql.createConnection({
   host: DB_HOST || "127.0.0.1",
   user: DB_USER || "root",
   password: DB_PASS,
-  database: DB_NAME || "facebook",
+  database: DB_NAME || "foodfinder",
   multipleStatements: true
 });
 
@@ -19,10 +19,11 @@ con.connect(function(err) {
   console.log("Connected!");
 
   let sql =
-    "DROP TABLE if exists students; CREATE TABLE students(id INT NOT NULL AUTO_INCREMENT, firstname VARCHAR(40) not null, lastname VARCHAR(40) not null, PRIMARY KEY (id));";
+    "DROP TABLE if exists users; CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), username VARCHAR(255), password VARCHAR(255));";
+    "DROP TABLE if exists restaurants; CREATE TABLE restaurants(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), location VARCHAR(255), allergens VARCHAR(255), address VARCHAR(255), contact_details VARCHAR(255), ratings VARCHAR(255), reviews VARCHAR(255), website VARCHAR(255), website VARCHAR(255), favorite (BOOLEAN));";
   con.query(sql, function(err, result) {
     if (err) throw err;
-    console.log("Table creation `students` was successful!");
+    console.log("Table creation `foodfinder` was successful!");
 
     console.log("Closing...");
   });
