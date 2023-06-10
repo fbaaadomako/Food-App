@@ -1,34 +1,32 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useEffect } from "react";
 import "./App.css";
+import html2pdf from "html2pdf.js";
 
 function App() {
-  const [count, setCount] = useState(0);
+
+  const onButtonClick = () => {
+    const element = document.getElementById("pdf-container");
+
+    html2pdf().set({
+      margin: 0.5,
+      filename: "webpage.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    }).from(element).save();
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  <div>
+      {/* Render the content to be converted to PDF */}
+      <div id="pdf-container">
+        <h1>Test 1 2 3</h1>
+        <h3>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumv Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</h3>
       </div>
-      <h1>FRIENDLY FOOD FINDER</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      {/* Button to trigger PDF generation and download */}
+      <button onClick={onButtonClick}>Download PDF</button>
+    </div>
   );
 }
 
