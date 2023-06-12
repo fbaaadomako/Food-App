@@ -5,6 +5,7 @@ import Favorites from "./components/Favorites";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import About from "./components/About";
+// import Translate from "./components/Translate";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/about" element={<About />} />
         </Routes>
+
+        {/* <Translate /> */}
       </div>
     </Router>
   );
