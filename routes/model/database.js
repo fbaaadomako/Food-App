@@ -20,7 +20,7 @@ con.connect(function(err) {
 
   let sql =
     "DROP TABLE if exists users; CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), username VARCHAR(255), password VARCHAR(255));";
-    "DROP TABLE if exists restaurants; CREATE TABLE restaurants(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), location VARCHAR(255), allergens VARCHAR(255), address VARCHAR(255), contact_details VARCHAR(255), ratings VARCHAR(255), reviews VARCHAR(255), website VARCHAR(255), website VARCHAR(255), favorite (BOOLEAN));";
+    "DROP TABLE if exists restaurants; CREATE TABLE restaurants(id VARCHAR(255) PRIMARY KEY, allergens VARCHAR(255));";
   con.query(sql, function(err, result) {
     if (err) throw err;
     console.log("Table creation `foodfinder` was successful!");
