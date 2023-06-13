@@ -15,19 +15,23 @@ DROP TABLE IF EXISTS restaurants;
      
 CREATE TABLE restaurants (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    res_id VARCHAR(200),
-    city VARCHAR(200),
-    name VARCHAR(200),
-    allergens VARCHAR(200),
+    restaurant_id VARCHAR(255),
+    dairy_free BOOLEAN,
+    gluten_free BOOLEAN,
+    vegetarian BOOLEAN,
+    vegan BOOLEAN,
 );
 
+DROP TABLE if exists restaurants; 
+CREATE TABLE restaurants(id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, restaurant_id VARCHAR(255), dairy_free BOOLEAN, gluten_free BOOLEAN, vegetarian BOOLEAN, vegan BOOLEAN);
 
 
-INSERT INTO restaurants (id, res_id, city, name, allergens) VALUES 
-(),
-(),
-(),
+INSERT INTO restaurants (restaurant_id, dairy_free, gluten_free, vegetarian, vegan) VALUES 
+("ChIJw2SzTVsbdkgRFLrwhdiLmCw", 0, 1, 0, 0),
+("ChIJq5XIW8oEdkgRg4k6dRh5T-k", 0, 1, 0, 0),
 ();
+
+
 
 
 

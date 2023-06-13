@@ -16,8 +16,7 @@ module.exports = async function db(query) {
       host: DB_HOST || "127.0.0.1",
       user: DB_USER || "root",
       password: DB_PASS,
-      // changed from "database" to "cities"; didn't work
-      database: DB_NAME || "cities",
+      database: DB_NAME || "foodfinder",
       multipleStatements: true
     });
 
