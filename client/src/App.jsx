@@ -6,7 +6,6 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import About from "./components/About";
 import Restaurants from "./components/Restaurants";
-// import Translate from "./components/Translate";
 
 function App() {
   return (
@@ -29,8 +28,6 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/restaurants" element={<Restaurants />} />
         </Routes>
-
-        {/* <Translate /> */}
       </div>
     </Router>
   );
