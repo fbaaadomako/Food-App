@@ -65,7 +65,6 @@ router.post("/login", async (req, res) => {
 });
 
 /***** CLIENT: LOGIN FOR USERS ONLY *****/
-
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 })
