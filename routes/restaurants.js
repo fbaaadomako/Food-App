@@ -17,7 +17,7 @@ router.get('/restaurants', async (req, res) => {
     const promises = Object.values(restaurants).map(async (restaurant) => {
       const { restaurant_id } = restaurant;
 
-      const apiUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant_id}&fields=name,formatted_address,website,formatted_phone_number&key=${apiKey}`;
+      const apiUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant_id}&fields=name,formatted_address,website,formatted_phone_number,rating,geometry&key=${apiKey}`;
 
       const response = await fetch(apiUrl);
 
@@ -29,16 +29,22 @@ router.get('/restaurants', async (req, res) => {
 
       const placeData = data.result;
       const name = placeData.name;
-      const location = placeData.formatted_address;
+      const address = placeData.formatted_address;
       const website = placeData.website;
       const phone = placeData.formatted_phone_number;
+      const rating = placeData.rating;
+      const longitude = placeData.geometry.location.lng;
+      const latitude = placeData.geometry.location.lat;
 
       return {
         id: restaurant.id,
         name,
-        location,
+        address,
         website,
         phone,
+        rating,
+        longitude, 
+        latitude,
       };
     });
 
