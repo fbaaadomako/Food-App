@@ -1,42 +1,49 @@
 import React, { useState, useEffect } from "react";
 import "../restaurants_favorites.css";
-import mapboxgl from "mapbox-gl";
-import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 
 function Restaurants() {
-  const [restaurant, setRestaurant] = useState(null);
-  const [error, setError] = useState(null);
+  const [city, setCity] = useState('');
+  const [restaurants, setRestaurants] = useState([]);
 
-  useEffect(() => {
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg";
-    const map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [-79.4512, 43.6568],
-      zoom: 13,
-    });
+  const handleInputChange = (e) => {
+    setCity(e.target.value);
+  };
 
-    map.addControl(
-      new MapboxDirections({
-        accessToken: mapboxgl.accessToken,
-      }),
-      "top-left"
-    );
-  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`/api/restaurants?city=${city}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch restaurant details');
+      }
+
+      const data = await response.json();
+      setRestaurants(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   return (
     <div>
-      <div>
-        {/* <h1>{restaurant.name}</h1>
-        <p>Location: {restaurant.location}</p>
-        <p>Address: {restaurant.address}</p>
-        <p>Contact Details: {restaurant.contactDetails}</p>
-        <p>Ratings: {restaurant.ratings}</p>
-        <p>Reviews: {restaurant.reviews}</p>
-        <p>Website: {restaurant.website}</p> */}
-      </div>
-      <div id="map"></div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={city} onChange={handleInputChange} placeholder="Enter city" />
+        <button type="submit">Get Restaurants</button>
+      </form>
+
+      <ul>
+        {restaurants.map((restaurant) => (
+          <li key={restaurant.id}>
+            <h3>{restaurant.name}</h3>
+            <p>Location: {restaurant.location}</p>
+            <p>Website:
+            <a href={restaurant.website} target="_blank">{restaurant.website}</a> 
+            </p>
+            <p>Phone: {restaurant.phone}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
