@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
-import "../restaurants_favorites.css";
+import React, { useState, useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+import '../restaurants_favorites.css';
+import heart from '../assets/heart.png';
+import map from '../assets/map.png';
 
 function Restaurants() {
   const [city, setCity] = useState('');
   const [restaurants, setRestaurants] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
@@ -25,6 +30,31 @@ function Restaurants() {
     }
   };
 
+  const handleHeartClick = () => {
+    setIsClicked(!isClicked);
+  };
+
+  useEffect(() => {
+    mapboxgl.accessToken = 'pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg';
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [-79.4512, 43.6568],
+      zoom: 13
+    });
+
+    map.addControl(
+      new MapboxDirections({
+        accessToken: mapboxgl.accessToken
+      }),
+      'top-left'
+    );
+  }, []);
+
+  const handleMapIconClick = (longitude, latitude) => {
+    window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -34,16 +64,25 @@ function Restaurants() {
 
       <ul>
         {restaurants.map((restaurant) => (
-          <li key={restaurant.id}>
-            <h3>{restaurant.name}</h3>
-            <p>Location: {restaurant.location}</p>
-            <p>Website:
-            <a href={restaurant.website} target="_blank">{restaurant.website}</a> 
-            </p>
+          <li key={restaurant.id} className="card">
+            <h3>
+              <img src={heart} alt="heart" className={`heart-icon ${isClicked ? 'clicked' : ''}`} onClick={handleHeartClick} />
+              {restaurant.name}</h3>
+            <p>Rating: {restaurant.rating}</p>
+            <p>Address: {restaurant.address}</p>
             <p>Phone: {restaurant.phone}</p>
+            <p>Website: <a href={restaurant.website} target="_blank">{restaurant.website}</a></p>
+            <img
+              src={map}
+              alt="map"
+              className="map-icon"
+              onClick={() => handleMapIconClick(restaurant.longitude, restaurant.latitude)}
+            />
           </li>
         ))}
       </ul>
+
+      <div id="map"></div>
     </div>
   );
 }
