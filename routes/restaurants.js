@@ -1,18 +1,22 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-require('dotenv').config();
-const fetch = require('node-fetch');
+require("dotenv").config();
+const fetch = require("node-fetch");
 
 const apiKey = process.env.API_KEY; // Access the API key from .env
 
 const db = require("../model/helper"); // Import the helper module
 
-router.get('/restaurants', async (req, res) => {
+// localhost:4000/api/restaurants?city=cityname
+router.get("/restaurants", async (req, res) => {
   const { city } = req.query;
 
   try {
-    const { data: restaurants } = await db(`SELECT * FROM restaurants WHERE city = '${city}';`);
-    console.log('restaurants:', restaurants);
+    const { data: restaurants } = await db(
+      `SELECT * FROM restaurants WHERE city = '${city}';`
+    );
+
+    console.log("restaurants:", restaurants);
 
     const promises = Object.values(restaurants).map(async (restaurant) => {
       const { restaurant_id } = restaurant;
@@ -22,7 +26,7 @@ router.get('/restaurants', async (req, res) => {
       const response = await fetch(apiUrl);
 
       if (!response.ok) {
-        throw new Error('Failed to fetch restaurant details');
+        throw new Error("Failed to fetch restaurant details");
       }
 
       const data = await response.json();
@@ -43,7 +47,7 @@ router.get('/restaurants', async (req, res) => {
         website,
         phone,
         rating,
-        longitude, 
+        longitude,
         latitude,
       };
     });
@@ -52,8 +56,8 @@ router.get('/restaurants', async (req, res) => {
 
     res.json(listOfRestaurants);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Failed to fetch restaurant details' });
+    console.error("Error:", error);
+    res.status(500).json({ error: "Failed to fetch restaurant details" });
   }
 });
 
