@@ -73,6 +73,9 @@ function Restaurants() {
       <ul>
         {restaurants.map((restaurant) => (
           <li key={restaurant.id} className="card">
+    
+            <img src={restaurant.photos}
+            className='restaurant-image'/>
             <h3>
               <img
                 src={heart}

@@ -16,12 +16,12 @@ router.get("/restaurants", async (req, res) => {
       `SELECT * FROM restaurants WHERE city = '${city}';`
     );
 
-    console.log("restaurants:", restaurants);
+    // console.log("restaurants:", restaurants);
 
     const promises = Object.values(restaurants).map(async (restaurant) => {
       const { restaurant_id } = restaurant;
 
-      const apiUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant_id}&fields=name,formatted_address,website,formatted_phone_number,rating,geometry&key=${apiKey}`;
+      const apiUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant_id}&fields=name,formatted_address,website,formatted_phone_number,rating,geometry,photos&key=${apiKey}`;
 
       const response = await fetch(apiUrl);
 
@@ -39,6 +39,8 @@ router.get("/restaurants", async (req, res) => {
       const rating = placeData.rating;
       const longitude = placeData.geometry.location.lng;
       const latitude = placeData.geometry.location.lat;
+      const photoReference = placeData.photos[0].photo_reference;
+      const photos = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&maxheight=1600&photoreference=${photoReference}&key=${apiKey}`;
 
       return {
         id: restaurant.id,
@@ -49,6 +51,7 @@ router.get("/restaurants", async (req, res) => {
         rating,
         longitude,
         latitude,
+        photos,
       };
     });
 

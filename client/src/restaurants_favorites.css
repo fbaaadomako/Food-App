@@ -1,1 +1,27 @@
 /* CSS FOR RESTAURANTS and FAVORITES pages */
+
+/* RESTAURANTS */
+.heart-icon {
+  position: absolute;
+  top: 87%;
+  right: 6%;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.heart-icon.clicked {
+  filter: none;
+  color: red;
+}
+
+.map-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.restaurant-image {
+  width: 400px; /* Specify the desired width */
+  height: 300px; /* Specify the desired height */
+}
+
