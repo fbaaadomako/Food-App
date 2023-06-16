@@ -5,7 +5,6 @@ import Favorites from "./components/Favorites";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import About from "./components/About";
-import Restaurants from "./components/Restaurants";
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
           <Link to="/login">Log In</Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/about">About</Link>
-          <Link to="/restaurants">Restaurants</Link>
         </nav>
 
         <Routes>
@@ -26,7 +24,6 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/about" element={<About />} />
-          <Route path="/restaurants" element={<Restaurants />} />
         </Routes>
       </div>
     </Router>

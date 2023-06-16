@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React from 'react';
+import Restaurants from './Restaurants';
 
 function Home() {
   return (
     <div>
-      <h1>Home page</h1>
+      <Restaurants />
     </div>
   );
 }

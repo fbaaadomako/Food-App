@@ -1,41 +1,87 @@
-import React, { useState, useEffect } from "react";
-import "../restaurants_favorites.css";
-import mapboxgl from "mapbox-gl";
-import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
+import React, { useState, useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+import '../restaurants_favorites.css';
+import heart from '../assets/heart.png';
+import map from '../assets/map.png';
 
 function Restaurants() {
-  const [restaurant, setRestaurant] = useState(null);
-  const [error, setError] = useState(null);
+  const [city, setCity] = useState('');
+  const [restaurants, setRestaurants] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleInputChange = (e) => {
+    setCity(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`/api/restaurants?city=${city}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch restaurant details');
+      }
+
+      const data = await response.json();
+      setRestaurants(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleHeartClick = () => {
+    setIsClicked(!isClicked);
+  };
 
   useEffect(() => {
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg";
+    mapboxgl.accessToken = 'pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg';
     const map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v12",
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
       center: [-79.4512, 43.6568],
-      zoom: 13,
+      zoom: 13
     });
 
     map.addControl(
       new MapboxDirections({
-        accessToken: mapboxgl.accessToken,
+        accessToken: mapboxgl.accessToken
       }),
-      "top-left"
+      'top-left'
     );
   }, []);
 
+  const handleMapIconClick = (longitude, latitude) => {
+    window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
+  };
+
   return (
     <div>
-      <div>
-        {/* <h1>{restaurant.name}</h1>
-        <p>Location: {restaurant.location}</p>
-        <p>Address: {restaurant.address}</p>
-        <p>Contact Details: {restaurant.contactDetails}</p>
-        <p>Ratings: {restaurant.ratings}</p>
-        <p>Reviews: {restaurant.reviews}</p>
-        <p>Website: {restaurant.website}</p> */}
-      </div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={city} onChange={handleInputChange} placeholder="Enter city" />
+        <button type="submit">Get Restaurants</button>
+      </form>
+
+      <ul>
+        {restaurants.map((restaurant) => (
+          <li key={restaurant.id} className="card">
+            <h3>
+              <img src={heart} alt="heart" className={`heart-icon ${isClicked ? 'clicked' : ''}`} onClick={handleHeartClick} />
+              {restaurant.name}</h3>
+            <p>Rating: {restaurant.rating}</p>
+            <p>Address: {restaurant.address}</p>
+            <p>Phone: {restaurant.phone}</p>
+            <p>Website: <a href={restaurant.website} target="_blank">{restaurant.website}</a></p>
+            <img
+              src={map}
+              alt="map"
+              className="map-icon"
+              onClick={() => handleMapIconClick(restaurant.longitude, restaurant.latitude)}
+            />
+          </li>
+        ))}
+      </ul>
+
       <div id="map"></div>
     </div>
   );
