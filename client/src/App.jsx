@@ -5,7 +5,7 @@ import Favorites from "./components/Favorites";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import About from "./components/About";
- //import Translate from "./components/Translate";
+// import Translate from "./components/Translate";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <Route path="/about" element={<About />} />
         </Routes>
 
-        { /* <Translate /> */}
+        {/* <Translate /> */}
       </div>
     </Router>
   );

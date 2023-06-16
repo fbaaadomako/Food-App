@@ -1,47 +1,63 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-require('dotenv').config();
+require("dotenv").config();
+const fetch = require("node-fetch");
 
 const apiKey = process.env.API_KEY; // Access the API key from .env
 
-//localhost:4000/api/restaurants/:name
-router.get('/restaurants/:name', async (req, res, next) => {
-  const { name } = req.params; // Access the restaurant name from the URL parameter
-  const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${name}&key=${apiKey}`;
+const db = require("../model/helper"); // Import the helper module
+
+// localhost:4000/api/restaurants?city=cityname
+router.get("/restaurants", async (req, res) => {
+  const { city } = req.query;
 
   try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error('Failed to fetch restaurant details');
-    }
+    const { data: restaurants } = await db(
+      `SELECT * FROM restaurants WHERE city = '${city}';`
+    );
 
-    const data = await response.json();
-    if (data.results.length === 0) {
-      throw new Error('Restaurant not found');
-    }
+    console.log("restaurants:", restaurants);
 
-    const restaurant = data.results[0];
-    const name = restaurant.name;
-    const location = restaurant.geometry.location;
-    const address = restaurant.formatted_address;
-    const contactDetails = restaurant.formatted_phone_number;
-    const ratings = restaurant.rating;
-    const reviews = restaurant.reviews;
-    const website = restaurant.website;
+    const promises = Object.values(restaurants).map(async (restaurant) => {
+      const { restaurant_id } = restaurant;
 
-    const restaurantDetails = {
-      name,
-      location,
-      address,
-      contact_details: contactDetails,
-      ratings,
-      reviews,
-      website,
-    };
+      const apiUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant_id}&fields=name,formatted_address,website,formatted_phone_number,rating,geometry&key=${apiKey}`;
 
-    res.json(restaurantDetails);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+      const response = await fetch(apiUrl);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch restaurant details");
+      }
+
+      const data = await response.json();
+
+      const placeData = data.result;
+      const name = placeData.name;
+      const address = placeData.formatted_address;
+      const website = placeData.website;
+      const phone = placeData.formatted_phone_number;
+      const rating = placeData.rating;
+      const longitude = placeData.geometry.location.lng;
+      const latitude = placeData.geometry.location.lat;
+
+      return {
+        id: restaurant.id,
+        name,
+        address,
+        website,
+        phone,
+        rating,
+        longitude,
+        latitude,
+      };
+    });
+
+    const listOfRestaurants = await Promise.all(promises);
+
+    res.json(listOfRestaurants);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Failed to fetch restaurant details" });
   }
 });
 
