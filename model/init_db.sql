@@ -64,3 +64,4 @@ INSERT INTO restaurants (restaurant_id, city, dairy_free, gluten_free, vegetaria
 
 
 
+
