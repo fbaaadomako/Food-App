@@ -54,10 +54,10 @@ INSERT INTO restaurants (restaurant_id, city, dairy_free, gluten_free, vegetaria
 ("ChIJaewDdZhJzDEReZKBF9_riJ4", "Kuala Lumpur", 1, 1, 1, 1),
 ("ChIJR8dsSfJIzDERa73fXOdQv88", "Kuala Lumpur", 1, 1, 1, 1),
 ("ChIJt0wX7cBJzDER4N1CYmzQrKs", "Kuala Lumpur", 0, 1, 0, 0),
-("ChIJ-RVey15SzDERbYl4IyJFEZE", "Kuala Lumpur", 1, 0, 1, 1),
-("ChIJKTxLJNVJzDERs_iwRo6PCgc", "Kuala Lumpur", 1, 1, 1, 1),
-("ChIJEz4yYRM3zDERPeJBXCloKio", "Kuala Lumpur", 0, 1, 0, 0),
-("ChIJZ05BeSZJzDERlVmxJahQ1iM", "Kuala Lumpur", 1, 1, 1, 1);
+("ChIJZ05BeSZJzDERlVmxJahQ1iM", "Kuala Lumpur", 1, 0, 1, 1),
+("ChIJ-RVey15SzDERbYl4IyJFEZE", "Kuala Lumpur", 1, 1, 1, 1),
+("ChIJKTxLJNVJzDERs_iwRo6PCgc", "Kuala Lumpur", 0, 1, 0, 0),
+("ChIJEz4yYRM3zDERPeJBXCloKio", "Kuala Lumpur", 1, 1, 1, 1);
 
 
 
