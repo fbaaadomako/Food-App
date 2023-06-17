@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../login_signup.css";
+import { useNavigate } from "react-router-dom";
 
 function LogIn() {
   const [credentials, setCredentials] = useState({
@@ -8,6 +9,8 @@ function LogIn() {
   });
 
   const [error, setError] = useState("Password Incorrect");
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,15 +26,14 @@ function LogIn() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
       };
-      const results = await fetch("/users/login", options);
+      const results = await fetch("http://localhost:4000/users/login", options);
       const data = await results.json(); //this is the token
-      console.log("dataTOKENHERE", data.token);
       // 2. get token (the data) from server and store in localStorage
       localStorage.setItem("token", data.token);
       //3. once logged in, redirect user home page with favorites option
-      //TO BE COMPLETED - ERROR in POST on front end
-    } catch (err) {
-      console.log(err);
+      // navigate("/favorites");
+    } catch {
+      console.log("err");
     }
   };
 

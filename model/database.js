@@ -12,10 +12,10 @@ const con = mysql.createConnection({
   user: DB_USER || "root",
   password: DB_PASS,
   database: DB_NAME || "foodfinder",
-  multipleStatements: true,
+  multipleStatements: true
 });
 
-con.connect(function (err) {
+con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!"); 
  
