@@ -57,11 +57,32 @@ INSERT INTO restaurants (restaurant_id, city, dairy_free, gluten_free, vegetaria
 ("ChIJZ05BeSZJzDERlVmxJahQ1iM", "Kuala Lumpur", 1, 0, 1, 1),
 ("ChIJ-RVey15SzDERbYl4IyJFEZE", "Kuala Lumpur", 1, 1, 1, 1),
 ("ChIJKTxLJNVJzDERs_iwRo6PCgc", "Kuala Lumpur", 0, 1, 0, 0),
-("ChIJEz4yYRM3zDERPeJBXCloKio", "Kuala Lumpur", 1, 1, 1, 1);
-
-
-
-
-
-
-
+("ChIJEz4yYRM3zDERPeJBXCloKio", "Kuala Lumpur", 1, 1, 1, 1),
+("ChIJf1T-PJlZwokR0i4jGbXJW6s", "New York", 0, 1, 0, 0),
+("ChIJDy4b5q1ZwokR7Ayp1Ap3-c0", "New York", 1, 1, 0, 0),
+("ChIJ2YRjN4dZwokRbL5DuScXEyo", "New York", 1, 1, 1, 1),
+("ChIJQwJ0Z1dYwokRSnJUdNRJz1w", "New York", 0, 1, 0, 1),
+("ChIJ0wsieaZZwokR72DD7FhYqnw", "New York", 1, 1, 1, 1),
+("ChIJlW3QcOe5yhQReubAn3p0VUs", "Istanbul", 0, 1, 0, 0),
+("ChIJt1-z8F-5yhQRtxLtYtwRpjY", "Istanbul", 0, 1, 0, 0),
+("ChIJa3romHq3yhQRQcfTUwmvMm0", "Istanbul", 0, 1, 1, 0),
+("ChIJUQ31a5u5yhQRb3NRj0euDJI", "Istanbul", 0, 0, 1, 0),
+("ChIJI-4ZD8C5yhQRAwWo7uBN1DI", "Istanbul", 0, 1, 1, 0),
+("ChIJVc1NH3sJAWAR9SMlbODV9NQ", "Kyoto", 1, 0, 0, 0),
+("ChIJjWdpVQ0JAWAR-myTPZSlpnY", "Kyoto", 0, 1, 0, 0),
+("ChIJq6pu55kIAWAR310_2PwqPzE", "Kyoto", 0, 0, 1, 1),
+("ChIJGRq7H5QIAWARJ7y_2Ecdhnw", "Kyoto", 0, 1, 0, 0),
+("ChIJ90FzJc4IAWARupqhmWZSg0E", "Kyoto", 1, 0, 0, 0),
+("ChIJlUTKy1VYwokREq7LLltPsGU", "New York", 1, 0, 0, 0),
+("ChIJj7W3TuFYwokRTjTOk8xipL4", "New York", 1, 0, 0, 0),
+("ChIJfVFqGrxZwokRqva56HtwbRs", "New York", 1, 0, 1, 0),
+("ChIJNa5r9j1awokR7V0YcDbff0o", "New York", 1, 1, 0, 0),
+("ChIJa8NEw_JZwokRkUBcmHh8xOg", "New York", 1, 0, 1, 0),
+("ChIJBzYIOnZZwokRmW5jxY34G-Q", "New York", 1, 0, 1, 0),
+("ChIJqYdbZKkI3IkRV6as15m1q6Y", "New York", 1, 0, 1, 0),
+("ChIJiYsEnohZwokR8oZK_TgmSjY", "New York", 1, 1, 1, 0),
+("ChIJx-PaOJQIAWARakay2oi7ZGY", "Kyoto", 1, 0, 0, 0),
+("ChIJ93yyvbQJAWARGdkjcdcUYUE", "Kyoto", 0, 1, 0, 0),
+("ChIJx1leax0IAWARNRROX0s67RE", "Kyoto", 0, 0, 1, 1),
+("ChIJWwNkMLoJAWAR7chswFIMOEI", "Kyoto", 0, 1, 0, 0),
+("ChIJEyjldY0IAWARnH7Fzl8bcfo", "Kyoto", 1, 0, 0, 0);
