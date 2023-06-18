@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import "../restaurants_favorites.css";
+import "./css/restaurants_favorites.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
-import "./Home.css";
-
 
 function Restaurants() {
   const [city, setCity] = useState("");
@@ -40,6 +38,8 @@ function Restaurants() {
   // }
 
   const handleFilter = (e) => {
+    // let word = "all"
+
     if (e.target.checked) {
       setAllergen([...allergen, e.target.value]);
       console.log(allergen);
@@ -79,24 +79,24 @@ function Restaurants() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-      <div className='img'
-      style={{
-        height: "500px",
-        width: "900px",
-        backgroundImage: 
-        'url("https://static.vecteezy.com/system/resources/thumbnails/020/115/455/small/food-background-breakfast-with-yogurt-granola-or-muesli-strawberries-banner-image-for-website-photo.jpg")',
-        backgroundSize: "contain",
-        backgroundRepeat: "no-repeat",
-      }}
-      >
-
-        <input
-          type="text"
-          value={city}
-          onChange={handleInputChange}
-          placeholder="Enter city"
-        />
-        <button type="submit">Get Restaurants</button>
+        <div
+          className="img"
+          style={{
+            height: "500px",
+            width: "900px",
+            backgroundImage:
+              'url("https://static.vecteezy.com/system/resources/thumbnails/020/115/455/small/food-background-breakfast-with-yogurt-granola-or-muesli-strawberries-banner-image-for-website-photo.jpg")',
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <input
+            type="text"
+            value={city}
+            onChange={handleInputChange}
+            placeholder="Enter city"
+          />
+          <button type="submit">Get Restaurants</button>
         </div>
       </form>
 
@@ -137,7 +137,11 @@ function Restaurants() {
             <p>Phone: {restaurant.phone}</p>
             <p>
               Website:{" "}
-              <a href={restaurant.website} target="_blank" rel="noopener noreferrer">
+              <a
+                href={restaurant.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {restaurant.website}
               </a>
             </p>

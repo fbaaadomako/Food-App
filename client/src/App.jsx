@@ -7,7 +7,6 @@ import LogIn from "./components/LogIn";
 import Favorites from "./components/Favorites";
 import SignUp from "./components/SignUp";
 import About from "./components/About";
-// import Translate from "./components/Translate";
 
 import UserContext from "./context/UserContext";
 
@@ -35,8 +34,6 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/about" element={<About />} />
           </Routes>
-
-          {/* <Translate /> */}
         </div>
       </Router>
     </UserContext.Provider>
