@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../login_signup.css";
+import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+
 
 function LogIn() {
   const [credentials, setCredentials] = useState({
@@ -8,9 +10,10 @@ function LogIn() {
     password: "",
   });
 
-  const [error, setError] = useState("Password Incorrect");
+  // const [error, setError] = useState("");
 
-  const navigate = useNavigate();
+  let auth = useContext(UserContext);
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,20 +31,22 @@ function LogIn() {
       };
       const results = await fetch("/users/login", options);
       const data = await results.json(); //this is the token
+      console.log(data);
       // 2. get token (the data) from server and store in localStorage
       localStorage.setItem("token", data.token);
-      console.log("TOKEN", token);
-      console.log("DATA TOKEN", data.token);
+      // 3. set isLoggedIn to true
+      auth.setIsLoggedIn(true);
       //3. once logged in, redirect user home page with favorites option
-      // navigate("/favorites");
-    } catch (err) {
-      console.log(err);
+      navigate("/favorites");
+    } catch (e) {
+      console.log(e);
     }
   };
 
   return (
     <div>
       <div className="row">
+        <h1>Welcome {auth.user.name}</h1>
         <div className="col-4 offset-4">
           Username
           <input
@@ -63,8 +68,7 @@ function LogIn() {
             Log in
           </button>
         </div>
-
-        {error}
+        {/* {error} */}
       </div>
     </div>
   );

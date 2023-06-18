@@ -1,18 +1,8 @@
---
--- Drop Tables
---
--- This looks like it's leftover from the sample repo: you don't have  tables called customers or purchases, and you don't use foreign keys, so you don't need this part.
--- SET foreign_key_checks = 0;
--- DROP TABLE IF EXISTS customers;
--- DROP TABLE IF EXISTS purchases;
--- SET foreign_key_checks = 1;
-
---
--- Create Tables
---
+-- Create restaurants table
 
 DROP TABLE IF EXISTS restaurants;
-     
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE restaurants (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     restaurant_id VARCHAR(255),
@@ -23,9 +13,13 @@ CREATE TABLE restaurants (
     vegan BOOLEAN
 );
 
-DROP TABLE if exists restaurants; 
-CREATE TABLE restaurants(id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, restaurant_id VARCHAR(255), city VARCHAR(255), dairy_free BOOLEAN, gluten_free BOOLEAN, vegetarian BOOLEAN, vegan BOOLEAN);
-
+CREATE TABLE users (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, 
+name VARCHAR(255),
+email VARCHAR(255),
+username VARCHAR(255),
+password VARCHAR(255)
+);
 
 INSERT INTO restaurants (restaurant_id, city, dairy_free, gluten_free, vegetarian, vegan) VALUES 
 ("ChIJw2SzTVsbdkgRFLrwhdiLmCw", "London", 0, 1, 0, 0),
@@ -54,13 +48,39 @@ INSERT INTO restaurants (restaurant_id, city, dairy_free, gluten_free, vegetaria
 ("ChIJaewDdZhJzDEReZKBF9_riJ4", "Kuala Lumpur", 1, 1, 1, 1),
 ("ChIJR8dsSfJIzDERa73fXOdQv88", "Kuala Lumpur", 1, 1, 1, 1),
 ("ChIJt0wX7cBJzDER4N1CYmzQrKs", "Kuala Lumpur", 0, 1, 0, 0),
-("ChIJ-RVey15SzDERbYl4IyJFEZE", "Kuala Lumpur", 1, 0, 1, 1),
-("ChIJKTxLJNVJzDERs_iwRo6PCgc", "Kuala Lumpur", 1, 1, 1, 1),
-("ChIJEz4yYRM3zDERPeJBXCloKio", "Kuala Lumpur", 0, 1, 0, 0),
-("ChIJZ05BeSZJzDERlVmxJahQ1iM", "Kuala Lumpur", 1, 1, 1, 1);
+("ChIJZ05BeSZJzDERlVmxJahQ1iM", "Kuala Lumpur", 1, 0, 1, 1),
+("ChIJ-RVey15SzDERbYl4IyJFEZE", "Kuala Lumpur", 1, 1, 1, 1),
+("ChIJKTxLJNVJzDERs_iwRo6PCgc", "Kuala Lumpur", 0, 1, 0, 0),
+("ChIJEz4yYRM3zDERPeJBXCloKio", "Kuala Lumpur", 1, 1, 1, 1),
+("ChIJf1T-PJlZwokR0i4jGbXJW6s", "New York", 0, 1, 0, 0),
+("ChIJDy4b5q1ZwokR7Ayp1Ap3-c0", "New York", 1, 1, 0, 0),
+("ChIJ2YRjN4dZwokRbL5DuScXEyo", "New York", 1, 1, 1, 1),
+("ChIJQwJ0Z1dYwokRSnJUdNRJz1w", "New York", 0, 1, 0, 1),
+("ChIJ0wsieaZZwokR72DD7FhYqnw", "New York", 1, 1, 1, 1),
+("ChIJlW3QcOe5yhQReubAn3p0VUs", "Istanbul", 0, 1, 0, 0),
+("ChIJt1-z8F-5yhQRtxLtYtwRpjY", "Istanbul", 0, 1, 0, 0),
+("ChIJa3romHq3yhQRQcfTUwmvMm0", "Istanbul", 0, 1, 1, 0),
+("ChIJUQ31a5u5yhQRb3NRj0euDJI", "Istanbul", 0, 0, 1, 0),
+("ChIJI-4ZD8C5yhQRAwWo7uBN1DI", "Istanbul", 0, 1, 1, 0),
+("ChIJVc1NH3sJAWAR9SMlbODV9NQ", "Kyoto", 1, 0, 0, 0),
+("ChIJjWdpVQ0JAWAR-myTPZSlpnY", "Kyoto", 0, 1, 0, 0),
+("ChIJq6pu55kIAWAR310_2PwqPzE", "Kyoto", 0, 0, 1, 1),
+("ChIJGRq7H5QIAWARJ7y_2Ecdhnw", "Kyoto", 0, 1, 0, 0),
+("ChIJ90FzJc4IAWARupqhmWZSg0E", "Kyoto", 1, 0, 0, 0),
+("ChIJlUTKy1VYwokREq7LLltPsGU", "New York", 1, 0, 0, 0),
+("ChIJj7W3TuFYwokRTjTOk8xipL4", "New York", 1, 0, 0, 0),
+("ChIJfVFqGrxZwokRqva56HtwbRs", "New York", 1, 0, 1, 0),
+("ChIJNa5r9j1awokR7V0YcDbff0o", "New York", 1, 1, 0, 0),
+("ChIJa8NEw_JZwokRkUBcmHh8xOg", "New York", 1, 0, 1, 0),
+("ChIJBzYIOnZZwokRmW5jxY34G-Q", "New York", 1, 0, 1, 0),
+("ChIJqYdbZKkI3IkRV6as15m1q6Y", "New York", 1, 0, 1, 0),
+("ChIJiYsEnohZwokR8oZK_TgmSjY", "New York", 1, 1, 1, 0),
+("ChIJx-PaOJQIAWARakay2oi7ZGY", "Kyoto", 1, 0, 0, 0),
+("ChIJ93yyvbQJAWARGdkjcdcUYUE", "Kyoto", 0, 1, 0, 0),
+("ChIJx1leax0IAWARNRROX0s67RE", "Kyoto", 0, 0, 1, 1),
+("ChIJWwNkMLoJAWAR7chswFIMOEI", "Kyoto", 0, 1, 0, 0),
+("ChIJEyjldY0IAWARnH7Fzl8bcfo", "Kyoto", 1, 0, 0, 0);
 
-
-
-
-
-
+INSERT INTO users (name, email, username, password) VALUES
+('Chandler', 'chandler@gmail.com', 'chandler', '$2b$10$4KtBuFVVNVneNPaKacFLRO0RbP9s56KVSdS5CLxflC9soMRK67LN.'),
+('Rachel', 'rachel@gmail.com', 'rachel', '$2b$10$XfJx2vgUtukVYnFP52JYxOgazD5KwXuy7UMXvaZRhcAxGRReS4lD6');

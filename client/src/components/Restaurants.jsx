@@ -4,12 +4,15 @@ import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 import "../restaurants_favorites.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
+import "./Home.css";
+
 
 function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
   const [allergen, setAllergen] = useState("");
+  const [userLocation, setUserLocation] = useState(null);
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
@@ -50,33 +53,43 @@ function Restaurants() {
     setIsClicked(!isClicked);
   };
 
-  useEffect(() => {
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg";
-    const map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [-79.4512, 43.6568],
-      zoom: 13,
-    });
+  const handleMapIconClick = (longitude, latitude) => {
+    if (userLocation) {
+      const userCoordinates = `${userLocation.coords.latitude},${userLocation.coords.longitude}`;
+      const restaurantCoordinates = `${latitude},${longitude}`;
+      const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userCoordinates}&destination=${restaurantCoordinates}`;
+      window.open(mapsUrl);
+    } else {
+      alert("Could not determine your location.");
+    }
+  };
 
-    map.addControl(
-      new MapboxDirections({
-        accessToken: mapboxgl.accessToken,
-      }),
-      "top-left"
+  useEffect(() => {
+    // Get user's current location
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation(position);
+      },
+      (error) => {
+        console.error("Error getting user location:", error);
+      }
     );
   }, []);
-
-  const handleMapIconClick = (longitude, latitude) => {
-    window.open(
-      `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`
-    );
-  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
+      <div className='img'
+      style={{
+        height: "500px",
+        width: "900px",
+        backgroundImage: 
+        'url("https://static.vecteezy.com/system/resources/thumbnails/020/115/455/small/food-background-breakfast-with-yogurt-granola-or-muesli-strawberries-banner-image-for-website-photo.jpg")',
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+      }}
+      >
+
         <input
           type="text"
           value={city}
@@ -84,6 +97,7 @@ function Restaurants() {
           placeholder="Enter city"
         />
         <button type="submit">Get Restaurants</button>
+        </div>
       </form>
 
       <h3>Filter</h3>
@@ -100,6 +114,7 @@ function Restaurants() {
       <ul>
         {restaurants.map((restaurant) => (
           <li key={restaurant.id} className="card">
+            <img src={restaurant.photos} className="restaurant-image" />
             <h3>
               <img
                 src={heart}
@@ -122,7 +137,7 @@ function Restaurants() {
             <p>Phone: {restaurant.phone}</p>
             <p>
               Website:{" "}
-              <a href={restaurant.website} target="_blank">
+              <a href={restaurant.website} target="_blank" rel="noopener noreferrer">
                 {restaurant.website}
               </a>
             </p>
