@@ -1,23 +1,56 @@
-/* CSS FOR LOGIN & SIGN UP PAGES
- */
-/* SIGN UP */
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
+/* CSS FOR LOGIN & SIGN UP PAGES*/
+/* BOTH pages */
+.registerlogo {
+  width: auto;
+  height: 70px;
+  display: flex;
+  margin: auto;
 }
 
-.form-signin .form-floating:focus-within {
-  z-index: 2;
+.registerheading {
+  font-size: 2em;
+  text-align: center;
+  padding-top: 5px;
 }
 
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+/* LOG IN Page */
+.logincontainer {
+  min-width: 300px;
+  max-width: 400px;
+  padding: 10px 20px;
+  margin: 10px auto;
+  border-radius: 10px;
+  -webkit-box-shadow: 3px 15px 15px rgba(226, 226, 226, 0.86);
+  -moz-box-shadow: 3px 15px 15px rgba(226, 226, 226, 0.86);
+  box-shadow: 3px 15px 15px rgba(226, 226, 226, 0.86);
 }
 
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+/* SIGN UP Page */
+.signuppage {
+  background-color: #e71212;
+  margin: 0;
+  padding: 0;
+  height: inherit;
+}
+
+.signupcontainer {
+  min-width: 300px;
+  max-width: 400px;
+  padding: 10px 20px;
+  height: 400px;
+  margin: 20px auto;
+  border-radius: 10px;
+  background-color: #fff;
+  -webkit-box-shadow: 3px 15px 15px rgba(167, 0, 0, 0.86);
+  -moz-box-shadow: 3px 15px 15px rgba(167, 0, 0, 0.86);
+  box-shadow: 3px 15px 15px rgba(167, 0, 0, 0.86);
+}
+
+.signuptext {
+  color: #fff;
+  text-align: center;
+}
+
+.signuptext:hover {
+  color: #fff;
 }

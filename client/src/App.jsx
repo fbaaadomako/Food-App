@@ -26,7 +26,7 @@ function App() {
     <UserContext.Provider value={auth}>
       <Router>
         <NavBar />
-        <div className="container p-5">
+        <div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LogIn />} />

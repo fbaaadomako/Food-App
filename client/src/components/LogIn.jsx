@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
-import "./css/login_signup.css";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import "./css/login_signup.css";
+import redlogo from "../assets/logo-red.png";
 
 function LogIn() {
   const [credentials, setCredentials] = useState({
@@ -9,14 +10,11 @@ function LogIn() {
     password: "",
   });
 
+  //Autheticaton of User & Navigation
   let auth = useContext(UserContext);
   let navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value });
-  };
-
+  //log in fetch from DB
   const login = async () => {
     //do the login
     try {
@@ -40,31 +38,42 @@ function LogIn() {
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
+
   return (
     <div>
-      <div className="row">
-        <div className="col-4 offset-4">
-          Username
-          <input
-            value={credentials.username}
-            onChange={handleChange}
-            name="username"
-            type="text"
-            className="form-control mb-2"
-          />
-          Password
-          <input
-            value={credentials.password}
-            onChange={handleChange}
-            name="password"
-            type="password"
-            className="form-control mb-2"
-          />
-          <button className="btn btn-danger" onClick={login}>
-            Log in
-          </button>
+      <img className="registerlogo" src={redlogo} />
+      <div className="logincontainer">
+        <div className="row pb-3">
+          <div className="col-12">
+            <h1 className="registerheading">Log In</h1>
+            Username:
+            <input
+              value={credentials.username}
+              onChange={handleChange}
+              name="username"
+              type="text"
+              className="form-control mb-2"
+            />
+            Password:
+            <input
+              value={credentials.password}
+              onChange={handleChange}
+              name="password"
+              type="password"
+              className="form-control mb-2"
+            />
+            <button
+              className="btn btn-dark d-flex mx-auto mt-3"
+              onClick={login}
+            >
+              Log in
+            </button>
+          </div>
         </div>
-        {/* {error} */}
       </div>
     </div>
   );

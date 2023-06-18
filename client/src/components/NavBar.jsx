@@ -16,7 +16,7 @@ function NavBar() {
   };
 
   return (
-    <div className="bg-info text-white p-3">
+    <div className="text-white p-3">
       {!auth.isLoggedIn && (
         <Link to="/login">
           <button className="btn btn-dark">Login</button>
