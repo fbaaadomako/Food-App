@@ -3,14 +3,11 @@ import "../login_signup.css";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-
 function LogIn() {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
-
-  // const [error, setError] = useState("");
 
   let auth = useContext(UserContext);
   let navigate = useNavigate();
@@ -46,7 +43,6 @@ function LogIn() {
   return (
     <div>
       <div className="row">
-        <h1>Welcome {auth.user.name}</h1>
         <div className="col-4 offset-4">
           Username
           <input
