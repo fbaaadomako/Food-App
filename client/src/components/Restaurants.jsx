@@ -86,18 +86,21 @@ function Restaurants() {
             height: "500px",
             width: "900px",
             backgroundImage:
-              'url("https://static.vecteezy.com/system/resources/thumbnails/020/115/455/small/food-background-breakfast-with-yogurt-granola-or-muesli-strawberries-banner-image-for-website-photo.jpg")',
+              'url("https://media.istockphoto.com/id/1204371265/photo/flat-lay-of-turkish-traditional-foods-for-celebrating-holiday-wode-composition.jpg?s=612x612&w=0&k=20&c=X-9XA8TIOe-GxtYnojNLUfu-_rXR1Zab1GYqAu1ne64=")',
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
           }}
         >
           <input
+            className="home-input"
             type="text"
             value={city}
             onChange={handleInputChange}
             placeholder="Enter city"
           />
-          <button type="submit">Get Restaurants</button>
+          <button className="home-btn" type="submit">
+            Get Restaurants
+          </button>
         </div>
       </form>
 
