@@ -26,14 +26,16 @@ function LogIn() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
       };
-      const results = await fetch("http://localhost:4000/users/login", options);
+      const results = await fetch("/users/login", options);
       const data = await results.json(); //this is the token
       // 2. get token (the data) from server and store in localStorage
       localStorage.setItem("token", data.token);
+      console.log("TOKEN", token);
+      console.log("DATA TOKEN", data.token);
       //3. once logged in, redirect user home page with favorites option
       // navigate("/favorites");
-    } catch {
-      console.log("err");
+    } catch (err) {
+      console.log(err);
     }
   };
 

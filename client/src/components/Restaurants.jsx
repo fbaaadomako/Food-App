@@ -9,6 +9,7 @@ function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
+  const [allergen, setAllergen] = useState("");
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
@@ -27,6 +28,21 @@ function Restaurants() {
       setRestaurants(data);
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+
+  // const allAllergens = restaurants.filter((r) =>
+  //   allergen.length > 0 ? allergen.every((a) => r.restaurants.map)
+
+  // }
+
+  const handleFilter = (e) => {
+    if (e.target.checked) {
+      setAllergen([...allergen, e.target.value]);
+      console.log(allergen);
+    } else {
+      setAllergen(allergen.filter((a) => a !== e.target.value));
+      console.log("allergen2", allergen);
     }
   };
 
@@ -69,6 +85,17 @@ function Restaurants() {
         />
         <button type="submit">Get Restaurants</button>
       </form>
+
+      <h3>Filter</h3>
+      <label name="gluten free">
+        <input
+          type="checkbox"
+          onChange={handleFilter}
+          value={allergen}
+          id="gluten free"
+        />{" "}
+        Gluten Free
+      </label>
 
       <ul>
         {restaurants.map((restaurant) => (
