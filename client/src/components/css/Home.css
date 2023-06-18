@@ -1,3 +1,17 @@
+
+.logo {
+    text-align: center;
+}
+
 .img {
-    
+    text-align: center;
+    size-adjust: 100%;
+}
+
+.home-input {
+      text-align: center;
+}
+
+.home-btn {
+    text-align: center;
 }

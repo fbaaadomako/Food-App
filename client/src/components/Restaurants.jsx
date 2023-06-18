@@ -4,6 +4,7 @@ import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 import "./css/restaurants_favorites.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
+import "./css/Home.css";
 
 function Restaurants() {
   const [city, setCity] = useState("");
