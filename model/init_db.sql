@@ -1,18 +1,8 @@
---
--- Drop Tables
---
--- This looks like it's leftover from the sample repo: you don't have  tables called customers or purchases, and you don't use foreign keys, so you don't need this part.
--- SET foreign_key_checks = 0;
--- DROP TABLE IF EXISTS customers;
--- DROP TABLE IF EXISTS purchases;
--- SET foreign_key_checks = 1;
-
---
--- Create Tables
---
+-- Create restaurants table
 
 DROP TABLE IF EXISTS restaurants;
-     
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE restaurants (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     restaurant_id VARCHAR(255),
@@ -23,9 +13,13 @@ CREATE TABLE restaurants (
     vegan BOOLEAN
 );
 
-DROP TABLE if exists restaurants; 
-CREATE TABLE restaurants(id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, restaurant_id VARCHAR(255), city VARCHAR(255), dairy_free BOOLEAN, gluten_free BOOLEAN, vegetarian BOOLEAN, vegan BOOLEAN);
-
+CREATE TABLE users (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, 
+name VARCHAR(255),
+email VARCHAR(255),
+username VARCHAR(255),
+password VARCHAR(255)
+);
 
 INSERT INTO restaurants (restaurant_id, city, dairy_free, gluten_free, vegetarian, vegan) VALUES 
 ("ChIJw2SzTVsbdkgRFLrwhdiLmCw", "London", 0, 1, 0, 0),
@@ -86,3 +80,7 @@ INSERT INTO restaurants (restaurant_id, city, dairy_free, gluten_free, vegetaria
 ("ChIJx1leax0IAWARNRROX0s67RE", "Kyoto", 0, 0, 1, 1),
 ("ChIJWwNkMLoJAWAR7chswFIMOEI", "Kyoto", 0, 1, 0, 0),
 ("ChIJEyjldY0IAWARnH7Fzl8bcfo", "Kyoto", 1, 0, 0, 0);
+
+INSERT INTO users (name, email, username, password) VALUES
+('Chandler', 'chandler@gmail.com', 'chandler', '$2b$10$4KtBuFVVNVneNPaKacFLRO0RbP9s56KVSdS5CLxflC9soMRK67LN.'),
+('Rachel', 'rachel@gmail.com', 'rachel', '$2b$10$XfJx2vgUtukVYnFP52JYxOgazD5KwXuy7UMXvaZRhcAxGRReS4lD6');

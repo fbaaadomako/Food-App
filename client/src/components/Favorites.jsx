@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import html2pdf from "html2pdf.js";
 import "../restaurants_favorites.css";
+import UserContext from "../context/UserContext";
+import { useContext } from "react";
 
 function Favorites() {
+
+  let auth = useContext(UserContext);
+
   const onButtonClick = () => {
     const element = document.getElementById("pdf-container");
 
@@ -22,11 +27,10 @@ function Favorites() {
     <div>
       {/* Render the content to be converted to PDF */}
       <div id="pdf-container">
-        <h1>Test 1 2 3</h1>
+        <h2>{auth.user.name}</h2>
+        <h1>Here is a list of your favorite restaurants, {auth.user.name}</h1>
         <h3>
-          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
-          ipsum Lorem ipsum Lorem ipsumv Lorem ipsum Lorem ipsum Lorem ipsum
-          Lorem ipsum Lorem ipsum Lorem ipsum
+          This page to list favorite restaurants that we've favorite using heart icon on the Home page
         </h3>
       </div>
 

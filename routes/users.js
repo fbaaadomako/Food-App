@@ -7,6 +7,8 @@ require("dotenv").config();
 //2. require jsonwebtoken & bcrypt
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcrypt");
+//require middleware for private route 
+var userIsLoggedIn = require("../guards/userIsLoggedIn");
 
 //variable needed for bcrypt to do the encryption
 //saltRounds - how many times it runs the algorithms. The higher the saltRounds, the slower it runs
@@ -14,7 +16,7 @@ const saltRounds = 10;
 //variable needed for creating the token
 const supersecret = process.env.SUPER_SECRET;
 
-/*****  REGISTRATION *****/
+/*  REGISTRATION via Postman, no form setup on front-end */
 //localhost:4000/users/register
 router.post("/register", async (req, res) => {
   //1. get user info from request body
@@ -38,38 +40,46 @@ router.post("/register", async (req, res) => {
 //localhost:4000/users/login
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  try {
-    //1. check if user exits on DB
-    const results = await db(
-      `SELECT * FROM users WHERE username = '${username}';`
-    );
-    console.log(results);
-    //DB returns an object with data array
-    const user = results.data[0];
-    if (user) {
-      //2. check if password correct (compare passwords = 'bcrypt.compare()')
-      //bcrypt.compare compares the password received with password from DB
-      const isCorrect = await bcrypt.compare(password, user.password);
-      if (!isCorrect) res.status(401).send({ message: "Password incorrect" });
 
-      //3. create token using user id (=> 'sign()')
-      //receive user id from DB
-      let payload = { userID: user.id };
-      console.log("Super Secret:", supersecret);
-      console.log("SUPER_SECRET:", process.env.SUPER_SECRET);
-      const token = jwt.sign(payload, supersecret);
-      //4. respond with token
-      res.status(200).send(token);
+  try {
+    //find on the DB the user that tries to login (if exists)
+    const results = await db(
+      `SELECT * FROM users WHERE username = "${username}"`
+    );
+    const user = results.data[0];
+
+    //if user is found on DB
+    if (user) {
+      //check if password submitted through the form matches the one stored in DB
+      //use bcrypt cause stored password is encrypted
+      const correctPassword = await bcrypt.compare(password, user.password);
+
+      //if not matching
+      if (!correctPassword) throw new Error("Incorrect password");
+
+      //else, create and send token. Send also user info to store in context
+      const token = jwt.sign({ user_id: user.id }, supersecret);
+      delete user.password;
+      res
+        .status(200)
+        .send({ message: "Login successful, here is your token", token, user });
     } else {
-      res.status(401).send({ message: "User not found" });
+      throw new Error("User not found");
     }
   } catch (err) {
-    res.status(400).send({ error: err.message });
+    res.status(401).send({ error: err.message });
   }
 });
 
-/***** CLIENT: LOGIN FOR USERS ONLY *****/
-// router.post("/login", async (req, res) => {
-//   const { username, password } = req.body;
+//Private route code will run only if Middleware - Guards folder is successful
+/* PRIVATE ROUTE: LOGIN FOR USERS ONLY */
+// router.get("/restaurants", userIsLoggedIn, async (req, res) => {
+//   try {
+//     //select restauran info for restaurant with
+//   }
 // })
+
+
+/* PRIVATE ROUTE: ONLY CAN FAVORITE RESTAURANTS IF LOGGED IN */
+
 module.exports = router;
