@@ -29,7 +29,7 @@ function LogIn() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
       };
-      const results = await fetch("http://localhost:4000/users/login", options);
+      const results = await fetch("/users/login", options);
       const data = await results.json(); //this is the token
       console.log(data);
       // 2. get token (the data) from server and store in localStorage
