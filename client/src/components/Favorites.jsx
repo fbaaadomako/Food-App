@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import html2pdf from "html2pdf.js";
 import "./css/restaurants_favorites.css";
 import UserContext from "../context/UserContext";
-import { useContext } from "react";
 
 function Favorites() {
   let auth = useContext(UserContext);
+  console.log("AUTH", auth);
+  console.log("AUTH NAME", auth.user.name);
 
   const onButtonClick = () => {
     const element = document.getElementById("pdf-container");
