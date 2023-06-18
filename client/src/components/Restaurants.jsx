@@ -4,6 +4,8 @@ import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 import "../restaurants_favorites.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
+import "./Home.css";
+
 
 function Restaurants() {
   const [city, setCity] = useState("");
@@ -61,6 +63,17 @@ function Restaurants() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+      <div className='img'
+      style={{
+        height: "500px",
+        width: "900px",
+        backgroundImage: 
+        'url("https://static.vecteezy.com/system/resources/thumbnails/020/115/455/small/food-background-breakfast-with-yogurt-granola-or-muesli-strawberries-banner-image-for-website-photo.jpg")',
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+      }}
+      >
+
         <input
           type="text"
           value={city}
@@ -68,6 +81,7 @@ function Restaurants() {
           placeholder="Enter city"
         />
         <button type="submit">Get Restaurants</button>
+        </div>
       </form>
 
       <ul>
