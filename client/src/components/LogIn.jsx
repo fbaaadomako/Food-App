@@ -29,6 +29,8 @@ function LogIn() {
       console.log(data);
       // 2. get token (the data) from server and store in localStorage
       localStorage.setItem("token", data.token);
+      // 3. add to context the current user info received from server
+      auth.setCurrentUser(data.user);
       // 3. set isLoggedIn to true
       auth.setIsLoggedIn(true);
       //3. once logged in, redirect user home page with favorites option
