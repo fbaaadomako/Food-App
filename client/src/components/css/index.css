@@ -37,6 +37,10 @@
   height: 200px;
 }
 
+.footercontainer {
+  width: 400px;
+}
+
 .footerlogo {
   width: auto;
   height: 70px;
