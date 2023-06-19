@@ -1,20 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import whitelogo from "../assets/logo-white.png";
 import "./css/index.css";
 
 function Footer() {
   return (
-    <div>
-      Footer section
-      {/* div#footer
-{
-    position:fixed;
-    z-index:999;
-    bottom:0px;
-    left:0px;
-    background:#5e9dc8;
-    width:100%;
-    height:20px;
-} */}
+    <div className="footersection">
+      <div className="footercontainer">
+        <div className="row m-5">
+          <div className="col-3 ">
+            <img src={whitelogo} className="footerlogo" />
+          </div>
+          <div className="col-6 footerlinks">
+            <Link to="/">Home</Link>
+            <br />
+            <Link to="/favorites">Favorites</Link>
+            <br />
+            <Link to="/login">Log In</Link>
+            <br />
+            <Link to="/signup">Sign Up</Link>
+            <br />
+            <Link to="/about">About Us</Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

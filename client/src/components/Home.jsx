@@ -1,5 +1,6 @@
 import React from "react";
 import Restaurants from "./Restaurants";
+import Footer from "./Footer";
 import "./css/Home.css";
 import NavBar from "./NavBar";
 
@@ -17,6 +18,7 @@ function Home() {
         />
       </div>
       <Restaurants />
+      <Footer />
     </div>
   );
 }
