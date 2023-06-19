@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import mapboxgl, { FreeCameraOptions } from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import "../restaurants_favorites.css";
+import "./css/restaurants_favorites.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
-import "../Home.css";
-
+import "./css/Home.css";
 
 function Restaurants() {
   const [city, setCity] = useState("");
@@ -40,6 +39,8 @@ function Restaurants() {
   // }
 
   const handleFilter = (e) => {
+    // let word = "all"
+
     if (e.target.checked) {
       setAllergen([...allergen, e.target.value]);
       console.log(allergen);
@@ -80,25 +81,27 @@ function Restaurants() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-      <div className='img'
-      style={{
-        height: "500px",
-        width: "900px",
-        backgroundImage: 
-        'url("https://media.istockphoto.com/id/1204371265/photo/flat-lay-of-turkish-traditional-foods-for-celebrating-holiday-wode-composition.jpg?s=612x612&w=0&k=20&c=X-9XA8TIOe-GxtYnojNLUfu-_rXR1Zab1GYqAu1ne64=")',
-        backgroundSize: "contain",
-        backgroundRepeat: "no-repeat",
-      }}
-      >
-
-        <input
-        className="home-input"
-          type="text"
-          value={city}
-          onChange={handleInputChange}
-          placeholder="Enter city"
-        />
-        <button className="home-btn" type="submit">Get Restaurants</button>
+        <div
+          className="img"
+          style={{
+            height: "500px",
+            width: "900px",
+            backgroundImage:
+              'url("https://media.istockphoto.com/id/1204371265/photo/flat-lay-of-turkish-traditional-foods-for-celebrating-holiday-wode-composition.jpg?s=612x612&w=0&k=20&c=X-9XA8TIOe-GxtYnojNLUfu-_rXR1Zab1GYqAu1ne64=")',
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <input
+            className="home-input"
+            type="text"
+            value={city}
+            onChange={handleInputChange}
+            placeholder="Enter city"
+          />
+          <button className="home-btn" type="submit">
+            Get Restaurants
+          </button>
         </div>
       </form>
 
@@ -184,7 +187,11 @@ function Restaurants() {
             <p>Phone: {restaurant.phone}</p>
             <p>
               Website:{" "}
-              <a href={restaurant.website} target="_blank" rel="noopener noreferrer">
+              <a
+                href={restaurant.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {restaurant.website}
               </a>
             </p>
