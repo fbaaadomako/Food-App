@@ -50,7 +50,7 @@ function Restaurants() {
     }
   };
 
-  const handleHeartClick = () => {
+  const handleHeartClick = () => {z
     setIsClicked(!isClicked);
   };
 
