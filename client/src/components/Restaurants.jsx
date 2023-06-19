@@ -42,6 +42,9 @@ function Restaurants() {
     // let word = "all"
 
     if (e.target.checked) {
+      // when varoable is checked allergen variable changes to true or 1
+      //each allergen will need its own functions
+      //filter all restaurants
       setAllergen([...allergen, e.target.value]);
       console.log(allergen);
     } else {
@@ -109,11 +112,14 @@ function Restaurants() {
         <input
           type="checkbox"
           onChange={handleFilter}
+          // value = {individual allergen}
           value={allergen}
           id="gluten free"
         />{" "}
         Gluten Free
       </label>
+
+      {/* Allergen should be an object with all allergens OR 4 variables with each allergen */}
 
       <ul>
         {restaurants.map((restaurant) => (
