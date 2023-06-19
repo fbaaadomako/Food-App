@@ -8,10 +8,10 @@ function Footer() {
     <div className="footersection">
       <div className="footercontainer">
         <div className="row m-5">
-          <div className="col-3 ">
+          <div className="col-5 ">
             <img src={whitelogo} className="footerlogo" />
           </div>
-          <div className="col-6 footerlinks">
+          <div className="col-7 footerlinks">
             <Link to="/">Home</Link>
             <br />
             <Link to="/favorites">Favorites</Link>
