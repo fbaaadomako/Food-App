@@ -5,8 +5,10 @@ import "./css/restaurants_favorites.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
 import "./css/Home.css";
+import Star from "./Star";
 
 function Restaurants() {
+  // onsole.log("~ file: Star.jsx ~ line 4 ~ Star ~ star", rating);
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
@@ -52,6 +54,22 @@ function Restaurants() {
       console.log("allergen2", allergen);
     }
   };
+
+  //Star Ratings
+  // const starRating = Array.from({ length: 5 }, (elem, index) => {
+  //   let number = index + 0.5;
+  //   return (
+  //     <span key={index}>
+  //       {star > index + 1 ? (
+  //         <FaStar />
+  //       ) : star > number ? (
+  //         <FaStarHalfAlt />
+  //       ) : (
+  //         <AiOutlineStar />
+  //       )}
+  //     </span>
+  //   );
+  // });
 
   const handleHeartClick = () => {
     setIsClicked(!isClicked);
@@ -143,6 +161,7 @@ function Restaurants() {
               {restaurant.name}
             </h3>
             <p>Rating: {restaurant.rating}</p>
+            <Star rating={restaurant.rating} />
             <p>Address: {restaurant.address}</p>
             <p>Phone: {restaurant.phone}</p>
             <p>
