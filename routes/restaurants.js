@@ -52,6 +52,10 @@ router.get("/restaurants", async (req, res) => {
         longitude,
         latitude,
         photos,
+        dairyFree: Boolean(restaurant.dairy_free), 
+        glutenFree: Boolean(restaurant.gluten_free),
+        vegetarian: Boolean(restaurant.vegetarian), 
+        vegan: Boolean(restaurant.vegan),
       };
     });
 

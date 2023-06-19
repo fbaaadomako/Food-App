@@ -27,7 +27,7 @@ function SignUp() {
 
     localStorage.setItem("user-info", JSON.stringify(results));
     //3. once logged in, redirect user to log-in page
-    // navigate("/login");
+    navigate("/login");
     // catch (e) {
     //   console.log(e);
     // }
