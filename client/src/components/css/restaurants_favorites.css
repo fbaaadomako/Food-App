@@ -25,3 +25,7 @@
   height: 300px; /* Specify the desired height */
 }
 
+/* MAP */
+#map {
+  height: 400px;
+}

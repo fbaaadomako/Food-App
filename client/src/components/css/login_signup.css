@@ -46,11 +46,9 @@
   box-shadow: 3px 15px 15px rgba(167, 0, 0, 0.86);
 }
 
-.signuptext {
+.signuptext,
+.signuptext a,
+.signuptext a:hover {
   color: #fff;
   text-align: center;
-}
-
-.signuptext:hover {
-  color: #fff;
 }
