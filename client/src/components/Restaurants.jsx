@@ -5,8 +5,10 @@ import "./css/restaurants_favorites.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
 import "./css/Home.css";
+import Star from "./Star";
 
 function Restaurants() {
+  // onsole.log("~ file: Star.jsx ~ line 4 ~ Star ~ star", rating);
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
@@ -42,6 +44,9 @@ function Restaurants() {
     // let word = "all"
 
     if (e.target.checked) {
+      // when varoable is checked allergen variable changes to true or 1
+      //each allergen will need its own functions
+      //filter all restaurants
       setAllergen([...allergen, e.target.value]);
       console.log(allergen);
     } else {
@@ -50,7 +55,7 @@ function Restaurants() {
     }
   };
 
-  const handleHeartClick = () => {z
+  const handleHeartClick = () => {
     setIsClicked(!isClicked);
   };
 
@@ -110,11 +115,15 @@ function Restaurants() {
         <input
           type="checkbox"
           onChange={handleFilter}
+          // value = {individual allergen}
           value={allergen}
           id="gluten free"
         />{" "}
         Gluten Free
       </label>
+
+
+      {/* Allergen should be an object with all allergens OR 4 variables with each allergen */}
 
       <h3></h3>
         <label name="dairy-free">
@@ -160,7 +169,6 @@ function Restaurants() {
           Best rated
         </label>
 
-        
       <ul>
         {restaurants.map((restaurant) => (
           <li key={restaurant.id} className="card">
@@ -183,6 +191,7 @@ function Restaurants() {
               {restaurant.name}
             </h3>
             <p>Rating: {restaurant.rating}</p>
+            <Star rating={restaurant.rating} />
             <p>Address: {restaurant.address}</p>
             <p>Phone: {restaurant.phone}</p>
             <p>

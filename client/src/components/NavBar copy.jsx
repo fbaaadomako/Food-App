@@ -1,0 +1,39 @@
+import React from "react";
+import UserContext from "../context/UserContext";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+function NavBar() {
+  let auth = useContext(UserContext);
+  let navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    auth.setIsLoggedIn(false);
+    auth.setCurrentUser({});
+    navigate("/");
+  };
+
+  return (
+    <div className="text-white p-3">
+      {!auth.isLoggedIn && (
+        <Link to="/login">
+          <button className="btn btn-dark">Login</button>
+        </Link>
+      )}
+      {auth.isLoggedIn && (
+        <>
+          <Link to="/favorites">
+            <button className="btn btn-dark">YOUR FAVORITES</button>
+          </Link>
+          <button className="btn btn-dark" onClick={logout}>
+            Logout
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default NavBar;
