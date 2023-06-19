@@ -25,7 +25,7 @@ function NavBar() {
       {auth.isLoggedIn && (
         <>
           <Link to="/favorites">
-            <button className="btn btn-dark">YOUR FAVORITES</button>
+            <button className="btn btn-dark">Your Favorites</button>
           </Link>
           <button className="btn btn-dark" onClick={logout}>
             Logout
