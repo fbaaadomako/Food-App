@@ -20,16 +20,34 @@
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #9191f6;
   }
   button {
     background-color: #f9f9f9;
   }
 }
 
-/* MAP */
-#map {
-  height: 400px;
+/* FOOTER */
+.footersection {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background: #e71212;
+  width: 100%;
+  height: 200px;
 }
 
+.footercontainer {
+  width: 400px;
+}
 
+.footerlogo {
+  width: auto;
+  height: 70px;
+}
+
+.footerlinks a,
+.footerlinks a:hover {
+  color: white;
+  cursor: pointer;
+}

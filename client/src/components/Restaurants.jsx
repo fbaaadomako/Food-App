@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import "../restaurants_favorites.css";
+import "./css/restaurants_favorites.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
+import "./css/Home.css";
 
 function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
+  const [allergen, setAllergen] = useState("");
   const [userLocation, setUserLocation] = useState(null);
 
   const handleInputChange = (e) => {
@@ -28,6 +30,23 @@ function Restaurants() {
       setRestaurants(data);
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+
+  // const allAllergens = restaurants.filter((r) =>
+  //   allergen.length > 0 ? allergen.every((a) => r.restaurants.map)
+
+  // }
+
+  const handleFilter = (e) => {
+    // let word = "all"
+
+    if (e.target.checked) {
+      setAllergen([...allergen, e.target.value]);
+      console.log(allergen);
+    } else {
+      setAllergen(allergen.filter((a) => a !== e.target.value));
+      console.log("allergen2", allergen);
     }
   };
 
@@ -61,14 +80,40 @@ function Restaurants() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={city}
-          onChange={handleInputChange}
-          placeholder="Enter city"
-        />
-        <button type="submit">Get Restaurants</button>
+        <div
+          className="img"
+          style={{
+            height: "500px",
+            width: "900px",
+            backgroundImage:
+              'url("https://media.istockphoto.com/id/1204371265/photo/flat-lay-of-turkish-traditional-foods-for-celebrating-holiday-wode-composition.jpg?s=612x612&w=0&k=20&c=X-9XA8TIOe-GxtYnojNLUfu-_rXR1Zab1GYqAu1ne64=")',
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <input
+            className="home-input"
+            type="text"
+            value={city}
+            onChange={handleInputChange}
+            placeholder="Enter city"
+          />
+          <button className="home-btn" type="submit">
+            Get Restaurants
+          </button>
+        </div>
       </form>
+
+      <h3>Filter</h3>
+      <label name="gluten free">
+        <input
+          type="checkbox"
+          onChange={handleFilter}
+          value={allergen}
+          id="gluten free"
+        />{" "}
+        Gluten Free
+      </label>
 
       <ul>
         {restaurants.map((restaurant) => (
@@ -96,7 +141,11 @@ function Restaurants() {
             <p>Phone: {restaurant.phone}</p>
             <p>
               Website:{" "}
-              <a href={restaurant.website} target="_blank" rel="noopener noreferrer">
+              <a
+                href={restaurant.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {restaurant.website}
               </a>
             </p>

@@ -1,6 +1,6 @@
-require("dotenv").config();
-const mysql = require("mysql");
-const fs = require("fs"); 
+require("dotenv").config(); 
+const mysql = require("mysql"); 
+const fs = require("fs");
 
 const DB_HOST = process.env.DB_HOST;
 const DB_USER = process.env.DB_USER;
@@ -18,8 +18,9 @@ const con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!"); 
-
-  let sql = fs.readFileSync(__dirname+"/init_db.sql").toString();
+ 
+  let sql = fs.readFileSync(__dirname+"/init_db.sql").toString();  
+  
   con.query(sql, function(err, result) {
     if (err) throw err;
     console.log("Table creation `foodfinder` was successful!");
