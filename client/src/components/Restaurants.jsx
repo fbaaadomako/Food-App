@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import mapboxgl from "mapbox-gl";
+import mapboxgl, { FreeCameraOptions } from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import "../restaurants_favorites.css";
 import heart from "../assets/heart.png";
@@ -76,6 +76,7 @@ function Restaurants() {
     );
   }, []);
 
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -101,8 +102,8 @@ function Restaurants() {
         </div>
       </form>
 
-      <h3>Filter</h3>
-      <label name="gluten free">
+      <h3>Filter by preference</h3>
+      <label name="gluten-free">
         <input
           type="checkbox"
           onChange={handleFilter}
@@ -112,6 +113,51 @@ function Restaurants() {
         Gluten Free
       </label>
 
+      <h3></h3>
+        <label name="dairy-free">
+          <input
+          type="checkbox"
+          onChange={handleFilter}
+          value={allergen}
+          id="dairy free"
+          />
+          Dairy free
+        </label>
+
+        <h3></h3>
+        <label name="vegetarian">
+          <input
+          type="checkbox"
+          onChange={handleFilter}
+          value={allergen}
+          id="vegetarian"
+          />
+          Vegetarian
+        </label>
+
+        <h3></h3>
+        <label name="vegan">
+          <input
+          type="checkbox"
+          onChange={handleFilter}
+          value={allergen}
+          id="vegan"
+          />
+          Vegan
+        </label>
+
+        <h3></h3>
+        <label name="best-rated">
+          <input
+          type="checkbox"
+          onChange={handleFilter}
+          value={allergen}
+          id="best rated"
+          />
+          Best rated
+        </label>
+
+        
       <ul>
         {restaurants.map((restaurant) => (
           <li key={restaurant.id} className="card">

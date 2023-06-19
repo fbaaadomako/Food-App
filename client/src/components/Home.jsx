@@ -1,6 +1,7 @@
 import React from 'react';
 import Restaurants from './Restaurants';
 import '../Home.css';
+import logo from '../assets/logo-text.png';
 
 
 
@@ -12,7 +13,7 @@ function Home() {
       className='logo'>
         <br/><br/>
       <img 
-      src='https://www.creativefabrica.com/wp-content/uploads/2018/10/Chef-restaurant-logo-by-DEEMKA-STUDIO-4.jpg'
+      src= {logo}
       alt='logo'
       width={200}
       height={100} />
