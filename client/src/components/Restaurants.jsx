@@ -88,6 +88,25 @@ function Restaurants() {
     );
   }, []);
 
+  const addFavoriteRestaurant = async (restaurantId) => {
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({ restaurantId })
+      };
+      const response = await fetch("/users/restaurants", options);
+      const data = await response.json();
+      console.log(data);
+      // Handle the response from the server as needed
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -178,8 +197,8 @@ function Restaurants() {
           <li key={restaurant.id} className="card">
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
-              {heartimage}
-              {/* <img
+              {/* {heartimage}
+              <img
                 src={heart}
                 alt="heart"
                 className={`heart-icon ${
@@ -187,6 +206,7 @@ function Restaurants() {
                 }`}
                 onClick={handleHeartClick}
               /> */}
+              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>Add to Favorites</button>
               <img
                 src={map}
                 alt="map"
