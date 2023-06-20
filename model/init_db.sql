@@ -2,6 +2,7 @@
 
 DROP TABLE IF EXISTS restaurants;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users_restaurants;
 
 CREATE TABLE restaurants (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -14,11 +15,19 @@ CREATE TABLE restaurants (
 );
 
 CREATE TABLE users (
-id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, 
+users_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, 
 name VARCHAR(255),
 email VARCHAR(255),
 username VARCHAR(255),
 password VARCHAR(255)
+);
+
+CREATE TABLE users_restaurants (
+usersId INT NOT NULL, 
+restaurantsId INT NOT NULL, 
+PRIMARY KEY (usersId, restaurantsId),
+FOREIGN KEY (usersId) REFERENCES users(users_id) ON DELETE CASCADE, 
+FOREIGN KEY (restaurantsId) REFERENCES restaurants(id) ON DELETE CASCADE
 );
 
 INSERT INTO restaurants (restaurant_id, city, dairy_free, gluten_free, vegetarian, vegan) VALUES 

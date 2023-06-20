@@ -5,6 +5,9 @@ import "./css/restaurants_favorites.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
 import "./css/Home.css";
+import Star from "./Star";
+// import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function Restaurants() {
   const [city, setCity] = useState("");
@@ -42,6 +45,9 @@ function Restaurants() {
     // let word = "all"
 
     if (e.target.checked) {
+      // when varoable is checked allergen variable changes to true or 1
+      //each allergen will need its own functions
+      //filter all restaurants
       setAllergen([...allergen, e.target.value]);
       console.log(allergen);
     } else {
@@ -50,8 +56,13 @@ function Restaurants() {
     }
   };
 
-  const handleHeartClick = () => {
+  const handleHeartClick = (e) => {
+    console.log(isClicked);
     setIsClicked(!isClicked);
+    // if (isClicked === !isClicked) {
+    //   e.target.setAttribute("src", "https://source.unsplash.com/LYK3ksSQyeo");
+    //   e.target.setAttribute("alt", "dog");
+    // }
   };
 
   const handleMapIconClick = (longitude, latitude) => {
@@ -77,10 +88,31 @@ function Restaurants() {
     );
   }, []);
 
+
   const [isCheckedGF, setIsCheckedGF] = useState(false);
   const [isCheckedDF, setIsCheckedDF] = useState(false);
   const [isCheckedVeg, setIsCheckedVeg] = useState(false);
   const [isCheckedVegan, setIsCheckedVegan] = useState(false);
+
+
+  const addFavoriteRestaurant = async (restaurantId) => {
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({ restaurantId })
+      };
+      const response = await fetch("/users/restaurants", options);
+      const data = await response.json();
+      console.log(data);
+      // Handle the response from the server as needed
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   return (
@@ -114,51 +146,76 @@ function Restaurants() {
       <label name="gluten-free">
         <input
           type="checkbox"
+
           onChange={() => setIsCheckedGF(!isCheckedGF)}
           checked={isCheckedGF}
+
+          onChange={handleFilter}
+          // value = {individual allergen}
+
           value={allergen}
           id="gluten free"
         />{" "}
         Gluten Free
       </label>
 
+      {/* Allergen should be an object with all allergens OR 4 variables with each allergen */}
+
       <h3></h3>
-        <label name="dairy-free">
-          <input
+      <label name="dairy-free">
+        <input
           type="checkbox"
           onChange={() => setIsCheckedDF(!isCheckedDF)}
           checked={isCheckedDF}
           value={allergen}
           id="dairy free"
-          />
-          Dairy free
-        </label>
+        />
+        Dairy free
+      </label>
 
-        <h3></h3>
-        <label name="vegetarian">
-          <input
+      <h3></h3>
+      <label name="vegetarian">
+        <input
           type="checkbox"
           onChange={() => setIsCheckedVeg(!isCheckedVeg)}
           checked={isCheckedVeg}
           value={allergen}
           id="vegetarian"
-          />
-          Vegetarian
-        </label>
+        />
+        Vegetarian
+      </label>
 
-        <h3></h3>
-        <label name="vegan">
-          <input
+      <h3></h3>
+      <label name="vegan">
+        <input
           type="checkbox"
           onChange={() => setIsCheckedVegan(!isCheckedVegan)}
           checked={isCheckedVegan}
           value={allergen}
           id="vegan"
+
           />
           Vegan
         </label>
        
         
+
+        />
+        Vegan
+      </label>
+
+      <h3></h3>
+      <label name="best-rated">
+        <input
+          type="checkbox"
+          onChange={handleFilter}
+          value={allergen}
+          id="best rated"
+        />
+        Best rated
+      </label>
+
+
       <ul>
         {restaurants.filter(function (restaurant) {
           if (isCheckedGF && restaurant.glutenFree) return true;
@@ -188,12 +245,16 @@ function Restaurants() {
           <li key={restaurant.id} className="card">
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
+              {/* {heartimage}
               <img
                 src={heart}
                 alt="heart"
-                className={`heart-icon ${isClicked ? "clicked" : ""}`}
+                className={`heart-icon ${
+                  isClicked ? "heart-icon-clicked" : ""
+                }`}
                 onClick={handleHeartClick}
-              />
+              /> */}
+              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>Add to Favorites</button>
               <img
                 src={map}
                 alt="map"
@@ -205,6 +266,7 @@ function Restaurants() {
               {restaurant.name}
             </h3>
             <p>Rating: {restaurant.rating}</p>
+            <Star rating={restaurant.rating} />
             <p>Address: {restaurant.address}</p>
             <p>Phone: {restaurant.phone}</p>
             <p>

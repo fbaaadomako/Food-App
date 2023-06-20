@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/login_signup.css";
 import whitelogo from "../assets/logo-white.png";
 
@@ -12,8 +11,11 @@ function SignUp() {
 
   let navigate = useNavigate();
 
-  const signup = async () => {
-    let item = { name, email, username, password };
+  let item = { name, email, username, password };
+
+  //Handling "REGISTER" Button
+  const signup = async (e) => {
+    e.preventDefault();
 
     // 1. send the registration credentials to server
     let options = {
@@ -27,20 +29,18 @@ function SignUp() {
 
     localStorage.setItem("user-info", JSON.stringify(results));
     //3. once logged in, redirect user to log-in page
-    // navigate("/login");
-    // catch (e) {
-    //   console.log(e);
-    // }
+    navigate("/login");
   };
 
   return (
     <div className="signuppage">
-      <form>
+      <form onSubmit={signup}>
         <img className="registerlogo" src={whitelogo} />
         <div className="signupcontainer">
           <h1 className="registerheading">Sign Up</h1>
           Name:
           <input
+            required
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="form-control mb-2"
@@ -48,6 +48,7 @@ function SignUp() {
           />
           E-mail:
           <input
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="form-control mb-2"
@@ -55,21 +56,21 @@ function SignUp() {
           />
           Username:
           <input
+            required
+            type="username"
+            className="form-control mb-2"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="form-control mb-2"
-            type="username"
           />
           Password:
           <input
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="form-control mb-2"
             type="password"
           />
-          <button className="btn btn-dark d-flex mx-auto mt-3" onClick={signup}>
-            Register
-          </button>
+          <button className="btn btn-dark d-flex mx-auto mt-3">Register</button>
         </div>
       </form>
       <p className="signuptext">

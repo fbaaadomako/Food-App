@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-/***** LOGIN *****/
+/* LOGIN */
 //localhost:4000/users/login
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -58,7 +58,8 @@ router.post("/login", async (req, res) => {
       if (!correctPassword) throw new Error("Incorrect password");
 
       //else, create and send token. Send also user info to store in context
-      const token = jwt.sign({ user_id: user.id }, supersecret);
+      //usersId = name, users_id is what we get from DB
+      const token = jwt.sign({ usersId: user.users_id }, supersecret);
       delete user.password;
       res
         .status(200)
@@ -71,15 +72,37 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//Private route code will run only if Middleware - Guards folder is successful
-/* PRIVATE ROUTE: LOGIN FOR USERS ONLY */
-// router.get("/restaurants", userIsLoggedIn, async (req, res) => {
-//   try {
-//     //select restauran info for restaurant with
-//   }
-// })
+/*Private route code will run only if Middleware - Guards folder is successful
+PRIVATE ROUTE: LOGIN FOR USERS ONLY 
+GET - to fetch and display the list of user's favorite restaurants */
+//localhost:4000/users/restaurants
+router.get("/restaurants", userIsLoggedIn, async (req, res) => {
+  try {
+    const results = await db(`SELECT * FROM users_restaurants JOIN restaurants ON restaurants.id = users_restaurants.restaurantsId WHERE users_restaurants.usersId = "${req.user_id}";`
+    );
+    const restaurants = results.data;
+    res.status(200).send({ restaurants });
+  } catch (err) {
+    res.status(500).send({ error: "Failed to fetch restaurants" });
+  }
+});
 
 
-/* PRIVATE ROUTE: ONLY CAN FAVORITE RESTAURANTS IF LOGGED IN */
+/* PRIVATE ROUTE: ONLY CAN FAVORITE RESTAURANTS IF LOGGED IN 
+POST - to add a restaurant to the user's favorite list when the user clicks the heart icon
+//user id is get from the token
+*/
+//localhost:4000/users/restaurants
+router.post("/restaurants", userIsLoggedIn, async (req, res) => {
+  const { restaurantId } = req.body;
+  try {
+    await db(
+      `INSERT INTO users_restaurants (usersId, restaurantsId) VALUES ("${req.user_id}", "${restaurantId}")`
+    );
+    res.status(200).send({ message: "Restaurant added to favorites" });
+  } catch (err) {
+    res.status(500).send({ error: "Failed to add restaurant to favorites" });
+  }
+});
 
 module.exports = router;
