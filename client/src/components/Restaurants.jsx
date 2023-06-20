@@ -6,9 +6,10 @@ import heart from "../assets/heart.png";
 import map from "../assets/map.png";
 import "./css/Home.css";
 import Star from "./Star";
+// import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function Restaurants() {
-  // onsole.log("~ file: Star.jsx ~ line 4 ~ Star ~ star", rating);
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
@@ -55,8 +56,13 @@ function Restaurants() {
     }
   };
 
-  const handleHeartClick = () => {
+  const handleHeartClick = (e) => {
+    console.log(isClicked);
     setIsClicked(!isClicked);
+    // if (isClicked === !isClicked) {
+    //   e.target.setAttribute("src", "https://source.unsplash.com/LYK3ksSQyeo");
+    //   e.target.setAttribute("alt", "dog");
+    // }
   };
 
   const handleMapIconClick = (longitude, latitude) => {
@@ -81,7 +87,6 @@ function Restaurants() {
       }
     );
   }, []);
-
 
   return (
     <div>
@@ -122,64 +127,66 @@ function Restaurants() {
         Gluten Free
       </label>
 
-
       {/* Allergen should be an object with all allergens OR 4 variables with each allergen */}
 
       <h3></h3>
-        <label name="dairy-free">
-          <input
+      <label name="dairy-free">
+        <input
           type="checkbox"
           onChange={handleFilter}
           value={allergen}
           id="dairy free"
-          />
-          Dairy free
-        </label>
+        />
+        Dairy free
+      </label>
 
-        <h3></h3>
-        <label name="vegetarian">
-          <input
+      <h3></h3>
+      <label name="vegetarian">
+        <input
           type="checkbox"
           onChange={handleFilter}
           value={allergen}
           id="vegetarian"
-          />
-          Vegetarian
-        </label>
+        />
+        Vegetarian
+      </label>
 
-        <h3></h3>
-        <label name="vegan">
-          <input
+      <h3></h3>
+      <label name="vegan">
+        <input
           type="checkbox"
           onChange={handleFilter}
           value={allergen}
           id="vegan"
-          />
-          Vegan
-        </label>
+        />
+        Vegan
+      </label>
 
-        <h3></h3>
-        <label name="best-rated">
-          <input
+      <h3></h3>
+      <label name="best-rated">
+        <input
           type="checkbox"
           onChange={handleFilter}
           value={allergen}
           id="best rated"
-          />
-          Best rated
-        </label>
+        />
+        Best rated
+      </label>
 
       <ul>
         {restaurants.map((restaurant) => (
           <li key={restaurant.id} className="card">
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
-              <img
+              {heartimage}
+              {/* <img
                 src={heart}
                 alt="heart"
-                className={`heart-icon ${isClicked ? "clicked" : ""}`}
+                className={`heart-icon ${
+                  isClicked ? "heart-icon-clicked" : ""
+                }`}
                 onClick={handleHeartClick}
-              />
+              /> */}
               <img
                 src={map}
                 alt="map"
