@@ -34,7 +34,7 @@ function LogIn() {
       // 3. set isLoggedIn to true
       auth.setIsLoggedIn(true);
       //3. once logged in, redirect user home page with favorites option
-      // navigate("/favorites");
+      navigate("/favorites");
     } catch (e) {
       console.log(e);
     }
