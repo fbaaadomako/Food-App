@@ -77,6 +77,11 @@ function Restaurants() {
     );
   }, []);
 
+  const [isCheckedGF, setIsCheckedGF] = useState(false);
+  const [isCheckedDF, setIsCheckedDF] = useState(false);
+  const [isCheckedVeg, setIsCheckedVeg] = useState(false);
+  const [isCheckedVegan, setIsCheckedVegan] = useState(false);
+
 
   return (
     <div>
@@ -109,7 +114,8 @@ function Restaurants() {
       <label name="gluten-free">
         <input
           type="checkbox"
-          onChange={handleFilter}
+          onChange={() => setIsCheckedGF(!isCheckedGF)}
+          checked={isCheckedGF}
           value={allergen}
           id="gluten free"
         />{" "}
@@ -120,7 +126,8 @@ function Restaurants() {
         <label name="dairy-free">
           <input
           type="checkbox"
-          onChange={handleFilter}
+          onChange={() => setIsCheckedDF(!isCheckedDF)}
+          checked={isCheckedDF}
           value={allergen}
           id="dairy free"
           />
@@ -131,7 +138,8 @@ function Restaurants() {
         <label name="vegetarian">
           <input
           type="checkbox"
-          onChange={handleFilter}
+          onChange={() => setIsCheckedVeg(!isCheckedVeg)}
+          checked={isCheckedVeg}
           value={allergen}
           id="vegetarian"
           />
@@ -142,26 +150,40 @@ function Restaurants() {
         <label name="vegan">
           <input
           type="checkbox"
-          onChange={handleFilter}
+          onChange={() => setIsCheckedVegan(!isCheckedVegan)}
+          checked={isCheckedVegan}
           value={allergen}
           id="vegan"
           />
           Vegan
         </label>
-
-        <h3></h3>
-        <label name="best-rated">
-          <input
-          type="checkbox"
-          onChange={handleFilter}
-          value={allergen}
-          id="best rated"
-          />
-          Best rated
-        </label>
-
+       
         
       <ul>
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedGF && restaurant.glutenFree) return true;
+          if (!isCheckedGF) return true;
+          return false;
+        })
+      }
+      {restaurants.filter(function (restaurant) {
+        if (isCheckedDF && restaurant.dairyFree) return true;
+         if (!isCheckedDF) return true;
+         return false;
+      })
+      }
+      {restaurants.filter(function (restaurant){
+        if(isCheckedVeg && restaurant.vegetarian) return true;
+        if(!isCheckedVeg) return true;
+        return false;
+      })
+      }
+      {restaurants.filter(function (restaurant) {
+        if(isCheckedVegan && restaurant.vegan) return true;
+        if(!isCheckedVegan) return true;
+        return false;
+      })
+      }
         {restaurants.map((restaurant) => (
           <li key={restaurant.id} className="card">
             <img src={restaurant.photos} className="restaurant-image" />
