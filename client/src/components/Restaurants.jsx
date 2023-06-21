@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import mapboxgl, { FreeCameraOptions } from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import "./css/restaurants_favorites.css";
-import heart from "../assets/heart.png";
 import map from "../assets/map.png";
 import "./css/Home.css";
 import Star from "./Star";
-// import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(<AiOutlineHeart />);
   const [allergen, setAllergen] = useState("");
   const [userLocation, setUserLocation] = useState(null);
 
@@ -57,12 +55,8 @@ function Restaurants() {
   };
 
   const handleHeartClick = (e) => {
-    console.log(isClicked);
-    setIsClicked(!isClicked);
-    // if (isClicked === !isClicked) {
-    //   e.target.setAttribute("src", "https://source.unsplash.com/LYK3ksSQyeo");
-    //   e.target.setAttribute("alt", "dog");
-    // }
+    // console.log(isClicked);
+    setIsClicked(<AiFillHeart />);
   };
 
   const handleMapIconClick = (longitude, latitude) => {
@@ -88,12 +82,10 @@ function Restaurants() {
     );
   }, []);
 
-
   const [isCheckedGF, setIsCheckedGF] = useState(false);
   const [isCheckedDF, setIsCheckedDF] = useState(false);
   const [isCheckedVeg, setIsCheckedVeg] = useState(false);
   const [isCheckedVegan, setIsCheckedVegan] = useState(false);
-
 
   const addFavoriteRestaurant = async (restaurantId) => {
     try {
@@ -101,9 +93,9 @@ function Restaurants() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: "Bearer " + localStorage.getItem("token")
+          authorization: "Bearer " + localStorage.getItem("token"),
         },
-        body: JSON.stringify({ restaurantId })
+        body: JSON.stringify({ restaurantId }),
       };
       const response = await fetch("/users/restaurants", options);
       const data = await response.json();
@@ -113,7 +105,6 @@ function Restaurants() {
       console.log(error);
     }
   };
-
 
   return (
     <div>
@@ -146,9 +137,10 @@ function Restaurants() {
       <label name="gluten-free">
         <input
           type="checkbox"
-
           onChange={() => setIsCheckedGF(!isCheckedGF)}
           checked={isCheckedGF}
+
+          // onChange={handleFilter}
 
           // value = {individual allergen}
 
@@ -192,10 +184,15 @@ function Restaurants() {
           checked={isCheckedVegan}
           value={allergen}
           id="vegan"
+
           />
           Vegan
         </label>
        
+
+        />
+        Vegan
+      </label>
 
       <h3></h3>
       <label name="best-rated">
@@ -208,11 +205,16 @@ function Restaurants() {
         Best rated
       </label>
 
+
       <ul> 
+
+      <ul>
+
         {restaurants.filter(function (restaurant) {
           if (isCheckedGF && restaurant.glutenFree) return true;
           if (!isCheckedGF) return true;
           return false;
+
         }).filter(function (restaurant) {
           if (isCheckedDF && restaurant.dairyFree) return true;
            if (!isCheckedDF) return true;
@@ -230,6 +232,35 @@ function Restaurants() {
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
               <button onClick={() => addFavoriteRestaurant(restaurant.id)}>Add to Favorites</button>
+
+        })}
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedDF && restaurant.dairyFree) return true;
+          if (!isCheckedDF) return true;
+          return false;
+        })}
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedVeg && restaurant.vegetarian) return true;
+          if (!isCheckedVeg) return true;
+          return false;
+        })}
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedVegan && restaurant.vegan) return true;
+          if (!isCheckedVegan) return true;
+          return false;
+        })}
+        {restaurants.map((restaurant) => (
+          <li key={restaurant.id} className="card">
+            <img src={restaurant.photos} className="restaurant-image" />
+            <h3>
+              <div className="heart-icon" onClick={handleHeartClick}>
+                {isClicked}
+              </div>
+              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>
+                Add to Favorites
+              </button>
+              n
+
               <img
                 src={map}
                 alt="map"
