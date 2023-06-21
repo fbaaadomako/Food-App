@@ -6,19 +6,14 @@ import heart from "../assets/heart.png";
 import map from "../assets/map.png";
 import "./css/Home.css";
 import Star from "./Star";
+// import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-
 function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
   const [allergen, setAllergen] = useState("");
   const [userLocation, setUserLocation] = useState(null);
-  const [isCheckedGF, setIsCheckedGF] = useState(false);
-  const [isCheckedDF, setIsCheckedDF] = useState(false);
-  const [isCheckedVeg, setIsCheckedVeg] = useState(false);
-  const [isCheckedVegan, setIsCheckedVegan] = useState(false);
-
   const handleInputChange = (e) => {
     setCity(e.target.value);
   };
@@ -35,9 +30,15 @@ function Restaurants() {
       console.error("Error:", error);
     }
   };
-
+  // const allAllergens = restaurants.filter((r) =>
+  //   allergen.length > 0 ? allergen.every((a) => r.restaurants.map)
+  // }
   const handleFilter = (e) => {
+    // let word = "all"
     if (e.target.checked) {
+      // when varoable is checked allergen variable changes to true or 1
+      //each allergen will need its own functions
+      //filter all restaurants
       setAllergen([...allergen, e.target.value]);
       console.log(allergen);
     } else {
@@ -48,6 +49,10 @@ function Restaurants() {
   const handleHeartClick = (e) => {
     console.log(isClicked);
     setIsClicked(!isClicked);
+    // if (isClicked === !isClicked) {
+    //   e.target.setAttribute("src", "https://source.unsplash.com/LYK3ksSQyeo");
+    //   e.target.setAttribute("alt", "dog");
+    // }
   };
   const handleMapIconClick = (longitude, latitude) => {
     if (userLocation) {
@@ -70,7 +75,10 @@ function Restaurants() {
       }
     );
   }, []);
-
+  const [isCheckedGF, setIsCheckedGF] = useState(false);
+  const [isCheckedDF, setIsCheckedDF] = useState(false);
+  const [isCheckedVeg, setIsCheckedVeg] = useState(false);
+  const [isCheckedVegan, setIsCheckedVegan] = useState(false);
   const addFavoriteRestaurant = async (restaurantId) => {
     try {
       const options = {
@@ -84,6 +92,7 @@ function Restaurants() {
       const response = await fetch("/users/restaurants", options);
       const data = await response.json();
       console.log(data);
+      // Handle the response from the server as needed
     } catch (error) {
       console.log(error);
     }
@@ -120,12 +129,13 @@ function Restaurants() {
           type="checkbox"
           onChange={() => setIsCheckedGF(!isCheckedGF)}
           checked={isCheckedGF}
+          // value = {individual allergen}
           value={allergen}
           id="gluten free"
         />{" "}
         Gluten Free
       </label>
-
+      {/* Allergen should be an object with all allergens OR 4 variables with each allergen */}
       <h3></h3>
       <label name="dairy-free">
         <input
