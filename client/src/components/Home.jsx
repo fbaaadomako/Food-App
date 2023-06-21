@@ -1,3 +1,43 @@
+
+import React from 'react';
+import Restaurants from './Restaurants';
+import "./css/Home.css";
+import logo from '../assets/logo-text.png';
+
+
+
+
+function Home() {
+  return (
+    <div>
+      <div
+      className='logo'>
+        <br/><br/>
+      <img 
+      src= {logo}
+      alt='logo'
+      width={200}
+      height={100} />
+
+      </div>
+      <Restaurants />
+    </div>
+  );
+}
+
+export default Home;
+
+
+
+
+
+
+
+/*import React from 'react';
+import Restaurants from './Restaurants';
+import '../Home.css';
+import logo from '../assets/logo-text.png';
+
 import React from "react";
 import Restaurants from "./Restaurants";
 import Footer from "./Footer";
@@ -5,8 +45,23 @@ import "./css/Home.css";
 import NavBar from "./NavBar";
 import logo from "../assets/logo-text.png";
 
+
+
+
 function Home() {
-  return (
+
+    <div>
+      <div
+      className='logo'>
+        <br/><br/>
+      <img 
+      src= {logo}
+      alt='logo'
+      width={200}
+      height={100} />
+    
+      </div>
+
     <div className="container pt-5">
       <div className="logo">
         <br />
@@ -19,11 +74,11 @@ function Home() {
           width={200}
           height={100}
         />
-      </div>
-      <Restaurants />
-      <Footer />
-    </div>
-  );
-}
 
-export default Home;
+      </div>
+
+
+
+
+
+export default Home; */

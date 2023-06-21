@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
+import { useState, useEffect } from "react";
 import html2pdf from "html2pdf.js";
 import "./css/restaurants_favorites.css";
 import UserContext from "../context/UserContext";
 
 function Favorites() {
+  const [favRestaurants, setFavRestaurants] = useState(["test"]);
+
   let auth = useContext(UserContext);
-  console.log("AUTH", auth);
-  console.log("AUTH NAME", auth.user.name);
 
   const onButtonClick = () => {
     const element = document.getElementById("pdf-container");
@@ -23,16 +24,57 @@ function Favorites() {
       .save();
   };
 
+    useEffect(() => {
+    requestData();
+  }, []);
+
+  const requestData = async () => {
+    try {
+      let options = {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      let results = await fetch("/users/restaurants", options);
+      let data = await results.json();
+      console.log(data);
+      setFavRestaurants(data.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+ 
+  const addFavRestaurants = async (restaurantId) => {
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({ restaurantId })
+      };
+      const results = await fetch("/users/restaurants", options);
+      const data = await results.json();
+      console.log(data);
+      setfavRestaurants(data.data); // Update the favorite restaurants state
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div>
       {/* Render the content to be converted to PDF */}
       <div id="pdf-container">
-        <h2>{auth.user.name}</h2>
         <h1>Here is a list of your favorite restaurants, {auth.user.name}</h1>
-        <h3>
-          This page to list favorite restaurants that we've favorite using heart
-          icon on the Home page
-        </h3>
+        <div>
+        {favRestaurants.map((restaurant) => (
+        <div className="card col-md-4" key={restaurant.id}>
+        <h5 className="card-header">{restaurant.name}</h5>
+      </div>
+      ))}
+          </div>
       </div>
 
       {/* Button to trigger PDF generation and download */}

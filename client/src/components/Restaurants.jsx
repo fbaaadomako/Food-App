@@ -101,6 +101,33 @@ function Restaurants() {
     );
   }, []);
 
+
+  const [isCheckedGF, setIsCheckedGF] = useState(false);
+  const [isCheckedDF, setIsCheckedDF] = useState(false);
+  const [isCheckedVeg, setIsCheckedVeg] = useState(false);
+  const [isCheckedVegan, setIsCheckedVegan] = useState(false);
+
+
+  const addFavoriteRestaurant = async (restaurantId) => {
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({ restaurantId })
+      };
+      const response = await fetch("/users/restaurants", options);
+      const data = await response.json();
+      console.log(data);
+      // Handle the response from the server as needed
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -132,8 +159,13 @@ function Restaurants() {
       <label name="gluten-free">
         <input
           type="checkbox"
+
+          onChange={() => setIsCheckedGF(!isCheckedGF)}
+          checked={isCheckedGF}
+
           onChange={handleFilter}
           // value = {individual allergen}
+
           value={allergen}
           id="gluten free"
         />{" "}
@@ -146,7 +178,8 @@ function Restaurants() {
       <label name="dairy-free">
         <input
           type="checkbox"
-          onChange={handleFilter}
+          onChange={() => setIsCheckedDF(!isCheckedDF)}
+          checked={isCheckedDF}
           value={allergen}
           id="dairy free"
         />
@@ -157,7 +190,8 @@ function Restaurants() {
       <label name="vegetarian">
         <input
           type="checkbox"
-          onChange={handleFilter}
+          onChange={() => setIsCheckedVeg(!isCheckedVeg)}
+          checked={isCheckedVeg}
           value={allergen}
           id="vegetarian"
         />
@@ -168,9 +202,17 @@ function Restaurants() {
       <label name="vegan">
         <input
           type="checkbox"
-          onChange={handleFilter}
+          onChange={() => setIsCheckedVegan(!isCheckedVegan)}
+          checked={isCheckedVegan}
           value={allergen}
           id="vegan"
+
+          />
+          Vegan
+        </label>
+       
+        
+
         />
         Vegan
       </label>
@@ -186,14 +228,42 @@ function Restaurants() {
         Best rated
       </label>
 
+
       <ul>
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedGF && restaurant.glutenFree) return true;
+          if (!isCheckedGF) return true;
+          return false;
+        })
+      }
+      {restaurants.filter(function (restaurant) {
+        if (isCheckedDF && restaurant.dairyFree) return true;
+         if (!isCheckedDF) return true;
+         return false;
+      })
+      }
+      {restaurants.filter(function (restaurant){
+        if(isCheckedVeg && restaurant.vegetarian) return true;
+        if(!isCheckedVeg) return true;
+        return false;
+      })
+      }
+      {restaurants.filter(function (restaurant) {
+        if(isCheckedVegan && restaurant.vegan) return true;
+        if(!isCheckedVegan) return true;
+        return false;
+      })
+      }
         {restaurants.map((restaurant) => (
           <li key={restaurant.id} className="card">
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
+
               <div className="heart-icon" onClick={handleHeartClick}>
                 {isClicked}
               </div>
+  
+              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>Add to Favorites</button>n
               <img
                 src={map}
                 alt="map"

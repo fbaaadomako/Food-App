@@ -7,15 +7,15 @@ function userIsLoggedIn(req, res, next) {
   let authHeader = req.headers["authorization"];
   
   try {
-   // Separate 'Bearer' and token to keep only the token
+   // Separate 'Bearer'(aka str) and token to keep only the token
     let [str, token] = authHeader.split(" ");
   
     // Throws error on invalid/missing token
     // remember, payload includes the user_id we added to it when we created the token
     let payload = jwt.verify(token, supersecret);
 
-    //get from the payload the user_id and store in the req so we can use later
-    req.user_id = payload.user_id;
+    //get from the payload the users_id and store in the req so we can use later
+    req.user_id = payload.usersId;
     //next works as a continuation we have in our routes 
     next();
   } catch (err) {
