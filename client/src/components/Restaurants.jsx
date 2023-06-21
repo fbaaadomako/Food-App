@@ -8,7 +8,6 @@ import "./css/Home.css";
 import Star from "./Star";
 // import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-
 function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
