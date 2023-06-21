@@ -10,15 +10,6 @@
   margin-right: 10px;
 }
 
-/* .heart-icon  */
-.heart-icon-clicked {
-  /* background-image: url("https://picsum.photos/200"); */
-  /* background-repeat: no-repeat;
-  width: 20px;
-  height: 20px;
-  background-image: url("../../assets/heart-clicked.png"); */
-}
-
 .map-icon {
   width: 20px;
   height: 20px;
@@ -33,5 +24,3 @@
 #map {
   height: 400px;
 }
-
-/* STAR RATINGS */
