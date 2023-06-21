@@ -138,7 +138,9 @@ function Restaurants() {
           type="checkbox"
           onChange={() => setIsCheckedGF(!isCheckedGF)}
           checked={isCheckedGF}
+
           // onChange={handleFilter}
+
           // value = {individual allergen}
 
           value={allergen}
@@ -181,9 +183,9 @@ function Restaurants() {
           checked={isCheckedVegan}
           value={allergen}
           id="vegan"
-        />
-        Vegan
-      </label>
+          />
+          Vegan
+        </label>
 
       <h3></h3>
       <label name="best-rated">
@@ -196,11 +198,29 @@ function Restaurants() {
         Best rated
       </label>
 
-      <ul>
-        {/* {restaurants.filter(function (restaurant) {
+        {restaurants.filter(function (restaurant) {
           if (isCheckedGF && restaurant.glutenFree) return true;
           if (!isCheckedGF) return true;
           return false;
+
+        }).filter(function (restaurant) {
+          if (isCheckedDF && restaurant.dairyFree) return true;
+           if (!isCheckedDF) return true;
+           return false;
+        }).filter(function (restaurant) {
+          if (isCheckedVeg && restaurant.vegetarian) return true;
+           if (!isCheckedVeg) return true;
+           return false;
+        }).filter(function (restaurant){
+          if(isCheckedVegan && restaurant.vegan) return true;
+          if(!isCheckedVegan) return true;
+          return false;
+        }).map((restaurant) => (
+          <li key={restaurant.id} className="card">
+            <img src={restaurant.photos} className="restaurant-image" />
+            <h3>
+              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>Add to Favorites</button>
+
         })}
         {restaurants.filter(function (restaurant) {
           if (isCheckedDF && restaurant.dairyFree) return true;
@@ -229,6 +249,7 @@ function Restaurants() {
                 Add to Favorites
               </button>
               n
+
               <img
                 src={map}
                 alt="map"
