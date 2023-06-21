@@ -14,6 +14,11 @@ function Restaurants() {
   const [allergen, setAllergen] = useState("");
   const [userLocation, setUserLocation] = useState(null);
 
+  const [isCheckedGF, setIsCheckedGF] = useState(false);
+  const [isCheckedDF, setIsCheckedDF] = useState(false);
+  const [isCheckedVeg, setIsCheckedVeg] = useState(false);
+  const [isCheckedVegan, setIsCheckedVegan] = useState(false);
+
   const handleInputChange = (e) => {
     setCity(e.target.value);
   };
@@ -55,7 +60,6 @@ function Restaurants() {
   };
 
   const handleHeartClick = (e) => {
-    // console.log(isClicked);
     setIsClicked(<AiFillHeart />);
   };
 
@@ -81,11 +85,6 @@ function Restaurants() {
       }
     );
   }, []);
-
-  const [isCheckedGF, setIsCheckedGF] = useState(false);
-  const [isCheckedDF, setIsCheckedDF] = useState(false);
-  const [isCheckedVeg, setIsCheckedVeg] = useState(false);
-  const [isCheckedVegan, setIsCheckedVegan] = useState(false);
 
   const addFavoriteRestaurant = async (restaurantId) => {
     try {
@@ -184,15 +183,9 @@ function Restaurants() {
           checked={isCheckedVegan}
           value={allergen}
           id="vegan"
-
           />
           Vegan
         </label>
-       
-
-        />
-        Vegan
-      </label>
 
       <h3></h3>
       <label name="best-rated">
@@ -204,11 +197,6 @@ function Restaurants() {
         />
         Best rated
       </label>
-
-
-      <ul> 
-
-      <ul>
 
         {restaurants.filter(function (restaurant) {
           if (isCheckedGF && restaurant.glutenFree) return true;
@@ -248,7 +236,8 @@ function Restaurants() {
           if (isCheckedVegan && restaurant.vegan) return true;
           if (!isCheckedVegan) return true;
           return false;
-        })}
+        })} */}
+
         {restaurants.map((restaurant) => (
           <li key={restaurant.id} className="card">
             <img src={restaurant.photos} className="restaurant-image" />
