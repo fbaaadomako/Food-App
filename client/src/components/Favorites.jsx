@@ -44,41 +44,43 @@ function Favorites() {
     }
   };
 
-  const fetchRestaurantDetails = async (restaurants) => {
-    try {
-      // const apiKey = "YOUR_GOOGLE_PLACES_API_KEY";
+  console.log(favRestaurants);
 
-      const updatedRestaurants = await Promise.all(
-        restaurants.map(async (restaurant) => {
-          const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant.restaurant_id}&fields=name,formatted_address,formatted_phone_number,rating,photos&key=AIzaSyAA5EhIjx8DcDyiaucSKHJNbpqTZr5WKhg`;
-          const response = await fetch(url);
-          const data = await response.json();
-          console.log(data);
+  // const fetchRestaurantDetails = async (restaurants) => {
+  //   try {
+  //     // const apiKey = "YOUR_GOOGLE_PLACES_API_KEY";
 
-          const {
-            name,
-            formatted_address,
-            formatted_phone_number,
-            rating,
-            photos,
-          } = data.result;
+  //     const updatedRestaurants = await Promise.all(
+  //       restaurants.map(async (restaurant) => {
+  //         const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant.restaurant_id}&fields=name,formatted_address,formatted_phone_number,rating,photos&key=AIzaSyAA5EhIjx8DcDyiaucSKHJNbpqTZr5WKhg`;
+  //         const response = await fetch(url);
+  //         const data = await response.json();
+  //         console.log(data);
 
-          return {
-            ...restaurant,
-            name,
-            formatted_address,
-            formatted_phone_number,
-            rating,
-            photos,
-          };
-        })
-      );
+  //         const {
+  //           name,
+  //           formatted_address,
+  //           formatted_phone_number,
+  //           rating,
+  //           photos,
+  //         } = data.result;
 
-      setFavRestaurants(updatedRestaurants);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  //         return {
+  //           ...restaurant,
+  //           name,
+  //           formatted_address,
+  //           formatted_phone_number,
+  //           rating,
+  //           photos,
+  //         };
+  //       })
+  //     );
+
+  //     setFavRestaurants(updatedRestaurants);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   return (
     <div>
