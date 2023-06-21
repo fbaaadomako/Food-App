@@ -5,7 +5,7 @@ import "./css/restaurants_favorites.css";
 import UserContext from "../context/UserContext";
 
 function Favorites() {
-  const [favRestaurants, setFavRestaurants] = useState(["test"]);
+  const [favRestaurants, setFavRestaurants] = useState([""]);
 
   let auth = useContext(UserContext);
 
@@ -38,26 +38,7 @@ function Favorites() {
       let results = await fetch("/users/restaurants", options);
       let data = await results.json();
       console.log(data);
-      setFavRestaurants(data.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
- 
-  const addFavRestaurants = async (restaurantId) => {
-    try {
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: "Bearer " + localStorage.getItem("token")
-        },
-        body: JSON.stringify({ restaurantId })
-      };
-      const results = await fetch("/users/restaurants", options);
-      const data = await results.json();
-      console.log(data);
-      setfavRestaurants(data.data); // Update the favorite restaurants state
+      setFavRestaurants(data.restaurants);
     } catch (e) {
       console.log(e);
     }
