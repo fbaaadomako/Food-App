@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import mapboxgl, { FreeCameraOptions } from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import "./css/restaurants_favorites.css";
+import heart from "../assets/heart.png";
 import map from "../assets/map.png";
 import "./css/Home.css";
 import Star from "./Star";
@@ -10,10 +11,9 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
-  const [isClicked, setIsClicked] = useState(<AiOutlineHeart />);
+  const [isClicked, setIsClicked] = useState(false);
   const [allergen, setAllergen] = useState("");
   const [userLocation, setUserLocation] = useState(null);
-
   const [isCheckedGF, setIsCheckedGF] = useState(false);
   const [isCheckedDF, setIsCheckedDF] = useState(false);
   const [isCheckedVeg, setIsCheckedVeg] = useState(false);
@@ -22,16 +22,13 @@ function Restaurants() {
   const handleInputChange = (e) => {
     setCity(e.target.value);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch(`/api/restaurants?city=${city}`);
       if (!response.ok) {
         throw new Error("Failed to fetch restaurant details");
       }
-
       const data = await response.json();
       setRestaurants(data);
     } catch (error) {
@@ -39,18 +36,8 @@ function Restaurants() {
     }
   };
 
-  // const allAllergens = restaurants.filter((r) =>
-  //   allergen.length > 0 ? allergen.every((a) => r.restaurants.map)
-
-  // }
-
   const handleFilter = (e) => {
-    // let word = "all"
-
     if (e.target.checked) {
-      // when varoable is checked allergen variable changes to true or 1
-      //each allergen will need its own functions
-      //filter all restaurants
       setAllergen([...allergen, e.target.value]);
       console.log(allergen);
     } else {
@@ -58,11 +45,10 @@ function Restaurants() {
       console.log("allergen2", allergen);
     }
   };
-
   const handleHeartClick = (e) => {
-    setIsClicked(<AiFillHeart />);
+    console.log(isClicked);
+    setIsClicked(!isClicked);
   };
-
   const handleMapIconClick = (longitude, latitude) => {
     if (userLocation) {
       const userCoordinates = `${userLocation.coords.latitude},${userLocation.coords.longitude}`;
@@ -73,7 +59,6 @@ function Restaurants() {
       alert("Could not determine your location.");
     }
   };
-
   useEffect(() => {
     // Get user's current location
     navigator.geolocation.getCurrentPosition(
@@ -99,12 +84,10 @@ function Restaurants() {
       const response = await fetch("/users/restaurants", options);
       const data = await response.json();
       console.log(data);
-      // Handle the response from the server as needed
     } catch (error) {
       console.log(error);
     }
   };
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -131,23 +114,17 @@ function Restaurants() {
           </button>
         </div>
       </form>
-
       <h3>Filter by preference</h3>
       <label name="gluten-free">
         <input
           type="checkbox"
           onChange={() => setIsCheckedGF(!isCheckedGF)}
           checked={isCheckedGF}
-          // onChange={handleFilter}
-          // value = {individual allergen}
-
           value={allergen}
           id="gluten free"
         />{" "}
         Gluten Free
       </label>
-
-      {/* Allergen should be an object with all allergens OR 4 variables with each allergen */}
 
       <h3></h3>
       <label name="dairy-free">
@@ -160,7 +137,6 @@ function Restaurants() {
         />
         Dairy free
       </label>
-
       <h3></h3>
       <label name="vegetarian">
         <input
@@ -172,7 +148,6 @@ function Restaurants() {
         />
         Vegetarian
       </label>
-
       <h3></h3>
       <label name="vegan">
         <input
@@ -184,7 +159,6 @@ function Restaurants() {
         />
         Vegan
       </label>
-
       <h3></h3>
       <label name="best-rated">
         <input
@@ -195,71 +169,67 @@ function Restaurants() {
         />
         Best rated
       </label>
-
       <ul>
-        {/* {restaurants.filter(function (restaurant) {
-          if (isCheckedGF && restaurant.glutenFree) return true;
-          if (!isCheckedGF) return true;
-          return false;
-        })}
-        {restaurants.filter(function (restaurant) {
-          if (isCheckedDF && restaurant.dairyFree) return true;
-          if (!isCheckedDF) return true;
-          return false;
-        })}
-        {restaurants.filter(function (restaurant) {
-          if (isCheckedVeg && restaurant.vegetarian) return true;
-          if (!isCheckedVeg) return true;
-          return false;
-        })}
-        {restaurants.filter(function (restaurant) {
-          if (isCheckedVegan && restaurant.vegan) return true;
-          if (!isCheckedVegan) return true;
-          return false;
-        })} */}
-
-        {restaurants.map((restaurant) => (
-          <li key={restaurant.id} className="card">
-            <img src={restaurant.photos} className="restaurant-image" />
-            <h3>
-              <div className="heart-icon" onClick={handleHeartClick}>
-                {isClicked}
-              </div>
-              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>
-                Add to Favorites
-              </button>
-              n
-              <img
-                src={map}
-                alt="map"
-                className="map-icon"
-                onClick={() =>
-                  handleMapIconClick(restaurant.longitude, restaurant.latitude)
-                }
-              />
-              {restaurant.name}
-            </h3>
-            <p>Rating: {restaurant.rating}</p>
-            <Star rating={restaurant.rating} />
-            <p>Address: {restaurant.address}</p>
-            <p>Phone: {restaurant.phone}</p>
-            <p>
-              Website:{" "}
-              <a
-                href={restaurant.website}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {restaurant.website}
-              </a>
-            </p>
-          </li>
-        ))}
+        {restaurants
+          .filter(function (restaurant) {
+            if (isCheckedGF && restaurant.glutenFree) return true;
+            if (!isCheckedGF) return true;
+            return false;
+          })
+          .filter(function (restaurant) {
+            if (isCheckedDF && restaurant.dairyFree) return true;
+            if (!isCheckedDF) return true;
+            return false;
+          })
+          .filter(function (restaurant) {
+            if (isCheckedVeg && restaurant.vegetarian) return true;
+            if (!isCheckedVeg) return true;
+            return false;
+          })
+          .filter(function (restaurant) {
+            if (isCheckedVegan && restaurant.vegan) return true;
+            if (!isCheckedVegan) return true;
+            return false;
+          })
+          .map((restaurant) => (
+            <li key={restaurant.id} className="card">
+              <img src={restaurant.photos} className="restaurant-image" />
+              <h3>
+                <button onClick={() => addFavoriteRestaurant(restaurant.id)}>
+                  Add to Favorites
+                </button>
+                <img
+                  src={map}
+                  alt="map"
+                  className="map-icon"
+                  onClick={() =>
+                    handleMapIconClick(
+                      restaurant.longitude,
+                      restaurant.latitude
+                    )
+                  }
+                />
+                {restaurant.name}
+              </h3>
+              <p>Rating: {restaurant.rating}</p>
+              <Star rating={restaurant.rating} />
+              <p>Address: {restaurant.address}</p>
+              <p>Phone: {restaurant.phone}</p>
+              <p>
+                Website:{" "}
+                <a
+                  href={restaurant.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {restaurant.website}
+                </a>
+              </p>
+            </li>
+          ))}
       </ul>
-
       <div id="map"></div>
     </div>
   );
 }
-
 export default Restaurants;

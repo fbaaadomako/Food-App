@@ -14,12 +14,14 @@ CREATE TABLE restaurants (
     vegan BOOLEAN
 );
 
+-- SELECT * FROM users_restaurants JOIN restaurants ON restaurants.id = users_restaurants.restaurantsId WHERE users_restaurants.usersId = ${req.user_id};
+
 CREATE TABLE users (
-users_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, 
-name VARCHAR(255),
-email VARCHAR(255),
-username VARCHAR(255),
-password VARCHAR(255)
+    users_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, 
+    name VARCHAR(255),
+    email VARCHAR(255),
+    username VARCHAR(255),
+    password VARCHAR(255)
 );
 
 CREATE TABLE users_restaurants (
@@ -29,6 +31,7 @@ PRIMARY KEY (usersId, restaurantsId),
 FOREIGN KEY (usersId) REFERENCES users(users_id) ON DELETE CASCADE, 
 FOREIGN KEY (restaurantsId) REFERENCES restaurants(id) ON DELETE CASCADE
 );
+
 
 INSERT INTO restaurants (restaurant_id, city, dairy_free, gluten_free, vegetarian, vegan) VALUES 
 ("ChIJw2SzTVsbdkgRFLrwhdiLmCw", "London", 0, 1, 0, 0),
