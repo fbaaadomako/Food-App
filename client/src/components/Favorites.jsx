@@ -37,15 +37,16 @@ function Favorites() {
       let results = await fetch("/users/restaurants", options);
       let data = await results.json();
       console.log(data);
-      setFavRestaurants(data.restaurants);
-      fetchRestaurantDetails(data.restaurants);
+      setFavRestaurants(data);
+      // ******* Commented out, this comes from the back end now *******
+      // fetchRestaurantDetails(data.restaurants);
     } catch (e) {
       console.log(e);
     }
   };
+  console.log(favRestaurants)
 
-  console.log(favRestaurants);
-
+  // ******* Commented out, this comes from the back end now *******
   // const fetchRestaurantDetails = async (restaurants) => {
   //   try {
   //     // const apiKey = "YOUR_GOOGLE_PLACES_API_KEY";
@@ -87,17 +88,20 @@ function Favorites() {
       <div id="pdf-container">
         <h1>Here is a list of your favorite restaurants, {auth.user.name}</h1>
         <div>
-          {favRestaurants.map((restaurant) => (
+          {favRestaurants && favRestaurants.map((restaurant) => (
             <div className="card col-md-4" key={restaurant.id}>
               <h5 className="card-header">{restaurant.restaurant_id}</h5>
               <p>Name: {restaurant.name}</p>
-              <p>Address: {restaurant.formatted_address}</p>
-              <p>Phone: {restaurant.formatted_phone_number}</p>
+              {/* CHANGED FROM formatted_address */}
+              <p>Address: {restaurant.address}</p>
+              {/* CHANGED FROM formatted_phone_number */}
+              <p>Phone: {restaurant.phone}</p>
               <p>Rating: {restaurant.rating}</p>
               {restaurant.photos &&
-                restaurant.photos.map((photo) => (
-                  <img src={photo} alt="Restaurant" key={photo} />
-                ))}
+                // restaurant.photos.map((photo) => ( // removed map, also removed key={photo} attribute from img tag
+                  <img src={restaurant.photos} alt="Restaurant" />
+                // ))
+              }
             </div>
           ))}
         </div>

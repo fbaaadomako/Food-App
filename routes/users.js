@@ -90,7 +90,7 @@ router.get("/restaurants", userIsLoggedIn, async (req, res) => {
   // }
   // ************* END ORIGINAL *************
   
-  // ************* NEW: WORKS IN POSTMAN *************
+  // ************* NEW: copied function from restaurants fetch, just updated SQL query *************
   try {
     const { data: restaurants } = await db(
       `SELECT * FROM users_restaurants JOIN restaurants ON restaurants.id = users_restaurants.restaurantsId WHERE users_restaurants.usersId = "${req.user_id}"`
