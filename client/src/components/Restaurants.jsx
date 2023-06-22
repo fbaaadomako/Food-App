@@ -166,9 +166,26 @@ function Restaurants() {
           checked={isCheckedVegan}
           value={allergen}
           id="vegan"
+<<<<<<<<< Temporary merge branch 1
+        />
+        Vegan
+      </label>
+||||||||| merged common ancestors
+
           />
           Vegan
         </label>
+       
+
+        />
+        Vegan
+      </label>
+
+=========
+          />
+          Vegan
+        </label>
+>>>>>>>>> Temporary merge branch 2
       <h3></h3>
       <label name="best-rated">
         <input
@@ -180,6 +197,144 @@ function Restaurants() {
         Best rated
       </label>
       <ul>
+<<<<<<<<< Temporary merge branch 1
+        {restaurants
+          .filter(function (restaurant) {
+            if (isCheckedGF && restaurant.glutenFree) return true;
+            if (!isCheckedGF) return true;
+            return false;
+          })
+          .filter(function (restaurant) {
+            if (isCheckedDF && restaurant.dairyFree) return true;
+            if (!isCheckedDF) return true;
+            return false;
+          })
+          .filter(function (restaurant) {
+            if (isCheckedVeg && restaurant.vegetarian) return true;
+            if (!isCheckedVeg) return true;
+            return false;
+          })
+          .filter(function (restaurant) {
+            if (isCheckedVegan && restaurant.vegan) return true;
+            if (!isCheckedVegan) return true;
+            return false;
+          })
+          .map((restaurant) => (
+            <li key={restaurant.id} className="card">
+              <img src={restaurant.photos} className="restaurant-image" />
+              <h3>
+                <button onClick={() => addFavoriteRestaurant(restaurant.id)}>
+                  Add to Favorites
+                </button>
+                <img
+                  src={map}
+                  alt="map"
+                  className="map-icon"
+                  onClick={() =>
+                    handleMapIconClick(
+                      restaurant.longitude,
+                      restaurant.latitude
+                    )
+                  }
+                />
+                {restaurant.name}
+              </h3>
+              <p>Rating: {restaurant.rating}</p>
+              <Star rating={restaurant.rating} />
+              <p>Address: {restaurant.address}</p>
+              <p>Phone: {restaurant.phone}</p>
+              <p>
+                Website:{" "}
+                <a
+                  href={restaurant.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {restaurant.website}
+                </a>
+              </p>
+            </li>
+          ))}
+||||||||| merged common ancestors
+
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedGF && restaurant.glutenFree) return true;
+          if (!isCheckedGF) return true;
+          return false;
+
+        }).filter(function (restaurant) {
+          if (isCheckedDF && restaurant.dairyFree) return true;
+           if (!isCheckedDF) return true;
+           return false;
+        }).filter(function (restaurant) {
+          if (isCheckedVeg && restaurant.vegetarian) return true;
+           if (!isCheckedVeg) return true;
+           return false;
+        }).filter(function (restaurant){
+          if(isCheckedVegan && restaurant.vegan) return true;
+          if(!isCheckedVegan) return true;
+          return false;
+        }).map((restaurant) => (
+          <li key={restaurant.id} className="card">
+            <img src={restaurant.photos} className="restaurant-image" />
+            <h3>
+              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>Add to Favorites</button>
+
+        })}
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedDF && restaurant.dairyFree) return true;
+          if (!isCheckedDF) return true;
+          return false;
+        })}
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedVeg && restaurant.vegetarian) return true;
+          if (!isCheckedVeg) return true;
+          return false;
+        })}
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedVegan && restaurant.vegan) return true;
+          if (!isCheckedVegan) return true;
+          return false;
+        })}
+        {restaurants.map((restaurant) => (
+          <li key={restaurant.id} className="card">
+            <img src={restaurant.photos} className="restaurant-image" />
+            <h3>
+              <div className="heart-icon" onClick={handleHeartClick}>
+                {isClicked}
+              </div>
+              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>
+                Add to Favorites
+              </button>
+              n
+
+              <img
+                src={map}
+                alt="map"
+                className="map-icon"
+                onClick={() =>
+                  handleMapIconClick(restaurant.longitude, restaurant.latitude)
+                }
+              />
+              {restaurant.name}
+            </h3>
+            <p>Rating: {restaurant.rating}</p>
+            <Star rating={restaurant.rating} />
+            <p>Address: {restaurant.address}</p>
+            <p>Phone: {restaurant.phone}</p>
+            <p>
+              Website:{" "}
+              <a
+                href={restaurant.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {restaurant.website}
+              </a>
+            </p>
+          </li>
+        ))}
+=========
         {restaurants.filter(function (restaurant) {
           if (isCheckedGF && restaurant.glutenFree) return true;
           if (!isCheckedGF) return true;
@@ -227,6 +382,7 @@ function Restaurants() {
             </p>
           </li>
         ))}
+>>>>>>>>> Temporary merge branch 2
       </ul>
       <div id="map"></div>
     </div>
