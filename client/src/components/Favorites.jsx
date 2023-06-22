@@ -14,10 +14,10 @@ function Favorites() {
     html2pdf()
       .set({
         margin: 0.5,
-        filename: "webpage.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+        filename: "favorites.pdf",
+        image: { type: "webp", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
       })
       .from(element)
       .save();
@@ -38,50 +38,11 @@ function Favorites() {
       let data = await results.json();
       console.log(data);
       setFavRestaurants(data);
-      // ******* Commented out, this comes from the back end now *******
-      // fetchRestaurantDetails(data.restaurants);
     } catch (e) {
       console.log(e);
     }
   };
   console.log(favRestaurants)
-
-  // ******* Commented out, this comes from the back end now *******
-  // const fetchRestaurantDetails = async (restaurants) => {
-  //   try {
-  //     // const apiKey = "YOUR_GOOGLE_PLACES_API_KEY";
-
-  //     const updatedRestaurants = await Promise.all(
-  //       restaurants.map(async (restaurant) => {
-  //         const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant.restaurant_id}&fields=name,formatted_address,formatted_phone_number,rating,photos&key=AIzaSyAA5EhIjx8DcDyiaucSKHJNbpqTZr5WKhg`;
-  //         const response = await fetch(url);
-  //         const data = await response.json();
-  //         console.log(data);
-
-  //         const {
-  //           name,
-  //           formatted_address,
-  //           formatted_phone_number,
-  //           rating,
-  //           photos,
-  //         } = data.result;
-
-  //         return {
-  //           ...restaurant,
-  //           name,
-  //           formatted_address,
-  //           formatted_phone_number,
-  //           rating,
-  //           photos,
-  //         };
-  //       })
-  //     );
-
-  //     setFavRestaurants(updatedRestaurants);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   return (
     <div>
@@ -97,11 +58,9 @@ function Favorites() {
               {/* CHANGED FROM formatted_phone_number */}
               <p>Phone: {restaurant.phone}</p>
               <p>Rating: {restaurant.rating}</p>
-              {restaurant.photos &&
-                // restaurant.photos.map((photo) => ( // removed map, also removed key={photo} attribute from img tag
-                  <img src={restaurant.photos} alt="Restaurant" />
-                // ))
-              }
+              {restaurant.photos && (
+                <img src={restaurant.photos} alt="Restaurant" />
+              )}
             </div>
           ))}
         </div>
