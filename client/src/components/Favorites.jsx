@@ -42,7 +42,6 @@ function Favorites() {
       console.log(e);
     }
   };
-  console.log(favRestaurants)
 
   return (
     <div>
