@@ -4,6 +4,8 @@ const db = require("../model/helper");
 require("dotenv").config();
 const fetch = require("node-fetch");
 const apiKey = process.env.API_KEY;
+// *********** ADDED axios ***********
+const axios = require('axios');
 
 //1. install jsonwebtoken (token purpose) & bcrypt (encryption purpose) packages
 //2. require jsonwebtoken & bcrypt
@@ -108,8 +110,19 @@ router.post("/login", async (req, res) => {
         const longitude = placeData.geometry.location.lng;
         const latitude = placeData.geometry.location.lat;
         const photoReference = placeData.photos[0].photo_reference;
-        const photos = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&maxheight=1600&photoreference=${photoReference}&key=${apiKey}`;
+        // *********** CHANGED FROM photos ***********
+        const photoUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&maxheight=1600&photoreference=${photoReference}&key=${apiKey}`;
 
+        // *********** ADDED: Fetch the photo using Axios and serve it through your own server ***********
+        // NOTE: tried just fetching the photoUrl with the result as text, and turning into a JSON string object, but did not work because image was received in binary
+        const { data: photoData } = await axios.get(photoUrl, {
+          responseType: 'arraybuffer',
+        });
+
+      // *********** ADDED: Convert the photo data to a base64 string, because it's received in binary ***********
+      const photos = `data:image/jpeg;base64,${Buffer.from(photoData).toString('base64')}`;
+
+        
         return {
           id: restaurant.id,
           name,
