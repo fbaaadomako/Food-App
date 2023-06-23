@@ -8,42 +8,33 @@ import "./css/Home.css";
 import Star from "./Star";
 // import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-
 function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
   const [allergen, setAllergen] = useState("");
   const [userLocation, setUserLocation] = useState(null);
-
   const handleInputChange = (e) => {
     setCity(e.target.value);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch(`/api/restaurants?city=${city}`);
       if (!response.ok) {
         throw new Error("Failed to fetch restaurant details");
       }
-
       const data = await response.json();
       setRestaurants(data);
     } catch (error) {
       console.error("Error:", error);
     }
   };
-
   // const allAllergens = restaurants.filter((r) =>
   //   allergen.length > 0 ? allergen.every((a) => r.restaurants.map)
-
   // }
-
   const handleFilter = (e) => {
     // let word = "all"
-
     if (e.target.checked) {
       // when varoable is checked allergen variable changes to true or 1
       //each allergen will need its own functions
@@ -55,7 +46,6 @@ function Restaurants() {
       console.log("allergen2", allergen);
     }
   };
-
   const handleHeartClick = (e) => {
     console.log(isClicked);
     setIsClicked(!isClicked);
@@ -64,7 +54,6 @@ function Restaurants() {
     //   e.target.setAttribute("alt", "dog");
     // }
   };
-
   const handleMapIconClick = (longitude, latitude) => {
     if (userLocation) {
       const userCoordinates = `${userLocation.coords.latitude},${userLocation.coords.longitude}`;
@@ -75,7 +64,6 @@ function Restaurants() {
       alert("Could not determine your location.");
     }
   };
-
   useEffect(() => {
     // Get user's current location
     navigator.geolocation.getCurrentPosition(
@@ -87,14 +75,10 @@ function Restaurants() {
       }
     );
   }, []);
-
-
   const [isCheckedGF, setIsCheckedGF] = useState(false);
   const [isCheckedDF, setIsCheckedDF] = useState(false);
   const [isCheckedVeg, setIsCheckedVeg] = useState(false);
   const [isCheckedVegan, setIsCheckedVegan] = useState(false);
-
-
   const addFavoriteRestaurant = async (restaurantId) => {
     try {
       const options = {
@@ -113,8 +97,6 @@ function Restaurants() {
       console.log(error);
     }
   };
-
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -141,25 +123,19 @@ function Restaurants() {
           </button>
         </div>
       </form>
-
       <h3>Filter by preference</h3>
       <label name="gluten-free">
         <input
           type="checkbox"
-
           onChange={() => setIsCheckedGF(!isCheckedGF)}
           checked={isCheckedGF}
-
           // value = {individual allergen}
-
           value={allergen}
           id="gluten free"
         />{" "}
         Gluten Free
       </label>
-
       {/* Allergen should be an object with all allergens OR 4 variables with each allergen */}
-
       <h3></h3>
       <label name="dairy-free">
         <input
@@ -171,7 +147,6 @@ function Restaurants() {
         />
         Dairy free
       </label>
-
       <h3></h3>
       <label name="vegetarian">
         <input
@@ -183,7 +158,6 @@ function Restaurants() {
         />
         Vegetarian
       </label>
-
       <h3></h3>
       <label name="vegan">
         <input
@@ -245,10 +219,8 @@ function Restaurants() {
           </li>
         ))}
       </ul>
-
       <div id="map"></div>
     </div>
   );
 }
-
 export default Restaurants;

@@ -22,6 +22,11 @@ function NavBar() {
           <button className="btn btn-dark">Login</button>
         </Link>
       )}
+      {!auth.isLoggedIn && (
+        <Link to="/signup">
+          <button className="btn btn-dark">Sign Up</button>
+        </Link>
+      )}
       {auth.isLoggedIn && (
         <>
           <Link to="/favorites">
