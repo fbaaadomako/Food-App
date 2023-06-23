@@ -3,6 +3,7 @@ import React from 'react';
 import Restaurants from './Restaurants';
 import "./css/Home.css";
 import logo from '../assets/logo-text.png';
+import Footer from './Footer'
 
 
 
@@ -21,6 +22,7 @@ function Home() {
 
       </div>
       <Restaurants />
+      <Footer />
     </div>
   );
 }

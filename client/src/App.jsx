@@ -11,8 +11,9 @@ import About from "./components/About";
 import UserContext from "./context/UserContext";
 
 function App() {
-  let [isLoggedIn, setIsLoggedIn] = useState(false);
-  let [currentUser, setCurrentUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [color, changeColor] = useState("red")
 
   let auth = {
     user: currentUser,
@@ -28,11 +29,11 @@ function App() {
         <NavBar />
         <div>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/" element={<Home />} onClick={() => changeColor("")} />
+            <Route path="/favorites" element={<Favorites />} onClick={() => changeColor("#e71212")}/>
+            <Route path="/signup" element={<SignUp />} onClick={() => changeColor("#e71212")}/>
+            <Route path="/login" element={<LogIn />} onClick={() => changeColor("#e71212")}/>
+            <Route path="/about" element={<About />} onClick={() => changeColor("")}/>
           </Routes>
         </div>
       </Router>
