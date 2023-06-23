@@ -195,18 +195,6 @@ function Restaurants() {
           />
           Vegan
         </label>
-       
-
-      <h3></h3>
-      <label name="best-rated">
-        <input
-          type="checkbox"
-          onChange={handleFilter}
-          value={allergen}
-          id="best rated"
-        />
-        Best rated
-      </label>
 
       <ul> 
         {restaurants.filter(function (restaurant) {
