@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import html2pdf from "html2pdf.js";
-import "./css/restaurants_favorites.css";
+import "./css/Favorites.css";
 import UserContext from "../context/UserContext";
+import Footer from "./Footer";
 
 function Favorites() {
   const [favRestaurants, setFavRestaurants] = useState([]);
@@ -17,7 +18,7 @@ function Favorites() {
         filename: "favorites.pdf",
         image: { type: "webp", quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+        jsPDF: { unit: "in", format: "a4", orientation: "landscape" },
       })
       .from(element)
       .save();
@@ -46,25 +47,35 @@ function Favorites() {
   return (
     <div>
       <div id="pdf-container">
-        <h1>Here is a list of your favorite restaurants, {auth.user.name}</h1>
-        <div>
+        <h1>Here is your saved restaurants, {auth.user.name}</h1>
+        <div className="favorites-container">
           {favRestaurants && favRestaurants.map((restaurant) => (
-            <div className="card col-md-4" key={restaurant.id}>
-              <h5 className="card-header">{restaurant.restaurant_id}</h5>
-              <p>Name: {restaurant.name}</p>
-              {/* CHANGED FROM formatted_address */}
-              <p>Address: {restaurant.address}</p>
-              {/* CHANGED FROM formatted_phone_number */}
-              <p>Phone: {restaurant.phone}</p>
-              <p>Rating: {restaurant.rating}</p>
+            <div className="favorites-card" key={restaurant.id}>
+              <h5>{restaurant.restaurant_id}</h5>
               {restaurant.photos && (
                 <img src={restaurant.photos} alt="Restaurant" />
               )}
+              <p>Name: {restaurant.name}</p>
+              <p>Address: {restaurant.address}</p>
+              <p>Phone: {restaurant.phone}</p>
+              <p>Rating: {restaurant.rating}</p>
+              <p>
+              Website:{" "}
+              <a
+                href={restaurant.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {restaurant.website}
+                </a>
+                </p>
             </div>
           ))}
         </div>
       </div>
-      <button onClick={onButtonClick}>Download PDF</button>
+      <p>Share your favorites with friends & family in a PDF</p>
+      <button onClick={onButtonClick}>Download</button>
+      <Footer />
     </div>
   );
 }
