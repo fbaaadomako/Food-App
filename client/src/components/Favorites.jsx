@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import html2pdf from "html2pdf.js";
 import "./css/restaurants_favorites.css";
 import UserContext from "../context/UserContext";
+import Star from "./Star";
 
 function Favorites() {
   const [favRestaurants, setFavRestaurants] = useState([""]);
@@ -24,7 +25,7 @@ function Favorites() {
       .save();
   };
 
-    useEffect(() => {
+  useEffect(() => {
     requestData();
   }, []);
 
@@ -50,12 +51,13 @@ function Favorites() {
       <div id="pdf-container">
         <h1>Here is a list of your favorite restaurants, {auth.user.name}</h1>
         <div>
-        {favRestaurants.map((restaurant) => (
-        <div className="card col-md-4" key={restaurant.id}>
-        <h5 className="card-header">{restaurant.name}</h5>
-      </div>
-      ))}
-          </div>
+          {favRestaurants.map((restaurant) => (
+            <div className="card col-md-4" key={restaurant.id}>
+              <h5 className="card-header">{restaurant.name}</h5>
+              <Star rating={restaurant.rating} />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Button to trigger PDF generation and download */}
