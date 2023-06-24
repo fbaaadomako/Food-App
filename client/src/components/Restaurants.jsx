@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactMapGl, { Marker, Popup } from "react-map-gl";
-import "./css/restaurants_favorites.css";
+import "./css/Restaurants.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
 import "./css/Home.css";
