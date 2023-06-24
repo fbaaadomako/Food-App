@@ -34,31 +34,6 @@ function SignUp() {
     
   };
 
-  const googleTranslateElementInit = () => {
-    new window.google.translate.TranslateElement(
-      {
-        pageLanguage: "en",
-        autoDisplay: false,
-      },
-      "google_translate_element"
-    );
-  };
-
-
-
-  // useEffect(() => {
-  //   const body = document.querySelector("body");
-  //   const currentRoute = window.location.pathname;
-  
-  //   if (currentRoute === "/signup") {
-  //     body.style.backgroundColor = "#e71212";
-  //   } else if (currentRoute === "/login") {
-  //     body.style.backgroundColor = "#ffffff";
-  //   } else {
-  //     body.style.backgroundColor = "";
-  //   }
-  // }, []);
-
   return (
     <div className="signuppage">
       <form onSubmit={signup}>
