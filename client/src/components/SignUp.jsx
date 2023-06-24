@@ -94,7 +94,7 @@ function SignUp() {
       </form>
       <p className="signuptext">
         Already registered?
-        <Link to="/login" className="signuptext font-weight-bold">
+        <Link to="/login" className="font-weight-bold">
           {" "}
           Log In
         </Link>{" "}

@@ -1,5 +1,4 @@
 import React from "react";
-// import "./css/restaurants_favorites.css";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineStar } from "react-icons/ai";
 

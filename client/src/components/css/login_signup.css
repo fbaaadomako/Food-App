@@ -25,12 +25,27 @@
   box-shadow: 3px 15px 15px rgba(226, 226, 226, 0.86);
 }
 
+.logintext,
+.logintext a,
+.logintext a:hover {
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.loginpage {
+  margin: 0;
+  padding: 50px;
+  width: 100vw;
+  height: 100vh;
+}
+
 /* SIGN UP Page */
 .signuppage {
   background-color: #e71212;
   margin: 0;
-  padding: 0;
-  height: inherit;
+  padding: 50px;
+  width: 100vw;
+  height: 100vh;
 }
 
 .signupcontainer {
