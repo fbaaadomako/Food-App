@@ -47,7 +47,7 @@ function LogIn() {
   };
 
   return (
-    <div>
+    <div className="loginpage">
       <img className="registerlogo" src={redlogo} />
       <div className="logincontainer">
         <div className="row pb-3">
