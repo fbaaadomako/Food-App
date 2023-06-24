@@ -14,7 +14,9 @@ function About() {
         <h2 className="pb-3">Meet the Team</h2>
         <div className="row">
           <div className="col-md-3 col-xs-6 profile-card">
-            <img src={JuLi} />
+            <div className="profile">
+              <img src={JuLi} />
+            </div>
           </div>
 
           <div className="col-md-9 col-xs-6 pt-3">
@@ -45,7 +47,9 @@ function About() {
         </div>
         <div className="row mt-4">
           <div className="col-md-3 col-xs-6 profile-card">
-            <img src={Felicia} />
+            <div className="profile">
+              <img src={Felicia} />
+            </div>
           </div>
 
           <div className="col-md-9 col-xs-6 pt-3">
