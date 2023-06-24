@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ReactMapGl, { Marker, Popup } from "react-map-gl";
-import "./css/restaurants_favorites.css";
-import heart from "../assets/heart.png";
+import "./css/Restaurants.css";
 import map from "../assets/map.png";
 import "./css/Home.css";
 import Star from "./Star";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 function Restaurants() {
   const [city, setCity] = useState("");
@@ -24,6 +25,8 @@ function Restaurants() {
     longitude: -0.118092,
     zoom: 14,
   });
+  const [favorites, setFavorites] = useState([]);
+  // const [isFavorite, setIsFavorite] = useState(false);
 
   // Restaurant Search
   const handleInputChange = (e) => {
@@ -55,10 +58,20 @@ function Restaurants() {
     }
   };
 
+  // Old code for Favorites (heart icon)
+//  const handleHeartClick = (restaurantId) => {
+//   setIsFavorite(!isFavorite);
+//   addFavoriteRestaurant(restaurantId);
+// };
   // Setting as Favorites (heart icon)
-  const handleHeartClick = (e) => {
-    console.log(isClicked);
-    setIsClicked(!isClicked);
+  const handleHeartClick = (restaurantId) => {
+    setFavorites((prevFavorites) => {
+      if (prevFavorites.includes(restaurantId)) {
+        return prevFavorites.filter((id) => id !== restaurantId);
+      } else {
+        return [...prevFavorites, restaurantId];
+      }
+    });
   };
 
   const addFavoriteRestaurant = async (restaurantId) => {
@@ -214,7 +227,17 @@ function Restaurants() {
           <li key={restaurant.id} className="restaurant-card">
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
-              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>Add to Favorites</button>
+            <FontAwesomeIcon
+                icon={faHeart}
+                style={{ color: favorites.includes(restaurant.id) ? "#eb0a15" : "#272525" }}
+                onClick={() => handleHeartClick(restaurant.id)}
+              />
+                   {/* <h3>
+              <FontAwesomeIcon
+              icon={faHeart}
+              style={{ color: isFavorite ? "#eb0a15" : "#272525" }}
+              onClick={() => handleHeartClick(restaurant.id)}
+            /> */}
               <img
                 src={map}
                 alt="map"
