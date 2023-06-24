@@ -4,6 +4,7 @@ import "./css/index.css";
 import { FaLinkedin } from "react-icons/fa";
 import JuLi from "../assets/JuLi.jpg";
 import Felicia from "../assets/Felicia.jpg";
+import Footer from "./Footer";
 
 function About() {
   return (
@@ -45,7 +46,7 @@ function About() {
             </p>
           </div>
         </div>
-        <div className="row mt-4">
+        <div className="row mt-4 mb-5">
           <div className="col-md-3 col-xs-6 profile-card">
             <div className="profile">
               <img src={Felicia} />
@@ -75,6 +76,7 @@ function About() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
