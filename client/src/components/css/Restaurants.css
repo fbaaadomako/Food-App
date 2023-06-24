@@ -1,4 +1,4 @@
-/* CSS FOR RESTAURANTS and FAVORITES pages */
+/* CSS FOR RESTAURANTS pages */
 
 /* RESTAURANTS */
 .heart-icon {
@@ -10,17 +10,19 @@
   margin-right: 10px;
 }
 
-.map-icon {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
+
 .restaurant-image {
-  width: 400px; /* Specify the desired width */
+  width: 420px; /* Specify the desired width */
   height: 300px; /* Specify the desired height */
 }
 
 /* MAP */
 #map {
   height: 400px;
+}
+
+.map-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import mapboxgl, { FreeCameraOptions } from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import "./css/restaurants_favorites.css";
+import "./css/Restaurants.css";
 import heart from "../assets/heart.png";
 import map from "../assets/map.png";
 import "./css/Home.css";
@@ -188,7 +188,7 @@ function Restaurants() {
           if(!isCheckedVegan) return true;
           return false;
         }).map((restaurant) => (
-          <li key={restaurant.id} className="card">
+          <li key={restaurant.id} className="restaurant-card">
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
               <button onClick={() => addFavoriteRestaurant(restaurant.id)}>Add to Favorites</button>
