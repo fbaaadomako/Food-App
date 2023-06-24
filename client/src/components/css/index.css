@@ -55,13 +55,13 @@
 .profile-card {
   margin-bottom: 20px;
   text-align: center;
-  webkit-filter: grayscale(90%);
+  -webkit-filter: grayscale(90%);
   filter: grayscale(90%);
   transition: all 0.5s;
 }
 
 .profile-card:hover {
-  webkit-filter: grayscale(0%);
+  -webkit-filter: grayscale(0%);
   filter: grayscale(0%);
 }
 
