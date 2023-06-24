@@ -17,8 +17,16 @@
 }
 
 /* MAP */
-#map {
-  height: 400px;
+.marker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #910b0b;
+}
+
+.marker:hover {
+  color: rgb(37, 36, 36);
 }
 
 .map-icon {

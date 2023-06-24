@@ -2,7 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import html2pdf from "html2pdf.js";
 import "./css/Favorites.css";
 import UserContext from "../context/UserContext";
+<<<<<<< HEAD
+import Star from "./Star";
+||||||| 4948032
+=======
 import Footer from "./Footer";
+>>>>>>> 9169577815f1c4c680f6cfa661c8e82776a15592
 
 function Favorites() {
   const [favRestaurants, setFavRestaurants] = useState([]);
@@ -47,6 +52,34 @@ function Favorites() {
   return (
     <div>
       <div id="pdf-container">
+<<<<<<< HEAD
+        <h1>Here is a list of your favorite restaurants, {auth.user.name}</h1>
+        <div>
+          {favRestaurants.map((restaurant) => (
+            <div className="card col-md-4" key={restaurant.id}>
+              <h5 className="card-header">{restaurant.name}</h5>
+              <Star rating={restaurant.rating} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Button to trigger PDF generation and download */}
+      <button onClick={onButtonClick}>Download PDF</button>
+||||||| 4948032
+        <h1>Here is a list of your favorite restaurants, {auth.user.name}</h1>
+        <div>
+        {favRestaurants.map((restaurant) => (
+        <div className="card col-md-4" key={restaurant.id}>
+        <h5 className="card-header">{restaurant.name}</h5>
+      </div>
+      ))}
+          </div>
+      </div>
+
+      {/* Button to trigger PDF generation and download */}
+      <button onClick={onButtonClick}>Download PDF</button>
+=======
         <h1>Here is your saved restaurants, {auth.user.name}</h1>
         <div className="favorites-container">
           {favRestaurants && favRestaurants.map((restaurant) => (
@@ -76,6 +109,7 @@ function Favorites() {
       <p>Share your favorites with friends & family in a PDF</p>
       <button onClick={onButtonClick}>Download</button>
       <Footer />
+>>>>>>> 9169577815f1c4c680f6cfa661c8e82776a15592
     </div>
   );
 }

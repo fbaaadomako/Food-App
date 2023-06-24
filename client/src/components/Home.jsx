@@ -1,25 +1,19 @@
-
-import React from 'react';
-import Restaurants from './Restaurants';
-import Footer from './Footer';
+import React from "react";
+import Restaurants from "./Restaurants";
 import "./css/Home.css";
-import logo from '../assets/logo-text.png';
-
-
-
+import logo from "../assets/logo-text.png";
+import Footer from "./Footer";
+import NavBar from "./NavBar";
 
 function Home() {
   return (
     <div>
-      <div
-      className='logo'>
-        <br/><br/>
-      <img 
-      src= {logo}
-      alt='logo'
-      width={200}
-      height={100} />
+      <NavBar />
 
+      <div className="logo">
+        <br />
+        <br />
+        <img src={logo} alt="logo" width={200} height={100} />
       </div>
       <Restaurants />
       <Footer />
@@ -28,12 +22,6 @@ function Home() {
 }
 
 export default Home;
-
-
-
-
-
-
 
 /*import React from 'react';
 import Restaurants from './Restaurants';

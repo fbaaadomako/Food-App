@@ -27,6 +27,19 @@
   }
 }
 
+/* NAV BAR */
+.nav-container {
+  display: flex;
+  justify-content: end;
+  margin-right: 50px;
+  padding-top: 30px;
+}
+
+.nav-btn {
+  outline: none;
+  border: none;
+}
+
 /* ABOUT US */
 .meetteam:after {
   content: "";
@@ -55,13 +68,13 @@
 .profile-card {
   margin-bottom: 20px;
   text-align: center;
-  -webkit-filter: grayscale(90%);
+  /* webkit-filter: grayscale(90%); */
   filter: grayscale(90%);
   transition: all 0.5s;
 }
 
 .profile-card:hover {
-  -webkit-filter: grayscale(0%);
+  /* webkit-filter: grayscale(0%); */
   filter: grayscale(0%);
 }
 
@@ -72,6 +85,7 @@
   margin: 0 auto;
   border-radius: 100%;
   transition: all 0.5s;
+  object-fit: cover;
 }
 
 .profile-card > div > a.fa {
@@ -131,14 +145,15 @@
 /* FOOTER */
 .footersection {
   position: relative;
-  padding-top: 2px;
   bottom: 0px;
   background: #e71212;
-  height: 200px;
+  width: 100%;
+  height: 250px;
 }
 
 .footercontainer {
   width: 400px;
+  padding-top: 20px;
 }
 
 .footerlogo {
@@ -150,4 +165,6 @@
 .footerlinks a:hover {
   color: white;
   cursor: pointer;
+  font-size: 13px;
+  line-height: 2;
 }
