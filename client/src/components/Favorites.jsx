@@ -59,7 +59,7 @@ function Favorites() {
               <p>Name: {restaurant.name}</p>
               <p>Address: {restaurant.address}</p>
               <p>Phone: {restaurant.phone}</p>
-              <p>Rating: {restaurant.rating}</p>
+              <Star rating={restaurant.rating} />
               <p>
               Website:{" "}
               <a
