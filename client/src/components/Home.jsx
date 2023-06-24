@@ -3,10 +3,12 @@ import Restaurants from "./Restaurants";
 import "./css/Home.css";
 import logo from "../assets/logo-text.png";
 import Footer from "./Footer";
+import NavBar from "./NavBar";
 
 function Home() {
   return (
     <div>
+      <NavBar />
       <div className="logo">
         <br />
         <br />

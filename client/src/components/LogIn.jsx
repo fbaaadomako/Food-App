@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./css/login_signup.css";
 import redlogo from "../assets/logo-red.png";
 
@@ -77,6 +78,13 @@ function LogIn() {
           </div>
         </div>
       </div>
+      <p className="logintext">
+        <Link to="/signup" className="font-weight-bold">
+          {" "}
+          Register
+        </Link>{" "}
+        to start saving your favorite restaurants
+      </p>
     </div>
   );
 }
