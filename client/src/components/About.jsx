@@ -4,6 +4,7 @@ import "./css/index.css";
 import { FaLinkedin } from "react-icons/fa";
 import JuLi from "../assets/JuLi.jpg";
 import Felicia from "../assets/Felicia.jpg";
+import Serena from "../assets/Serena.jpg";
 import Footer from "./Footer";
 
 function About() {
@@ -13,7 +14,7 @@ function About() {
       <div className="about-header">{/* <img src={foodimage} /> */}</div>
       <div className="team-container">
         <h2 className="pb-3">Meet the Team</h2>
-        <div className="row">
+        <div className="row mt-4 mb-5">
           <div className="col-md-3 col-xs-6 profile-card">
             <div className="profile">
               <img src={JuLi} />
@@ -49,6 +50,36 @@ function About() {
         <div className="row mt-4 mb-5">
           <div className="col-md-3 col-xs-6 profile-card">
             <div className="profile">
+              <img src={Serena} />
+            </div>
+          </div>
+
+          <div className="col-md-9 col-xs-6 pt-3">
+            <div className="d-flex flex-row">
+              <h5>
+                Serena Ferri
+                <div className=" d-inline text-secondary font-weight-normal font-italic">
+                  {" "}
+                  | Software Engineer
+                </div>{" "}
+              </h5>
+              {/* <a href="#">
+                <FaLinkedin className="linkedin-logo" />
+              </a> */}
+            </div>
+            <p>
+              Before creating the food finder App, Serena worked in childcare
+              since she moved in England in 2019. She started being interested
+              in coding by hearing stories from other people that switched their
+              career with coding and got inspired by how their life changed.
+              Apart from coding, Serena enjoys watching history documentaries,
+              swimming and discovering and tasting other countries cuisine
+            </p>
+          </div>
+        </div>
+        <div className="row mt-4 mb-5">
+          <div className="col-md-3 col-xs-6 profile-card">
+            <div className="profile">
               <img src={Felicia} />
             </div>
           </div>
@@ -62,20 +93,22 @@ function About() {
                   | Web Developer
                 </div>{" "}
               </h5>
-              <a href="#">
+              {/* <a href="#">
                 <FaLinkedin className="linkedin-logo" />
-              </a>
+              </a> */}
             </div>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries,
+              Felicia is currently a social worker living and working in
+              Philadelphia, that has always had an interest in tech and
+              web-development. With a background in graphic design, she hopes to
+              be able to combine her skills into a full stack role. When not
+              coding, she enjoyes volunteering, spending time hiking and
+              reading.
             </p>
           </div>
         </div>
       </div>
+
       <Footer />
     </div>
   );
