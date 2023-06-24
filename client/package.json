@@ -19,8 +19,15 @@
     "mapbox-gl": "^2.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
     "react-icons": "^4.9.0",
     "react-map-gl": "^7.0.25",
+||||||| 4948032
+    "react-icons": "^4.9.0",
+=======
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.10.1",
+>>>>>>> 9169577815f1c4c680f6cfa661c8e82776a15592
     "react-pdf": "^7.1.2",
     "react-router-dom": "^6.12.1"
   },
