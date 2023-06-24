@@ -30,7 +30,21 @@ function SignUp() {
     localStorage.setItem("user-info", JSON.stringify(results));
     //3. once logged in, redirect user to log-in page
     navigate("/login");
+    
   };
+
+  // useEffect(() => {
+  //   const body = document.querySelector("body");
+  //   const currentRoute = window.location.pathname;
+  
+  //   if (currentRoute === "/signup") {
+  //     body.style.backgroundColor = "#e71212";
+  //   } else if (currentRoute === "/login") {
+  //     body.style.backgroundColor = "#ffffff";
+  //   } else {
+  //     body.style.backgroundColor = "";
+  //   }
+  // }, []);
 
   return (
     <div className="signuppage">

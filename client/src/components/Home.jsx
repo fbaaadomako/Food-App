@@ -4,6 +4,7 @@ import Restaurants from './Restaurants';
 import Footer from './Footer';
 import "./css/Home.css";
 import logo from '../assets/logo-text.png';
+import Footer from './Footer'
 
 
 
