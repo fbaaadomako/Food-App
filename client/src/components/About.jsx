@@ -1,37 +1,37 @@
 import React from "react";
 import NavBar from "./NavBar";
 import "./css/index.css";
+import { FaLinkedin } from "react-icons/fa";
 import JuLi from "../assets/JuLi.jpg";
+import Felicia from "../assets/Felicia.jpg";
 
 function About() {
   return (
     <div>
       <NavBar />
-
-      <div className="container">
-        <h2>About Friendly Food Finder</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          placerat id tellus ac posuere. Ut eget risus ultrices, euismod augue
-          sed, consectetur adipiscing elit. Donec placerat id tellus ac posuere.
-          Ut eget risus ultrices, euismod augue sed.{" "}
-        </p>
-        <h2>Meet the Team</h2>
+      <div className="about-header">{/* <img src={foodimage} /> */}</div>
+      <div className="team-container">
+        <h2 className="pb-3">Meet the Team</h2>
         <div className="row">
           <div className="col-md-3 col-xs-6 profile-card">
-            <img src={JuLi} />
-            <div>
-              <a
-                href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQGxkM0dy06udgAAAYjtZ2-YhMYFIwWe1OS2OdIJuXM8eMN9pzmTAv8U553RynJJaPNOm0kOt48-JiUEA3jaKc61eShKFKP66s770KNI7NZTu8SsTIrLAIFJO0eEHwxf_LbxPpU=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fju-li-c-a7863394%2F"
-                target="_blank"
-                class="fa fa-linkedin-square"
-                aria-hidden="true"
-              ></a>
+            <div className="profile">
+              <img src={JuLi} />
             </div>
-            <p>Ju Li Chow</p>
-            <p>Front-end Developer</p>
           </div>
+
           <div className="col-md-9 col-xs-6 pt-3">
+            <div className="d-flex flex-row">
+              <h5>
+                Ju Li Chow
+                <div className=" d-inline text-secondary font-weight-normal font-italic">
+                  {" "}
+                  | Software Engineer
+                </div>{" "}
+              </h5>
+              <a href="https://www.linkedin.com/in/ju-li-c-a7863394/">
+                <FaLinkedin className="linkedin-logo" />
+              </a>
+            </div>
             <p>
               Before creating the Food Finder App, Ju Li worked as a consultant
               at KPMG in Malaysia after completing her Degree and Masters in the
@@ -45,51 +45,35 @@ function About() {
             </p>
           </div>
         </div>
-        <div className="row">
-          <div class="col-md-3 col-xs-6 profile-card">
-            <img src="https://vlgux.com/img/team/headshots/nick-bray.jpg" />
-            <div>
-              <a
-                href="#"
-                target="_blank"
-                class="fa fa-linkedin-square"
-                aria-hidden="true"
-              ></a>
-              <p>JOHN DOE</p>
-              <p>Front-end Developer</p>
-            </div>
-          </div>
-          <div className="col-md-9 col-xs-6 pt-3">
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              placerat id tellus ac posuere. Ut eget risus ultrices, euismod
-              augue sed,{" "}
-            </span>
-          </div>
-        </div>
-        <div className="row">
+        <div className="row mt-4">
           <div className="col-md-3 col-xs-6 profile-card">
-            <img src="https://vlgux.com/img/team/headshots/nick-bray.jpg" />
-            <div>
-              <a
-                href="#"
-                target="_blank"
-                class="fa fa-linkedin-square"
-                aria-hidden="true"
-              ></a>
-              <p>JOHN DOE</p>
-              <p>Front-end Developer</p>
+            <div className="profile">
+              <img src={Felicia} />
             </div>
           </div>
-          <div className="col-md-9 col-xs-6 bg danger">
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              placerat id tellus ac posuere. Ut eget risus ultrices, euismod
-              augue sed,{" "}
-            </span>
+
+          <div className="col-md-9 col-xs-6 pt-3">
+            <div className="d-flex flex-row">
+              <h5>
+                Felicia Baa-Adomako
+                <div className=" d-inline text-secondary font-weight-normal font-italic">
+                  {" "}
+                  | Web Developer
+                </div>{" "}
+              </h5>
+              <a href="#">
+                <FaLinkedin className="linkedin-logo" />
+              </a>
+            </div>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries,
+            </p>
           </div>
         </div>
-        <h2>Subscribe to our newsletter</h2>
       </div>
     </div>
   );
