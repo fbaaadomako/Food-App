@@ -5,6 +5,7 @@ import LogIn from "./components/LogIn";
 import Favorites from "./components/Favorites";
 import SignUp from "./components/SignUp";
 import About from "./components/About";
+// import NavBar from "./components/NavBar";
 
 import UserContext from "./context/UserContext";
 

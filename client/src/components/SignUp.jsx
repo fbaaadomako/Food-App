@@ -38,7 +38,7 @@ function SignUp() {
     <div className="signuppage">
       <form onSubmit={signup}>
         <img className="registerlogo" src={whitelogo} />
-        <Helmet>
+        {/* <Helmet>
         <script
           src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
           async
@@ -53,7 +53,7 @@ function SignUp() {
           }
           `}
         </script>
-      </Helmet>
+      </Helmet> */}
         <div className="signupcontainer">
           <h1 className="registerheading">Sign Up</h1>
           <div id="google_translate_element"></div>
@@ -89,7 +89,7 @@ function SignUp() {
             className="form-control mb-2"
             type="password"
           />
-          <button className="btn btn-dark d-flex mx-auto mt-3">Register</button>
+          <button className="btn btn-dark d-flex mx-auto mt-4">Register</button>
         </div>
       </form>
       <p className="signuptext">

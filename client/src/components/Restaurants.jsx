@@ -25,8 +25,8 @@ function Restaurants() {
     longitude: -0.118092,
     zoom: 14,
   });
-  const [favorites, setFavorites] = useState([]);
-  // const [isFavorite, setIsFavorite] = useState(false);
+  const [favoriteRestaurants, setFavoriteRestaurants] = useState({});
+
 
   // Restaurant Search
   const handleInputChange = (e) => {
@@ -58,20 +58,14 @@ function Restaurants() {
     }
   };
 
-  // Old code for Favorites (heart icon)
-//  const handleHeartClick = (restaurantId) => {
-//   setIsFavorite(!isFavorite);
-//   addFavoriteRestaurant(restaurantId);
-// };
   // Setting as Favorites (heart icon)
   const handleHeartClick = (restaurantId) => {
-    setFavorites((prevFavorites) => {
-      if (prevFavorites.includes(restaurantId)) {
-        return prevFavorites.filter((id) => id !== restaurantId);
-      } else {
-        return [...prevFavorites, restaurantId];
-      }
+    setFavoriteRestaurants((prevFavorites) => {
+      const updatedFavorites = { ...prevFavorites };
+      updatedFavorites[restaurantId] = !updatedFavorites[restaurantId];
+      return updatedFavorites;
     });
+    addFavoriteRestaurant(restaurantId);
   };
 
   const addFavoriteRestaurant = async (restaurantId) => {
@@ -228,16 +222,12 @@ function Restaurants() {
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
             <FontAwesomeIcon
-                icon={faHeart}
-                style={{ color: favorites.includes(restaurant.id) ? "#eb0a15" : "#272525" }}
-                onClick={() => handleHeartClick(restaurant.id)}
+             icon={faHeart}
+            style={{
+            color: favoriteRestaurants[restaurant.id] ? "#eb0a15" : "#272525",
+            }}
+            onClick={() => handleHeartClick(restaurant.id)}
               />
-                   {/* <h3>
-              <FontAwesomeIcon
-              icon={faHeart}
-              style={{ color: isFavorite ? "#eb0a15" : "#272525" }}
-              onClick={() => handleHeartClick(restaurant.id)}
-            /> */}
               <img
                 src={map}
                 alt="map"
