@@ -19,44 +19,11 @@ function Restaurants() {
   const [isCheckedVeg, setIsCheckedVeg] = useState(false);
   const [isCheckedVegan, setIsCheckedVegan] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-  const [viewport, setViewport] = useState([
-    {
-      cityName: "london",
-      latitude: 51.509865,
-      longitude: -0.118092,
-      zoom: 14,
-    },
-    {
-      cityName: "philadelphia",
-      latitude: 39.9526,
-      longitude: -75.1652,
-      zoom: 14,
-    },
-    {
-      cityName: "istanbul",
-      latitude: 28.9784,
-      longitude: 41.0082,
-      zoom: 14,
-    },
-    {
-      cityName: "kyoto",
-      latitude: 135.7681,
-      longitude: 35.0116,
-      zoom: 14,
-    },
-    {
-      cityName: "kuala lumpur",
-      latitude: 3.1357,
-      longitude: 101.688,
-      zoom: 14,
-    },
-    {
-      cityName: "new york",
-      latitude: 40.7128,
-      longitude: -74.006,
-      zoom: 14,
-    },
-  ]);
+  const [viewport, setViewport] = useState({
+    latitude: 51.509865,
+    longitude: -0.118092,
+    zoom: 14,
+  });
   const [favorites, setFavorites] = useState([]);
   // const [isFavorite, setIsFavorite] = useState(false);
 
@@ -91,20 +58,14 @@ function Restaurants() {
   //   }
   // };
 
-  // Old code for Favorites (heart icon)
-  //  const handleHeartClick = (restaurantId) => {
-  //   setIsFavorite(!isFavorite);
-  //   addFavoriteRestaurant(restaurantId);
-  // };
   // Setting as Favorites (heart icon)
   const handleHeartClick = (restaurantId) => {
-    setFavorites((prevFavorites) => {
-      if (prevFavorites.includes(restaurantId)) {
-        return prevFavorites.filter((id) => id !== restaurantId);
-      } else {
-        return [...prevFavorites, restaurantId];
-      }
+    setFavoriteRestaurants((prevFavorites) => {
+      const updatedFavorites = { ...prevFavorites };
+      updatedFavorites[restaurantId] = !updatedFavorites[restaurantId];
+      return updatedFavorites;
     });
+    addFavoriteRestaurant(restaurantId);
   };
 
   const addFavoriteRestaurant = async (restaurantId) => {
@@ -266,45 +227,38 @@ function Restaurants() {
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
             <FontAwesomeIcon
-                icon={faHeart}
-                style={{ color: favorites.includes(restaurant.id) ? "#eb0a15" : "#272525" }}
-                onClick={() => handleHeartClick(restaurant.id)}
+             icon={faHeart}
+            style={{
+            color: favoriteRestaurants[restaurant.id] ? "#eb0a15" : "#272525",
+            }}
+            onClick={() => handleHeartClick(restaurant.id)}
               />
-                   {/* <h3>
-              <FontAwesomeIcon
-              icon={faHeart}
-              style={{ color: isFavorite ? "#eb0a15" : "#272525" }}
-              onClick={() => handleHeartClick(restaurant.id)}
-            /> */}
-                <img
-                  src={map}
-                  alt="map"
-                  className="map-icon"
-                  onClick={() =>
-                    handleMapIconClick(
-                      restaurant.longitude,
-                      restaurant.latitude
-                    )
-                  }
-                />
-                {restaurant.name}
-              </h3>
-              <p>Rating: {restaurant.rating}</p>
-              <Star rating={restaurant.rating} />
-              <p>Address: {restaurant.address}</p>
-              <p>Phone: {restaurant.phone}</p>
-              <p>
-                Website:{" "}
-                <a
-                  href={restaurant.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {restaurant.website}
-                </a>
-              </p>
-            </li>
-          ))}
+              <img
+                src={map}
+                alt="map"
+                className="map-icon"
+                onClick={() =>
+                  handleMapIconClick(restaurant.longitude, restaurant.latitude)
+                }
+              />
+              {restaurant.name}
+            </h3>
+            <p>Rating: {restaurant.rating}</p>
+            <Star rating={restaurant.rating} />
+            <p>Address: {restaurant.address}</p>
+            <p>Phone: {restaurant.phone}</p>
+            <p>
+              Website:{" "}
+              <a
+                href={restaurant.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {restaurant.website}
+              </a>
+            </p>
+          </li>
+        ))}
       </ul>
 
       {/* MAP */}
