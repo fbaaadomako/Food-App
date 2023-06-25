@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./css/login_signup.css";
 import whitelogo from "../assets/logo-white.png";
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -31,13 +31,36 @@ function SignUp() {
     localStorage.setItem("user-info", JSON.stringify(results));
     //3. once logged in, redirect user to log-in page
     navigate("/login");
-    
   };
+
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        autoDisplay: false,
+      },
+      "google_translate_element"
+    );
+  };
+
+  // useEffect(() => {
+  //   const body = document.querySelector("body");
+  //   const currentRoute = window.location.pathname;
+
+  //   if (currentRoute === "/signup") {
+  //     body.style.backgroundColor = "#e71212";
+  //   } else if (currentRoute === "/login") {
+  //     body.style.backgroundColor = "#ffffff";
+  //   } else {
+  //     body.style.backgroundColor = "";
+  //   }
+  // }, []);
 
   return (
     <div className="signuppage">
       <form onSubmit={signup}>
         <img className="registerlogo" src={whitelogo} />
+<<<<<<< HEAD
         {/* <Helmet>
         <script
           src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
@@ -45,6 +68,23 @@ function SignUp() {
         ></script>
         <script>
           {`
+||||||| 14f1c95
+        <Helmet>
+        <script
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          async
+        ></script>
+        <script>
+          {`
+=======
+        <Helmet>
+          <script
+            src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+            async
+          ></script>
+          <script>
+            {`
+>>>>>>> b2e48772cadc5e92f0c2936d4b11ac16e71e0d0b
           function googleTranslateElementInit() {
             new google.translate.TranslateElement(
               { pageLanguage: "en" },
@@ -52,8 +92,16 @@ function SignUp() {
             );
           }
           `}
+<<<<<<< HEAD
         </script>
       </Helmet> */}
+||||||| 14f1c95
+        </script>
+      </Helmet>
+=======
+          </script>
+        </Helmet>
+>>>>>>> b2e48772cadc5e92f0c2936d4b11ac16e71e0d0b
         <div className="signupcontainer">
           <h1 className="registerheading">Sign Up</h1>
           <div id="google_translate_element"></div>
@@ -100,8 +148,6 @@ function SignUp() {
         </Link>{" "}
         to see your favorites
       </p>
-     
-
     </div>
   );
 }
