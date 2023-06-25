@@ -5,15 +5,14 @@ import map from "../assets/map.png";
 import "./css/Home.css";
 import Star from "./Star";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faLongArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
-  const [isClicked, setIsClicked] = useState(false);
-  const [allergen, setAllergen] = useState("");
+  // const [isClicked, setIsClicked] = useState(false);
+  // const [allergen, setAllergen] = useState("");
   const [userLocation, setUserLocation] = useState(null);
   const [isCheckedGF, setIsCheckedGF] = useState(false);
   const [isCheckedDF, setIsCheckedDF] = useState(false);
@@ -25,12 +24,13 @@ function Restaurants() {
     longitude: -0.118092,
     zoom: 14,
   });
-  const [favoriteRestaurants, setFavoriteRestaurants] = useState({});
-
+  const [favorites, setFavorites] = useState([]);
+  // const [isFavorite, setIsFavorite] = useState(false);
 
   // Restaurant Search
   const handleInputChange = (e) => {
     setCity(e.target.value);
+    setViewport = { city };
   };
 
   const handleSubmit = async (e) => {
@@ -48,15 +48,15 @@ function Restaurants() {
   };
 
   // Filter by allergens
-  const handleFilter = (e) => {
-    if (e.target.checked) {
-      setAllergen([...allergen, e.target.value]);
-      console.log(allergen);
-    } else {
-      setAllergen(allergen.filter((a) => a !== e.target.value));
-      console.log("allergen2", allergen);
-    }
-  };
+  // const handleFilter = (e) => {
+  //   if (e.target.checked) {
+  //     setAllergen([...allergen, e.target.value]);
+  //     console.log(allergen);
+  //   } else {
+  //     setAllergen(allergen.filter((a) => a !== e.target.value));
+  //     console.log("allergen2", allergen);
+  //   }
+  // };
 
   // Setting as Favorites (heart icon)
   const handleHeartClick = (restaurantId) => {
@@ -74,9 +74,9 @@ function Restaurants() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: "Bearer " + localStorage.getItem("token")
+          authorization: "Bearer " + localStorage.getItem("token"),
         },
-        body: JSON.stringify({ restaurantId })
+        body: JSON.stringify({ restaurantId }),
       };
       const response = await fetch("/users/restaurants", options);
       const data = await response.json();
@@ -130,16 +130,21 @@ function Restaurants() {
       {/* HOME - SEARCH */}
       <form onSubmit={handleSubmit}>
         <div
-          className="img"
+          className="home-img"
           style={{
-            height: "500px",
-            width: "900px",
+            height: "1800px",
+            width: "2000px",
             backgroundImage:
-              'url("https://media.istockphoto.com/id/1204371265/photo/flat-lay-of-turkish-traditional-foods-for-celebrating-holiday-wode-composition.jpg?s=612x612&w=0&k=20&c=X-9XA8TIOe-GxtYnojNLUfu-_rXR1Zab1GYqAu1ne64=")',
-            backgroundSize: "contain",
+              'url("https://www.bing.com/images/blob?bcid=qLH-KIUcj8AFcsXkvMWW5NKjnp53.....xg")',
+            backgroundSize: "cover", 
             backgroundRepeat: "no-repeat",
+            /*alignItems: "center",
+            alignContent: "center", */
           }}
-        >
+  
+        > 
+        </div>
+        <div>
           <input
             className="home-input"
             type="text"
@@ -160,7 +165,7 @@ function Restaurants() {
           type="checkbox"
           onChange={() => setIsCheckedGF(!isCheckedGF)}
           checked={isCheckedGF}
-          value={allergen}
+          // value={allergen}
           id="gluten free"
         />{" "}
         Gluten Free
@@ -172,7 +177,7 @@ function Restaurants() {
           type="checkbox"
           onChange={() => setIsCheckedDF(!isCheckedDF)}
           checked={isCheckedDF}
-          value={allergen}
+          // value={allergen}
           id="dairy free"
         />
         Dairy free
@@ -183,7 +188,7 @@ function Restaurants() {
           type="checkbox"
           onChange={() => setIsCheckedVeg(!isCheckedVeg)}
           checked={isCheckedVeg}
-          value={allergen}
+          // value={allergen}
           id="vegetarian"
         />
         Vegetarian
@@ -194,13 +199,13 @@ function Restaurants() {
           type="checkbox"
           onChange={() => setIsCheckedVegan(!isCheckedVegan)}
           checked={isCheckedVegan}
-          value={allergen}
+          // value={allergen}
           id="vegan"
-        />
-        Vegan
-      </label>
-  
-      <ul>
+          />
+          Vegan
+        </label>
+
+      <ul> 
         {restaurants.filter(function (restaurant) {
           if (isCheckedGF && restaurant.glutenFree) return true;
           if (!isCheckedGF) return true;
@@ -258,8 +263,12 @@ function Restaurants() {
 
       {/* MAP */}
       <div style={{ width: "auto", height: "400px" }}>
-        {/* <ReactMapGl
+        <ReactMapGl
+          //   {viewport.map((view) => (
+          // setViewport={setViewport}
+          // }
           {...viewport}
+          // ))}
           mapboxAccessToken="pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg"
           width="100%"
           height="100%"
@@ -299,7 +308,7 @@ function Restaurants() {
               </div>
             </Popup>
           ) : null}
-        </ReactMapGl> */}
+        </ReactMapGl>
       </div>
     </div>
   );

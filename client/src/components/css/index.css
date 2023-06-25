@@ -1,4 +1,4 @@
-:root {
+ :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -63,42 +63,6 @@
   cursor: pointer;
 }
 
-/* .meetteam:after {
-  content: "";
-  display: table;
-  position: absolute;
-  background-color: #a5a5a3;
-  width: 100px;
-  height: 1px;
-  bottom: -30px;
-  left: 50%;
-  margin-left: -50px;
-  color: red;
-  right: 0;
-} */
-
-/* .meetteam > h2 {
-  font-weight: bold;
-} */
-
-/* .meetteam > span {
-  font: italic 400 18px "Open Sans", sans-serif;
-  text-align: center;
-  color: #a5a5a3;
-} */
-
-/* .profile-card {
-  margin-bottom: 20px;
-  text-align: center;
-  /* webkit-filter: grayscale(90%); */
-/* filter: grayscale(90%);
-  transition: all 0.5s; */
-
-/* .profile-card:hover { */
-/* webkit-filter: grayscale(0%); */
-/* filter: grayscale(0%); */
-/* } */
-
 .profile > img {
   width: 200px;
   height: 200px;
@@ -107,60 +71,6 @@
   border-radius: 100%;
   object-fit: cover;
 }
-
-/* .profile-card > div > {
-  color: #007bb5;
-  text-decoration: none;
-  font-size: 22px;
-  left: -25px;
-  position: absolute;
-  top: 18px;
-  opacity: 0;
-  transition: all 0.5s;
-} */
-
-/* .profile-card:hover > div > a.fa {
-  left: 0px;
-  opacity: 1;
-}
-
-.profile-card > div {
-  display: table;
-  text-align: left;
-  margin: 0 auto;
-  width: 150px;
-  position: relative;
-  transition: all 0.5s;
-}
-
-.profile-card:hover > div {
-  display: table;
-  transition: all 0.5s;
-  text-align: left;
-  margin: 0 auto;
-  width: 150px;
-  position: relative;
-  padding-left: 25px;
-}
-
-.profile-card > div > h2,
-.profile-card > div > h3 {
-  font: 400 12px "Open Sans", sans-serif;
-  position: relative;
-  margin: 0;
-  color: #212121;
-  white-space: nowrap;
-} */
-
-/* .profile-card > div > h2 {
-  font-weight: 700;
-  margin: 10px 0 3px 0;
-  transition: all 0.5s;
-}
-
-.profile-card:hover > div > h2 {
-  color: #007bb5;
-} */
 
 /* FOOTER */
 .footersection {
