@@ -23,4 +23,8 @@
         </ul>
 
 
+         // alignItems: "center";
+    alignContent: "center"; 
+
+
 
