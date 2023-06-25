@@ -10,17 +10,19 @@ import logo from '../assets/logo-text.png';
 function Home() {
   return (
     <div>
-      <div
-      className='logo'>
+      <div  className='logo'>
         <br/><br/>
-      <img 
-      src= {logo}
-      alt='logo'
-      width={200}
-      height={100} />
-
+        <img 
+        src= {logo}
+        alt='logo'
+        width={200}
+        height={100} />
       </div>
-      <Restaurants />
+
+      <div>
+        <Restaurants />
+      </div>
+
     </div>
   );
 }

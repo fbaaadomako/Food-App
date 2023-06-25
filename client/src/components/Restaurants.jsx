@@ -101,16 +101,21 @@ function Restaurants() {
     <div>
       <form onSubmit={handleSubmit}>
         <div
-          className="img"
+          className="home-img"
           style={{
-            height: "500px",
-            width: "900px",
+            height: "1800px",
+            width: "2000px",
             backgroundImage:
-              'url("https://media.istockphoto.com/id/1204371265/photo/flat-lay-of-turkish-traditional-foods-for-celebrating-holiday-wode-composition.jpg?s=612x612&w=0&k=20&c=X-9XA8TIOe-GxtYnojNLUfu-_rXR1Zab1GYqAu1ne64=")',
-            backgroundSize: "contain",
+              'url("https://www.bing.com/images/blob?bcid=qLH-KIUcj8AFcsXkvMWW5NKjnp53.....xg")',
+            backgroundSize: "cover", 
             backgroundRepeat: "no-repeat",
+            /*alignItems: "center",
+            alignContent: "center", */
           }}
-        >
+  
+        > 
+        </div>
+        <div>
           <input
             className="home-input"
             type="text"
@@ -121,7 +126,8 @@ function Restaurants() {
           <button className="home-btn" type="submit">
             Get Restaurants
           </button>
-        </div>
+        </div> 
+
       </form>
       <h3>Filter by preference</h3>
       <label name="gluten-free">
