@@ -1,22 +1,71 @@
 import React, { useState, useEffect } from "react";
-import mapboxgl, { FreeCameraOptions } from "mapbox-gl";
-import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import "./css/restaurants_favorites.css";
-import heart from "../assets/heart.png";
+import ReactMapGl, { Marker, Popup } from "react-map-gl";
+import "./css/Restaurants.css";
 import map from "../assets/map.png";
 import "./css/Home.css";
 import Star from "./Star";
-// import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faLongArrowDown } from "@fortawesome/free-solid-svg-icons";
+
 function Restaurants() {
   const [city, setCity] = useState("");
   const [restaurants, setRestaurants] = useState([]);
-  const [isClicked, setIsClicked] = useState(false);
-  const [allergen, setAllergen] = useState("");
+  // const [isClicked, setIsClicked] = useState(false);
+  // const [allergen, setAllergen] = useState("");
   const [userLocation, setUserLocation] = useState(null);
+  const [isCheckedGF, setIsCheckedGF] = useState(false);
+  const [isCheckedDF, setIsCheckedDF] = useState(false);
+  const [isCheckedVeg, setIsCheckedVeg] = useState(false);
+  const [isCheckedVegan, setIsCheckedVegan] = useState(false);
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [viewport, setViewport] = useState([
+    {
+      cityName: "london",
+      latitude: 51.509865,
+      longitude: -0.118092,
+      zoom: 14,
+    },
+    {
+      cityName: "philadelphia",
+      latitude: 39.9526,
+      longitude: -75.1652,
+      zoom: 14,
+    },
+    {
+      cityName: "istanbul",
+      latitude: 28.9784,
+      longitude: 41.0082,
+      zoom: 14,
+    },
+    {
+      cityName: "kyoto",
+      latitude: 135.7681,
+      longitude: 35.0116,
+      zoom: 14,
+    },
+    {
+      cityName: "kuala lumpur",
+      latitude: 3.1357,
+      longitude: 101.688,
+      zoom: 14,
+    },
+    {
+      cityName: "new york",
+      latitude: 40.7128,
+      longitude: -74.006,
+      zoom: 14,
+    },
+  ]);
+  const [favorites, setFavorites] = useState([]);
+  // const [isFavorite, setIsFavorite] = useState(false);
+
+  // Restaurant Search
   const handleInputChange = (e) => {
     setCity(e.target.value);
+    setViewport = { city };
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -30,30 +79,54 @@ function Restaurants() {
       console.error("Error:", error);
     }
   };
-  // const allAllergens = restaurants.filter((r) =>
-  //   allergen.length > 0 ? allergen.every((a) => r.restaurants.map)
-  // }
-  const handleFilter = (e) => {
-    // let word = "all"
-    if (e.target.checked) {
-      // when varoable is checked allergen variable changes to true or 1
-      //each allergen will need its own functions
-      //filter all restaurants
-      setAllergen([...allergen, e.target.value]);
-      console.log(allergen);
-    } else {
-      setAllergen(allergen.filter((a) => a !== e.target.value));
-      console.log("allergen2", allergen);
+
+  // Filter by allergens
+  // const handleFilter = (e) => {
+  //   if (e.target.checked) {
+  //     setAllergen([...allergen, e.target.value]);
+  //     console.log(allergen);
+  //   } else {
+  //     setAllergen(allergen.filter((a) => a !== e.target.value));
+  //     console.log("allergen2", allergen);
+  //   }
+  // };
+
+  // Old code for Favorites (heart icon)
+  //  const handleHeartClick = (restaurantId) => {
+  //   setIsFavorite(!isFavorite);
+  //   addFavoriteRestaurant(restaurantId);
+  // };
+  // Setting as Favorites (heart icon)
+  const handleHeartClick = (restaurantId) => {
+    setFavorites((prevFavorites) => {
+      if (prevFavorites.includes(restaurantId)) {
+        return prevFavorites.filter((id) => id !== restaurantId);
+      } else {
+        return [...prevFavorites, restaurantId];
+      }
+    });
+  };
+
+  const addFavoriteRestaurant = async (restaurantId) => {
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: JSON.stringify({ restaurantId }),
+      };
+      const response = await fetch("/users/restaurants", options);
+      const data = await response.json();
+      console.log(data);
+      // Handle the response from the server as needed
+    } catch (error) {
+      console.log(error);
     }
   };
-  const handleHeartClick = (e) => {
-    console.log(isClicked);
-    setIsClicked(!isClicked);
-    // if (isClicked === !isClicked) {
-    //   e.target.setAttribute("src", "https://source.unsplash.com/LYK3ksSQyeo");
-    //   e.target.setAttribute("alt", "dog");
-    // }
-  };
+
+  //Map Icon on each restaurants
   const handleMapIconClick = (longitude, latitude) => {
     if (userLocation) {
       const userCoordinates = `${userLocation.coords.latitude},${userLocation.coords.longitude}`;
@@ -64,8 +137,9 @@ function Restaurants() {
       alert("Could not determine your location.");
     }
   };
+
+  // Get user's current location
   useEffect(() => {
-    // Get user's current location
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setUserLocation(position);
@@ -75,30 +149,24 @@ function Restaurants() {
       }
     );
   }, []);
-  const [isCheckedGF, setIsCheckedGF] = useState(false);
-  const [isCheckedDF, setIsCheckedDF] = useState(false);
-  const [isCheckedVeg, setIsCheckedVeg] = useState(false);
-  const [isCheckedVegan, setIsCheckedVegan] = useState(false);
-  const addFavoriteRestaurant = async (restaurantId) => {
-    try {
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: "Bearer " + localStorage.getItem("token")
-        },
-        body: JSON.stringify({ restaurantId })
-      };
-      const response = await fetch("/users/restaurants", options);
-      const data = await response.json();
-      console.log(data);
-      // Handle the response from the server as needed
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  // Pop up on Mapbox when marker is clicked
+  // useEffect(() => {
+  //   const listener = (e) => {
+  //     if (e.key === "Escape") {
+  //       setSelectedRestaurant(null);
+  //     }
+  //   };
+  //   window.addEventListener("keydown", listener);
+
+  //   return () => {
+  //     window.removeEventListener("keydown", listener);
+  //   };
+  // }, []);
+
   return (
     <div>
+      {/* HOME - SEARCH */}
       <form onSubmit={handleSubmit}>
         <div
           className="home-img"
@@ -126,8 +194,9 @@ function Restaurants() {
           <button className="home-btn" type="submit">
             Get Restaurants
           </button>
-        </div> 
+        </div>
 
+        {/* FILTER */}
       </form>
       <h3>Filter by preference</h3>
       <label name="gluten-free">
@@ -135,20 +204,19 @@ function Restaurants() {
           type="checkbox"
           onChange={() => setIsCheckedGF(!isCheckedGF)}
           checked={isCheckedGF}
-          // value = {individual allergen}
-          value={allergen}
+          // value={allergen}
           id="gluten free"
         />{" "}
         Gluten Free
       </label>
-      {/* Allergen should be an object with all allergens OR 4 variables with each allergen */}
+
       <h3></h3>
       <label name="dairy-free">
         <input
           type="checkbox"
           onChange={() => setIsCheckedDF(!isCheckedDF)}
           checked={isCheckedDF}
-          value={allergen}
+          // value={allergen}
           id="dairy free"
         />
         Dairy free
@@ -159,7 +227,7 @@ function Restaurants() {
           type="checkbox"
           onChange={() => setIsCheckedVeg(!isCheckedVeg)}
           checked={isCheckedVeg}
-          value={allergen}
+          // value={allergen}
           id="vegetarian"
         />
         Vegetarian
@@ -170,7 +238,7 @@ function Restaurants() {
           type="checkbox"
           onChange={() => setIsCheckedVegan(!isCheckedVegan)}
           checked={isCheckedVegan}
-          value={allergen}
+          // value={allergen}
           id="vegan"
           />
           Vegan
@@ -194,38 +262,100 @@ function Restaurants() {
           if(!isCheckedVegan) return true;
           return false;
         }).map((restaurant) => (
-          <li key={restaurant.id} className="card">
+          <li key={restaurant.id} className="restaurant-card">
             <img src={restaurant.photos} className="restaurant-image" />
             <h3>
-              <button onClick={() => addFavoriteRestaurant(restaurant.id)}>Add to Favorites</button>
-              <img
-                src={map}
-                alt="map"
-                className="map-icon"
-                onClick={() =>
-                  handleMapIconClick(restaurant.longitude, restaurant.latitude)
-                }
+            <FontAwesomeIcon
+                icon={faHeart}
+                style={{ color: favorites.includes(restaurant.id) ? "#eb0a15" : "#272525" }}
+                onClick={() => handleHeartClick(restaurant.id)}
               />
-              {restaurant.name}
-            </h3>
-            <p>Rating: {restaurant.rating}</p>
-            <Star rating={restaurant.rating} />
-            <p>Address: {restaurant.address}</p>
-            <p>Phone: {restaurant.phone}</p>
-            <p>
-              Website:{" "}
-              <a
-                href={restaurant.website}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {restaurant.website}
-              </a>
-            </p>
-          </li>
-        ))}
+                   {/* <h3>
+              <FontAwesomeIcon
+              icon={faHeart}
+              style={{ color: isFavorite ? "#eb0a15" : "#272525" }}
+              onClick={() => handleHeartClick(restaurant.id)}
+            /> */}
+                <img
+                  src={map}
+                  alt="map"
+                  className="map-icon"
+                  onClick={() =>
+                    handleMapIconClick(
+                      restaurant.longitude,
+                      restaurant.latitude
+                    )
+                  }
+                />
+                {restaurant.name}
+              </h3>
+              <p>Rating: {restaurant.rating}</p>
+              <Star rating={restaurant.rating} />
+              <p>Address: {restaurant.address}</p>
+              <p>Phone: {restaurant.phone}</p>
+              <p>
+                Website:{" "}
+                <a
+                  href={restaurant.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {restaurant.website}
+                </a>
+              </p>
+            </li>
+          ))}
       </ul>
-      <div id="map"></div>
+
+      {/* MAP */}
+      <div style={{ width: "auto", height: "400px" }}>
+        <ReactMapGl
+          //   {viewport.map((view) => (
+          // setViewport={setViewport}
+          // }
+          {...viewport}
+          // ))}
+          mapboxAccessToken="pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg"
+          width="100%"
+          height="100%"
+          transitionDuration="200"
+          mapStyle="mapbox://styles/mapbox/streets-v12"
+          onMove={(evt) => setViewport(evt.viewport)}
+        >
+          {restaurants.map((restaurant) => (
+            <Marker
+              key={restaurant.id}
+              latitude={restaurant.latitude}
+              longitude={restaurant.longitude}
+            >
+              <FaMapMarkerAlt
+                className="marker"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log("clicked");
+                  setSelectedRestaurant(restaurant);
+                  console.log(selectedRestaurant);
+                }}
+              />
+            </Marker>
+          ))}
+
+          {selectedRestaurant ? (
+            <Popup
+              latitude={selectedRestaurant.latitude}
+              longitude={selectedRestaurant.longitude}
+              onClose={() => {
+                setSelectedRestaurant(null);
+              }}
+            >
+              <div>
+                <h2>{selectedRestaurant.name}</h2>
+                <p>{selectedRestaurant.address}</p>
+              </div>
+            </Popup>
+          ) : null}
+        </ReactMapGl>
+      </div>
     </div>
   );
 }

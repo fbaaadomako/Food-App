@@ -1,0 +1,36 @@
+/* CSS FOR RESTAURANTS pages */
+
+/* RESTAURANTS */
+.heart-icon {
+  position: absolute;
+  top: 87%;
+  right: 6%;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+
+.restaurant-image {
+  width: 420px; /* Specify the desired width */
+  height: 300px; /* Specify the desired height */
+}
+
+/* MAP */
+.marker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #910b0b;
+}
+
+.marker:hover {
+  color: rgb(37, 36, 36);
+}
+
+.map-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}

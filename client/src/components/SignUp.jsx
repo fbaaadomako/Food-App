@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./css/login_signup.css";
 import whitelogo from "../assets/logo-white.png";
+import { Helmet } from "react-helmet";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -32,12 +33,52 @@ function SignUp() {
     navigate("/login");
   };
 
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        autoDisplay: false,
+      },
+      "google_translate_element"
+    );
+  };
+
+  // useEffect(() => {
+  //   const body = document.querySelector("body");
+  //   const currentRoute = window.location.pathname;
+
+  //   if (currentRoute === "/signup") {
+  //     body.style.backgroundColor = "#e71212";
+  //   } else if (currentRoute === "/login") {
+  //     body.style.backgroundColor = "#ffffff";
+  //   } else {
+  //     body.style.backgroundColor = "";
+  //   }
+  // }, []);
+
   return (
     <div className="signuppage">
       <form onSubmit={signup}>
         <img className="registerlogo" src={whitelogo} />
+        <Helmet>
+          <script
+            src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+            async
+          ></script>
+          <script>
+            {`
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+              { pageLanguage: "en" },
+              "google_translate_element"
+            );
+          }
+          `}
+          </script>
+        </Helmet>
         <div className="signupcontainer">
           <h1 className="registerheading">Sign Up</h1>
+          <div id="google_translate_element"></div>
           Name:
           <input
             required
@@ -75,7 +116,7 @@ function SignUp() {
       </form>
       <p className="signuptext">
         Already registered?
-        <Link to="/login" className="signuptext font-weight-bold">
+        <Link to="/login" className="font-weight-bold">
           {" "}
           Log In
         </Link>{" "}

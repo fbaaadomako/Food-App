@@ -1,7 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-
-import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import Favorites from "./components/Favorites";
@@ -11,8 +9,8 @@ import About from "./components/About";
 import UserContext from "./context/UserContext";
 
 function App() {
-  let [isLoggedIn, setIsLoggedIn] = useState(false);
-  let [currentUser, setCurrentUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
   let auth = {
     user: currentUser,
@@ -25,13 +23,13 @@ function App() {
     // value is visible to the context of every component
     <UserContext.Provider value={auth}>
       <Router>
-        <NavBar />
+        {/* <NavBar /> */}
         <div>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LogIn />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<LogIn />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </div>

@@ -16,23 +16,35 @@ function NavBar() {
   };
 
   return (
-    <div className="text-white p-3">
+    <div className="nav-container">
+      <Link to="/">
+        <button className="btn btn-outline-secondary nav-btn">Home</button>
+      </Link>
+      <Link to="/about">
+        <button className="btn btn-outline-secondary nav-btn">About</button>
+      </Link>
       {!auth.isLoggedIn && (
-        <Link to="/login">
-          <button className="btn btn-dark">Login</button>
-        </Link>
+        <>
+          <Link to="/login">
+            <button className="btn btn-outline-secondary nav-btn">Login</button>
+          </Link>
+          <Link to="/signup">
+            <button className="btn btn-danger">Sign Up</button>
+          </Link>
+        </>
       )}
-      {!auth.isLoggedIn && (
-        <Link to="/signup">
-          <button className="btn btn-dark">Sign Up</button>
-        </Link>
-      )}
+
       {auth.isLoggedIn && (
         <>
           <Link to="/favorites">
-            <button className="btn btn-dark">Your Favorites</button>
+            <button className="btn btn-outline-secondary nav-btn">
+              Your Favorites
+            </button>
           </Link>
-          <button className="btn btn-dark" onClick={logout}>
+          <button
+            className="btn btn-outline-secondary nav-btn"
+            onClick={logout}
+          >
             Logout
           </button>
         </>
