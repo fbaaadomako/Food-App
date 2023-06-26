@@ -65,8 +65,7 @@ function Restaurants() {
   // console.log(found);
   // Expected output: 12
 
-  const [favorites, setFavorites] = useState([]);
-  // const [isFavorite, setIsFavorite] = useState(false);
+  const [favoriteRestaurants, setFavoriteRestaurants] = useState({});
 
   // Restaurant Search
   const handleInputChange = (e) => {
@@ -107,14 +106,14 @@ function Restaurants() {
   // };
 
   // Setting as Favorites (heart icon)
-  // const handleHeartClick = (restaurantId) => {
-  //   setFavoriteRestaurants((prevFavorites) => {
-  //     const updatedFavorites = { ...prevFavorites };
-  //     updatedFavorites[restaurantId] = !updatedFavorites[restaurantId];
-  //     return updatedFavorites;
-  //   });
-  //   addFavoriteRestaurant(restaurantId);
-  // };
+  const handleHeartClick = (restaurantId) => {
+    setFavoriteRestaurants((prevFavorites) => {
+      const updatedFavorites = { ...prevFavorites };
+      updatedFavorites[restaurantId] = !updatedFavorites[restaurantId];
+      return updatedFavorites;
+    });
+    addFavoriteRestaurant(restaurantId);
+  };
 
   const addFavoriteRestaurant = async (restaurantId) => {
     try {
@@ -205,170 +204,182 @@ function Restaurants() {
         </div>
         </div>
        
-        {/* FILTER */}
-      </form>
-      <h3>Filter by preference</h3>
-      <label name="gluten-free">
-        <input
-          type="checkbox"
-          onChange={() => setIsCheckedGF(!isCheckedGF)}
-          checked={isCheckedGF}
-          // value={allergen}
-          id="gluten free"
-        />{" "}
-        Gluten Free
-      </label>
+         {/* FILTER */}
+         {restaurants.length > 0 && (
+          <div>
+            <h3>Filter by preference</h3>
+            <label name="gluten-free">
+              <input
+                type="checkbox"
+                onChange={() => setIsCheckedGF(!isCheckedGF)}
+                checked={isCheckedGF}
+                // value={allergen}
+                id="gluten free"
+              />{" "}
+              Gluten Free
+            </label>
 
-      <h3></h3>
-      <label name="dairy-free">
-        <input
-          type="checkbox"
-          onChange={() => setIsCheckedDF(!isCheckedDF)}
-          checked={isCheckedDF}
-          // value={allergen}
-          id="dairy free"
-        />
-        Dairy free
-      </label>
-      <h3></h3>
-      <label name="vegetarian">
-        <input
-          type="checkbox"
-          onChange={() => setIsCheckedVeg(!isCheckedVeg)}
-          checked={isCheckedVeg}
-          // value={allergen}
-          id="vegetarian"
-        />
-        Vegetarian
-      </label>
-      <h3></h3>
-      <label name="vegan">
-        <input
-          type="checkbox"
-          onChange={() => setIsCheckedVegan(!isCheckedVegan)}
-          checked={isCheckedVegan}
-          // value={allergen}
-          id="vegan"
-        />
-        Vegan
-      </label>
-
-      <ol className="res-grid"> 
-        {restaurants.filter(function (restaurant) {
-          if (isCheckedGF && restaurant.glutenFree) return true;
-          if (!isCheckedGF) return true;
-          return false;
-        }).filter(function (restaurant) {
-          if (isCheckedDF && restaurant.dairyFree) return true;
-           if (!isCheckedDF) return true;
-           return false;
-        }).filter(function (restaurant) {
-          if (isCheckedVeg && restaurant.vegetarian) return true;
-           if (!isCheckedVeg) return true;
-           return false;
-        }).filter(function (restaurant){
-          if(isCheckedVegan && restaurant.vegan) return true;
-          if(!isCheckedVegan) return true;
-          return false;
-        }).map((restaurant) => (
-          <li key={restaurant.id} className="restaurant-card">
-            <img src={restaurant.photos} className="restaurant-image" />
-            <div className="res-text">
-              <h3>
-              <FontAwesomeIcon
-                  icon={faHeart}
-                  style={{ color: favorites.includes(restaurant.id) ? "#eb0a15" : "#272525" }}
-                  onClick={() => handleHeartClick(restaurant.id)}
-                />
-                    {/* <h3>
-                <FontAwesomeIcon
-                icon={faHeart}
-                style={{ color: isFavorite ? "#eb0a15" : "#272525" }}
-                onClick={() => handleHeartClick(restaurant.id)}
-              /> */}
-                  <img
-                    src={map}
-                    alt="map"
-                    className="map-icon"
-                    onClick={() =>
-                      handleMapIconClick(
-                        restaurant.longitude,
-                        restaurant.latitude
-                      )
-                    }
-                  />
-                  {restaurant.name}
-                </h3>
-                <p>Rating: {restaurant.rating}</p>
-                <Star rating={restaurant.rating} />
-                <p>Address: {restaurant.address}</p>
-                <p>Phone: {restaurant.phone}</p>
-                <p>
-                  Website:{" "}
-                  <a
-                    href={restaurant.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {restaurant.website}
-                  </a>
-                </p>
-
-            </div>
-            </li>
-          ))}
-      </ol>
-
-      {/* MAP */}
-      <div style={{ width: "auto", height: "400px" }}>
-        {/* <ReactMapGl
-          //   {viewport.map((view) => (
-          // setViewport={setViewport}
-          // }
-          {...viewport}
-          // ))}
-          mapboxAccessToken="pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg"
-          width="100%"
-          height="100%"
-          transitionDuration="200"
-          mapStyle="mapbox://styles/mapbox/streets-v12"
-          onMove={(evt) => setViewport(evt.viewport)}
-        > 
-          {restaurants.map((restaurant) => (
-            <Marker
-              key={restaurant.id}
-              latitude={restaurant.latitude}
-              longitude={restaurant.longitude}
-            >
-              <FaMapMarkerAlt
-                className="marker"
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log("clicked");
-                  setSelectedRestaurant(restaurant);
-                  console.log(selectedRestaurant);
-                }}
+            <h3></h3>
+            <label name="dairy-free">
+              <input
+                type="checkbox"
+                onChange={() => setIsCheckedDF(!isCheckedDF)}
+                checked={isCheckedDF}
+                // value={allergen}
+                id="dairy free"
               />
-            </Marker>
-          ))}
+              Dairy free
+            </label>
+            <h3></h3>
+            <label name="vegetarian">
+              <input
+                type="checkbox"
+                onChange={() => setIsCheckedVeg(!isCheckedVeg)}
+                checked={isCheckedVeg}
+                // value={allergen}
+                id="vegetarian"
+              />
+              Vegetarian
+            </label>
+            <h3></h3>
+            <label name="vegan">
+              <input
+                type="checkbox"
+                onChange={() => setIsCheckedVegan(!isCheckedVegan)}
+                checked={isCheckedVegan}
+                // value={allergen}
+                id="vegan"
+              />
+              Vegan
+            </label>
+          </div>
+        )}
 
-          {selectedRestaurant ? (
-            <Popup
-              latitude={selectedRestaurant.latitude}
-              longitude={selectedRestaurant.longitude}
-              onClose={() => {
-                setSelectedRestaurant(null);
-              }}
-            >
-              <div>
-                <h2>{selectedRestaurant.name}</h2>
-                <p>{selectedRestaurant.address}</p>
-              </div>
-            </Popup>
-          ) : null}
-        </ReactMapGl>  */}
-      </div>
+       {/* RESTAURANT LIST */}
+       {restaurants.length > 0 ? (
+          <ol className="res-grid">
+            {restaurants
+              .filter(function (restaurant) {
+                if (isCheckedGF && restaurant.glutenFree) return true;
+                if (!isCheckedGF) return true;
+                return false;
+              })
+              .filter(function (restaurant) {
+                if (isCheckedDF && restaurant.dairyFree) return true;
+                if (!isCheckedDF) return true;
+                return false;
+              })
+              .filter(function (restaurant) {
+                if (isCheckedVeg && restaurant.vegetarian) return true;
+                if (!isCheckedVeg) return true;
+                return false;
+              })
+              .filter(function (restaurant) {
+                if (isCheckedVegan && restaurant.vegan) return true;
+                if (!isCheckedVegan) return true;
+                return false;
+              })
+              .map((restaurant) => (
+                <li key={restaurant.id} className="restaurant-card">
+                  <img src={restaurant.photos} className="restaurant-image" />
+                  <div className="res-text">
+                    <h3>
+                      <FontAwesomeIcon
+                        icon={faHeart}
+                        style={{
+                          color: favoriteRestaurants[restaurant.id]
+                            ? "#eb0a15"
+                            : "#272525",
+                        }}
+                        onClick={() => handleHeartClick(restaurant.id)}
+                      />
+                      <img
+                        src={map}
+                        alt="map"
+                        className="map-icon"
+                        onClick={() =>
+                          handleMapIconClick(
+                            restaurant.longitude,
+                            restaurant.latitude
+                          )
+                        }
+                      />
+                      {restaurant.name}
+                    </h3>
+                    <p>Rating: {restaurant.rating}</p>
+                    <Star rating={restaurant.rating} />
+                    <p>Address: {restaurant.address}</p>
+                    <p>Phone: {restaurant.phone}</p>
+                    <p>
+                      Website:{" "}
+                      <a
+                        href={restaurant.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {restaurant.website}
+                      </a>
+                    </p>
+                  </div>
+                </li>
+              ))}
+          </ol>
+        ) : (
+          <p></p>
+        )}
+
+       {/* MAP */}
+       <div style={{ width: "auto", height: "400px" }}>
+          {/* <ReactMapGl
+            //   {viewport.map((view) => (
+            // setViewport={setViewport}
+            // }
+            {...viewport}
+            // ))}
+            mapboxAccessToken="pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg"
+            width="100%"
+            height="100%"
+            transitionDuration="200"
+            mapStyle="mapbox://styles/mapbox/streets-v12"
+            onMove={(evt) => setViewport(evt.viewport)}
+          >
+            {restaurants.map((restaurant) => (
+              <Marker
+                key={restaurant.id}
+                latitude={restaurant.latitude}
+                longitude={restaurant.longitude}
+              >
+                <FaMapMarkerAlt
+                  className="marker"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    console.log("clicked");
+                    setSelectedRestaurant(restaurant);
+                    console.log(selectedRestaurant);
+                  }}
+                />
+              </Marker>
+            ))}
+
+            {selectedRestaurant ? (
+              <Popup
+                latitude={selectedRestaurant.latitude}
+                longitude={selectedRestaurant.longitude}
+                onClose={() => {
+                  setSelectedRestaurant(null);
+                }}
+              >
+                <div>
+                  <h2>{selectedRestaurant.name}</h2>
+                  <p>{selectedRestaurant.address}</p>
+                </div>
+              </Popup>
+            ) : null}
+          </ReactMapGl> */}
+        </div>
+      </form>
     </div>
   );
 }
+
 export default Restaurants;
