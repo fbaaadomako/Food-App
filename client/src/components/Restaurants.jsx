@@ -206,10 +206,10 @@ function Restaurants() {
        
          {/* FILTER */}
          {restaurants.length > 0 && (
-          <div>
-            <h3>Filter by preference</h3>
-            <label name="gluten-free">
-              <input
+          <div className="filter-by-preference">
+            <h3 className="filter-pref-title">Filter by preference</h3>
+            <label className="gluten" name="gluten-free">
+              <input 
                 type="checkbox"
                 onChange={() => setIsCheckedGF(!isCheckedGF)}
                 checked={isCheckedGF}
@@ -220,7 +220,7 @@ function Restaurants() {
             </label>
 
             <h3></h3>
-            <label name="dairy-free">
+            <label  className="dairy" name="dairy-free">
               <input
                 type="checkbox"
                 onChange={() => setIsCheckedDF(!isCheckedDF)}
@@ -231,7 +231,7 @@ function Restaurants() {
               Dairy free
             </label>
             <h3></h3>
-            <label name="vegetarian">
+            <label className="vegetarian" name="vegetarian">
               <input
                 type="checkbox"
                 onChange={() => setIsCheckedVeg(!isCheckedVeg)}
@@ -242,7 +242,7 @@ function Restaurants() {
               Vegetarian
             </label>
             <h3></h3>
-            <label name="vegan">
+            <label className="vegan" name="vegan">
               <input
                 type="checkbox"
                 onChange={() => setIsCheckedVegan(!isCheckedVegan)}

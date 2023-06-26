@@ -4,16 +4,19 @@ import "./css/Home.css";
 import logo from "../assets/logo-text.png";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
+import logo2 from "../assets/logo-red.png";
 
 function Home() {
   return (
     <div>
       <NavBar />
-
       <div className="logo">
         <br />
         <br />
         <img src={logo} alt="logo" width={200} height={100} />
+      </div>
+      <div className="logo2">
+        <img src={logo2} alt="logo2" width={100} height={100} />
       </div>
       <Restaurants />
       <Footer />
