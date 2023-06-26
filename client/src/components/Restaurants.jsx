@@ -53,12 +53,6 @@ function Restaurants() {
     },
   ];
 
-  // Example of find
-  //   const array1 = [5, 12, 8, 130, 44];
-  // const found = array1.find(element => element > 10)
-  // console.log(found);
-  // Expected output: 12
-
   const [favorites, setFavorites] = useState([]);
   // const [isFavorite, setIsFavorite] = useState(false);
 
@@ -66,14 +60,6 @@ function Restaurants() {
   const handleInputChange = (e) => {
     setCity(e.target.value);
   };
-
-  // for (let i = 0; i < view.length; i++) {
-  //   // console.log("cityview", view[i].cityName);
-  //   // console.log("city", city);
-  //   if (city === view[i].cityName) {
-  //     setViewport("updatedViewport", view[i].cityName);
-  //   }
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -159,20 +145,6 @@ function Restaurants() {
       }
     );
   }, []);
-
-  // Pop up on Mapbox when marker is clicked
-  // useEffect(() => {
-  //   const listener = (e) => {
-  //     if (e.key === "Escape") {
-  //       setSelectedRestaurant(null);
-  //     }
-  //   };
-  //   window.addEventListener("keydown", listener);
-
-  //   return () => {
-  //     window.removeEventListener("keydown", listener);
-  //   };
-  // }, []);
 
   return (
     <div>
@@ -319,7 +291,9 @@ function Restaurants() {
       </ul>
 
       {/* MAP */}
-      <div style={{ width: "auto", height: "400px" }}>
+      <h2>Check out these retaurants near you</h2>
+      <p>(Click and drag the map to see more)</p>
+      <div className="map mb-4">
         <ReactMapGl
           {...viewport}
           mapboxAccessToken="pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg"
@@ -347,22 +321,6 @@ function Restaurants() {
               />
             </Marker>
           ))}
-          {/* 
-{selectedRestaurant ? (
-            <Popup
-              latitude={selectedRestaurant.latitude}
-              longitude={selectedRestaurant.longitude}
-              onClose={() => {
-                setSelectedRestaurant(null);
-              }}
-            >
-              <div>
-                <h2>{selectedRestaurant.name}</h2>
-                <p>{selectedRestaurant.address}</p>
-              </div>
-            </Popup>
-          ) : null} */}
-
           {selectedRestaurant != null ? (
             <Popup
               latitude={selectedRestaurant.latitude}
@@ -370,10 +328,11 @@ function Restaurants() {
               onClose={() => {
                 setSelectedRestaurant(null);
               }}
+              closeOnClick={false}
             >
               <div>
-                <h2>{selectedRestaurant.name}</h2>
-                <p>{selectedRestaurant.address}</p>
+                <h3 className="map-popup-header">{selectedRestaurant.name}</h3>
+                <p className="map-pop-up-text">{selectedRestaurant.address}</p>
               </div>
             </Popup>
           ) : null}
