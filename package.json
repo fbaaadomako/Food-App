@@ -7,6 +7,10 @@
     "migrate": "node model/database.js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "cookie-parser": "~1.4.4",
@@ -21,6 +25,7 @@
     "mysql": "^2.18.1",
     "nodemon": "^1.14.9",
     "process": "^0.11.10",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.12.1"
   }
 }
