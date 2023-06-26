@@ -25,37 +25,31 @@ function Restaurants() {
       cityName: "london",
       latitude: 51.509865,
       longitude: -0.118092,
-      zoom: 14,
     },
     {
       cityName: "philadelphia",
       latitude: 39.9526,
       longitude: -75.1652,
-      zoom: 14,
     },
     {
       cityName: "istanbul",
       latitude: 28.9784,
       longitude: 41.0082,
-      zoom: 14,
     },
     {
       cityName: "kyoto",
       latitude: 135.7681,
       longitude: 35.0116,
-      zoom: 14,
     },
     {
       cityName: "kuala lumpur",
       latitude: 3.1357,
       longitude: 101.688,
-      zoom: 14,
     },
     {
       cityName: "new york",
       latitude: 40.7128,
       longitude: -74.006,
-      zoom: 14,
     },
   ];
 
@@ -93,6 +87,13 @@ function Restaurants() {
     } catch (error) {
       console.error("Error:", error);
     }
+
+    let updatedCity = view.find((item) => item.cityName === city);
+    console.log(updatedCity);
+    setViewport({
+      latitude: updatedCity.latitude,
+      longitude: updatedCity.longitude,
+    });
   };
 
   // Filter by allergens
@@ -319,14 +320,14 @@ function Restaurants() {
 
       {/* MAP */}
       <div style={{ width: "auto", height: "400px" }}>
-        {/* <ReactMapGl
+        <ReactMapGl
           {...viewport}
-          // ))}
           mapboxAccessToken="pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg"
           width="100%"
           height="100%"
           transitionDuration="200"
           mapStyle="mapbox://styles/mapbox/streets-v12"
+          zoom="14"
           onMove={(evt) => setViewport(evt.viewport)}
         >
           {restaurants.map((restaurant) => (
@@ -341,13 +342,28 @@ function Restaurants() {
                   e.preventDefault();
                   console.log("clicked");
                   setSelectedRestaurant(restaurant);
-                  console.log(selectedRestaurant);
+                  console.log(restaurant);
                 }}
               />
             </Marker>
           ))}
+          {/* 
+{selectedRestaurant ? (
+            <Popup
+              latitude={selectedRestaurant.latitude}
+              longitude={selectedRestaurant.longitude}
+              onClose={() => {
+                setSelectedRestaurant(null);
+              }}
+            >
+              <div>
+                <h2>{selectedRestaurant.name}</h2>
+                <p>{selectedRestaurant.address}</p>
+              </div>
+            </Popup>
+          ) : null} */}
 
-          {selectedRestaurant ? (
+          {selectedRestaurant != null ? (
             <Popup
               latitude={selectedRestaurant.latitude}
               longitude={selectedRestaurant.longitude}
@@ -361,7 +377,7 @@ function Restaurants() {
               </div>
             </Popup>
           ) : null}
-        </ReactMapGl> */}
+        </ReactMapGl>
       </div>
     </div>
   );
