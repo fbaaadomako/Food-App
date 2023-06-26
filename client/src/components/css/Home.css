@@ -3,6 +3,7 @@
     text-align: center;
 }
 
+
 .home-img {
   height: 400px;
   object-fit: cover;
@@ -27,7 +28,7 @@ body {
 
 .home-searchbar{
   padding-left: 32%;
-  padding-top: 100px;
+  padding-top: 210px;
   border-radius: 5px;
 }
 
@@ -59,3 +60,29 @@ body {
   padding: 10px;
   padding-top: 30px;
 }
+
+.filter-by-preference{
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.filter-pref-title{
+  color: rgb(243, 26, 26);
+}
+
+.gluten{
+  color: blue;
+}
+
+.dairy{
+  color: green;
+}
+
+.vegetarian{
+  color: orange;
+}
+
+.vegan{
+  color: fuchsia;
+}
+
