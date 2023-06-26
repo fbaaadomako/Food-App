@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReactMapGl, { Marker, Popup } from "react-map-gl";
+//import ReactMapGl, { Marker, Popup } from "react-map-gl";
 import "./css/Restaurants.css";
 import map from "../assets/map.png";
 import "./css/Home.css";
@@ -180,17 +180,18 @@ function Restaurants() {
         <div
           className="home-img"
           style={{
-            height: "1800px",
+            height: "500px",
             width: "2000px",
-            backgroundImage:
-              'url("https://www.bing.com/images/blob?bcid=qLH-KIUcj8AFcsXkvMWW5NKjnp53.....xg")',
-            backgroundSize: "cover",
+           /* backgroundImage:
+              'url("https://www.bing.com/images/blob?bcid=qLH-KIUcj8AFcsXkvMWW5NKjnp53.....xg")',*/
+            backgroundSize: "cover", 
             backgroundRepeat: "no-repeat",
             /*alignItems: "center",
             alignContent: "center", */
           }}
-        ></div>
-        <div>
+  
+        > 
+         <div className="home-searchbar">
           <input
             className="home-input"
             type="text"
@@ -202,7 +203,8 @@ function Restaurants() {
             Get Restaurants
           </button>
         </div>
-
+        </div>
+       
         {/* FILTER */}
       </form>
       <h3>Filter by preference</h3>
@@ -251,75 +253,78 @@ function Restaurants() {
         Vegan
       </label>
 
-      <ul>
-        {restaurants
-          .filter(function (restaurant) {
-            if (isCheckedGF && restaurant.glutenFree) return true;
-            if (!isCheckedGF) return true;
-            return false;
-          })
-          .filter(function (restaurant) {
-            if (isCheckedDF && restaurant.dairyFree) return true;
-            if (!isCheckedDF) return true;
-            return false;
-          })
-          .filter(function (restaurant) {
-            if (isCheckedVeg && restaurant.vegetarian) return true;
-            if (!isCheckedVeg) return true;
-            return false;
-          })
-          .filter(function (restaurant) {
-            if (isCheckedVegan && restaurant.vegan) return true;
-            if (!isCheckedVegan) return true;
-            return false;
-          })
-          .map((restaurant) => (
-            <li key={restaurant.id} className="restaurant-card">
-              <img src={restaurant.photos} className="restaurant-image" />
+      <ol className="res-grid"> 
+        {restaurants.filter(function (restaurant) {
+          if (isCheckedGF && restaurant.glutenFree) return true;
+          if (!isCheckedGF) return true;
+          return false;
+        }).filter(function (restaurant) {
+          if (isCheckedDF && restaurant.dairyFree) return true;
+           if (!isCheckedDF) return true;
+           return false;
+        }).filter(function (restaurant) {
+          if (isCheckedVeg && restaurant.vegetarian) return true;
+           if (!isCheckedVeg) return true;
+           return false;
+        }).filter(function (restaurant){
+          if(isCheckedVegan && restaurant.vegan) return true;
+          if(!isCheckedVegan) return true;
+          return false;
+        }).map((restaurant) => (
+          <li key={restaurant.id} className="restaurant-card">
+            <img src={restaurant.photos} className="restaurant-image" />
+            <div className="res-text">
               <h3>
-                <FontAwesomeIcon
+              <FontAwesomeIcon
                   icon={faHeart}
-                  // style={{
-                  //   color: favoriteRestaurants[restaurant.id]
-                  //     ? "#eb0a15"
-                  //     : "#272525",
-                  // }}
+                  style={{ color: favorites.includes(restaurant.id) ? "#eb0a15" : "#272525" }}
                   onClick={() => handleHeartClick(restaurant.id)}
                 />
-                <img
-                  src={map}
-                  alt="map"
-                  className="map-icon"
-                  onClick={() =>
-                    handleMapIconClick(
-                      restaurant.longitude,
-                      restaurant.latitude
-                    )
-                  }
-                />
-                {restaurant.name}
-              </h3>
-              <p>Rating: {restaurant.rating}</p>
-              <Star rating={restaurant.rating} />
-              <p>Address: {restaurant.address}</p>
-              <p>Phone: {restaurant.phone}</p>
-              <p>
-                Website:{" "}
-                <a
-                  href={restaurant.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {restaurant.website}
-                </a>
-              </p>
+                    {/* <h3>
+                <FontAwesomeIcon
+                icon={faHeart}
+                style={{ color: isFavorite ? "#eb0a15" : "#272525" }}
+                onClick={() => handleHeartClick(restaurant.id)}
+              /> */}
+                  <img
+                    src={map}
+                    alt="map"
+                    className="map-icon"
+                    onClick={() =>
+                      handleMapIconClick(
+                        restaurant.longitude,
+                        restaurant.latitude
+                      )
+                    }
+                  />
+                  {restaurant.name}
+                </h3>
+                <p>Rating: {restaurant.rating}</p>
+                <Star rating={restaurant.rating} />
+                <p>Address: {restaurant.address}</p>
+                <p>Phone: {restaurant.phone}</p>
+                <p>
+                  Website:{" "}
+                  <a
+                    href={restaurant.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {restaurant.website}
+                  </a>
+                </p>
+
+            </div>
             </li>
           ))}
-      </ul>
+      </ol>
 
       {/* MAP */}
       <div style={{ width: "auto", height: "400px" }}>
         {/* <ReactMapGl
+          //   {viewport.map((view) => (
+          // setViewport={setViewport}
+          // }
           {...viewport}
           // ))}
           mapboxAccessToken="pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg"
@@ -328,7 +333,7 @@ function Restaurants() {
           transitionDuration="200"
           mapStyle="mapbox://styles/mapbox/streets-v12"
           onMove={(evt) => setViewport(evt.viewport)}
-        >
+        > 
           {restaurants.map((restaurant) => (
             <Marker
               key={restaurant.id}
@@ -361,7 +366,7 @@ function Restaurants() {
               </div>
             </Popup>
           ) : null}
-        </ReactMapGl> */}
+        </ReactMapGl>  */}
       </div>
     </div>
   );
