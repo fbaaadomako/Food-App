@@ -60,13 +60,13 @@ function SignUp() {
     <div className="signuppage">
       <form onSubmit={signup}>
         <img className="registerlogo" src={whitelogo} />
-        {/* <Helmet>
-        <script
-          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          async
-        ></script>
-        <script>
-          {`
+        <Helmet>
+          <script
+            src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+            async
+          ></script>
+          <script>
+            {`
           function googleTranslateElementInit() {
             new google.translate.TranslateElement(
               { pageLanguage: "en" },
@@ -74,8 +74,8 @@ function SignUp() {
             );
           }
           `}
-        </script>
-      </Helmet> */}
+          </script>
+        </Helmet>
         <div className="signupcontainer">
           <h1 className="registerheading">Sign Up</h1>
           <div id="google_translate_element"></div>

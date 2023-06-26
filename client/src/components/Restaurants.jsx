@@ -19,19 +19,67 @@ function Restaurants() {
   const [isCheckedVeg, setIsCheckedVeg] = useState(false);
   const [isCheckedVegan, setIsCheckedVegan] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-  const [viewport, setViewport] = useState({
-    latitude: 51.509865,
-    longitude: -0.118092,
-    zoom: 14,
-  });
+  const [viewport, setViewport] = useState({});
+  const view = [
+    {
+      cityName: "london",
+      latitude: 51.509865,
+      longitude: -0.118092,
+      zoom: 14,
+    },
+    {
+      cityName: "philadelphia",
+      latitude: 39.9526,
+      longitude: -75.1652,
+      zoom: 14,
+    },
+    {
+      cityName: "istanbul",
+      latitude: 28.9784,
+      longitude: 41.0082,
+      zoom: 14,
+    },
+    {
+      cityName: "kyoto",
+      latitude: 135.7681,
+      longitude: 35.0116,
+      zoom: 14,
+    },
+    {
+      cityName: "kuala lumpur",
+      latitude: 3.1357,
+      longitude: 101.688,
+      zoom: 14,
+    },
+    {
+      cityName: "new york",
+      latitude: 40.7128,
+      longitude: -74.006,
+      zoom: 14,
+    },
+  ];
+
+  // Example of find
+  //   const array1 = [5, 12, 8, 130, 44];
+  // const found = array1.find(element => element > 10)
+  // console.log(found);
+  // Expected output: 12
+
   const [favorites, setFavorites] = useState([]);
   // const [isFavorite, setIsFavorite] = useState(false);
 
   // Restaurant Search
   const handleInputChange = (e) => {
     setCity(e.target.value);
-    setViewport = { city };
   };
+
+  // for (let i = 0; i < view.length; i++) {
+  //   // console.log("cityview", view[i].cityName);
+  //   // console.log("city", city);
+  //   if (city === view[i].cityName) {
+  //     setViewport("updatedViewport", view[i].cityName);
+  //   }
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,14 +107,14 @@ function Restaurants() {
   // };
 
   // Setting as Favorites (heart icon)
-  const handleHeartClick = (restaurantId) => {
-    setFavoriteRestaurants((prevFavorites) => {
-      const updatedFavorites = { ...prevFavorites };
-      updatedFavorites[restaurantId] = !updatedFavorites[restaurantId];
-      return updatedFavorites;
-    });
-    addFavoriteRestaurant(restaurantId);
-  };
+  // const handleHeartClick = (restaurantId) => {
+  //   setFavoriteRestaurants((prevFavorites) => {
+  //     const updatedFavorites = { ...prevFavorites };
+  //     updatedFavorites[restaurantId] = !updatedFavorites[restaurantId];
+  //     return updatedFavorites;
+  //   });
+  //   addFavoriteRestaurant(restaurantId);
+  // };
 
   const addFavoriteRestaurant = async (restaurantId) => {
     try {
@@ -136,14 +184,12 @@ function Restaurants() {
             width: "2000px",
             backgroundImage:
               'url("https://www.bing.com/images/blob?bcid=qLH-KIUcj8AFcsXkvMWW5NKjnp53.....xg")',
-            backgroundSize: "cover", 
+            backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             /*alignItems: "center",
             alignContent: "center", */
           }}
-  
-        > 
-        </div>
+        ></div>
         <div>
           <input
             className="home-input"
@@ -201,72 +247,79 @@ function Restaurants() {
           checked={isCheckedVegan}
           // value={allergen}
           id="vegan"
-          />
-          Vegan
-        </label>
+        />
+        Vegan
+      </label>
 
-      <ul> 
-        {restaurants.filter(function (restaurant) {
-          if (isCheckedGF && restaurant.glutenFree) return true;
-          if (!isCheckedGF) return true;
-          return false;
-        }).filter(function (restaurant) {
-          if (isCheckedDF && restaurant.dairyFree) return true;
-           if (!isCheckedDF) return true;
-           return false;
-        }).filter(function (restaurant) {
-          if (isCheckedVeg && restaurant.vegetarian) return true;
-           if (!isCheckedVeg) return true;
-           return false;
-        }).filter(function (restaurant){
-          if(isCheckedVegan && restaurant.vegan) return true;
-          if(!isCheckedVegan) return true;
-          return false;
-        }).map((restaurant) => (
-          <li key={restaurant.id} className="restaurant-card">
-            <img src={restaurant.photos} className="restaurant-image" />
-            <h3>
-            <FontAwesomeIcon
-             icon={faHeart}
-            style={{
-            color: favoriteRestaurants[restaurant.id] ? "#eb0a15" : "#272525",
-            }}
-            onClick={() => handleHeartClick(restaurant.id)}
-              />
-              <img
-                src={map}
-                alt="map"
-                className="map-icon"
-                onClick={() =>
-                  handleMapIconClick(restaurant.longitude, restaurant.latitude)
-                }
-              />
-              {restaurant.name}
-            </h3>
-            <p>Rating: {restaurant.rating}</p>
-            <Star rating={restaurant.rating} />
-            <p>Address: {restaurant.address}</p>
-            <p>Phone: {restaurant.phone}</p>
-            <p>
-              Website:{" "}
-              <a
-                href={restaurant.website}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {restaurant.website}
-              </a>
-            </p>
-          </li>
-        ))}
+      <ul>
+        {restaurants
+          .filter(function (restaurant) {
+            if (isCheckedGF && restaurant.glutenFree) return true;
+            if (!isCheckedGF) return true;
+            return false;
+          })
+          .filter(function (restaurant) {
+            if (isCheckedDF && restaurant.dairyFree) return true;
+            if (!isCheckedDF) return true;
+            return false;
+          })
+          .filter(function (restaurant) {
+            if (isCheckedVeg && restaurant.vegetarian) return true;
+            if (!isCheckedVeg) return true;
+            return false;
+          })
+          .filter(function (restaurant) {
+            if (isCheckedVegan && restaurant.vegan) return true;
+            if (!isCheckedVegan) return true;
+            return false;
+          })
+          .map((restaurant) => (
+            <li key={restaurant.id} className="restaurant-card">
+              <img src={restaurant.photos} className="restaurant-image" />
+              <h3>
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  // style={{
+                  //   color: favoriteRestaurants[restaurant.id]
+                  //     ? "#eb0a15"
+                  //     : "#272525",
+                  // }}
+                  onClick={() => handleHeartClick(restaurant.id)}
+                />
+                <img
+                  src={map}
+                  alt="map"
+                  className="map-icon"
+                  onClick={() =>
+                    handleMapIconClick(
+                      restaurant.longitude,
+                      restaurant.latitude
+                    )
+                  }
+                />
+                {restaurant.name}
+              </h3>
+              <p>Rating: {restaurant.rating}</p>
+              <Star rating={restaurant.rating} />
+              <p>Address: {restaurant.address}</p>
+              <p>Phone: {restaurant.phone}</p>
+              <p>
+                Website:{" "}
+                <a
+                  href={restaurant.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {restaurant.website}
+                </a>
+              </p>
+            </li>
+          ))}
       </ul>
 
       {/* MAP */}
       <div style={{ width: "auto", height: "400px" }}>
-        <ReactMapGl
-          //   {viewport.map((view) => (
-          // setViewport={setViewport}
-          // }
+        {/* <ReactMapGl
           {...viewport}
           // ))}
           mapboxAccessToken="pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg"
@@ -308,7 +361,7 @@ function Restaurants() {
               </div>
             </Popup>
           ) : null}
-        </ReactMapGl>
+        </ReactMapGl> */}
       </div>
     </div>
   );
