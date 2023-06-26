@@ -4,6 +4,7 @@ import "./css/Favorites.css";
 import UserContext from "../context/UserContext";
 import Star from "./Star";
 import Footer from "./Footer";
+import NavBar from "./NavBar";
 
 function Favorites() {
   const [favRestaurants, setFavRestaurants] = useState([]);
@@ -15,19 +16,15 @@ function Favorites() {
 
     html2pdf()
       .set({
-        margin: 0.5,
+        margin: 0.1,
         filename: "favorites.pdf",
         image: { type: "webp", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "in", format: "a4", orientation: "landscape" },
+        html2canvas: "html2canvas",
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
       })
       .from(element)
       .save();
   };
-
-  useEffect(() => {
-    requestData();
-  }, []);
 
   const requestData = async () => {
     try {
@@ -45,9 +42,14 @@ function Favorites() {
     }
   };
 
+  useEffect(() => {
+    requestData();
+  }, []);
+  
   return (
     <div>
-      <div id="pdf-container">
+      {auth.user && <NavBar/>}
+        <div id="pdf-container">
         <h1>Here is your saved restaurants, {auth.user.name}</h1>
         <div className="favorites-container">
           {favRestaurants && favRestaurants.map((restaurant) => (

@@ -111,7 +111,7 @@ function SignUp() {
             className="form-control mb-2"
             type="password"
           />
-          <button className="btn btn-dark d-flex mx-auto mt-3">Register</button>
+          <button className="btn btn-dark d-flex mx-auto mt-4">Register</button>
         </div>
       </form>
       <p className="signuptext">

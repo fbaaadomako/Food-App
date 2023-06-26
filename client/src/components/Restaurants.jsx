@@ -19,7 +19,8 @@ function Restaurants() {
   const [isCheckedVeg, setIsCheckedVeg] = useState(false);
   const [isCheckedVegan, setIsCheckedVegan] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
- /* const [viewport, setViewport] = useState([
+  const [viewport, setViewport] = useState({});
+  const view = [
     {
       cityName: "london",
       latitude: 51.509865,
@@ -56,15 +57,29 @@ function Restaurants() {
       longitude: -74.006,
       zoom: 14,
     },
-  ]); */
+  ];
+
+  // Example of find
+  //   const array1 = [5, 12, 8, 130, 44];
+  // const found = array1.find(element => element > 10)
+  // console.log(found);
+  // Expected output: 12
+
   const [favorites, setFavorites] = useState([]);
   // const [isFavorite, setIsFavorite] = useState(false);
 
   // Restaurant Search
   const handleInputChange = (e) => {
     setCity(e.target.value);
-  /*  setViewport = { city }; */
-  }; 
+  };
+
+  // for (let i = 0; i < view.length; i++) {
+  //   // console.log("cityview", view[i].cityName);
+  //   // console.log("city", city);
+  //   if (city === view[i].cityName) {
+  //     setViewport("updatedViewport", view[i].cityName);
+  //   }
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,21 +106,15 @@ function Restaurants() {
   //   }
   // };
 
-  // Old code for Favorites (heart icon)
-  //  const handleHeartClick = (restaurantId) => {
-  //   setIsFavorite(!isFavorite);
+  // Setting as Favorites (heart icon)
+  // const handleHeartClick = (restaurantId) => {
+  //   setFavoriteRestaurants((prevFavorites) => {
+  //     const updatedFavorites = { ...prevFavorites };
+  //     updatedFavorites[restaurantId] = !updatedFavorites[restaurantId];
+  //     return updatedFavorites;
+  //   });
   //   addFavoriteRestaurant(restaurantId);
   // };
-  // Setting as Favorites (heart icon)
-  const handleHeartClick = (restaurantId) => {
-    setFavorites((prevFavorites) => {
-      if (prevFavorites.includes(restaurantId)) {
-        return prevFavorites.filter((id) => id !== restaurantId);
-      } else {
-        return [...prevFavorites, restaurantId];
-      }
-    });
-  };
 
   const addFavoriteRestaurant = async (restaurantId) => {
     try {
@@ -240,9 +249,9 @@ function Restaurants() {
           checked={isCheckedVegan}
           // value={allergen}
           id="vegan"
-          />
-          Vegan
-        </label>
+        />
+        Vegan
+      </label>
 
       <ol className="res-grid"> 
         {restaurants.filter(function (restaurant) {
