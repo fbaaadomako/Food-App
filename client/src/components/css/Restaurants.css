@@ -10,7 +10,6 @@
   margin-right: 10px;
 }
 
-
 .restaurant-image {
   width: 420px; /* Specify the desired width */
   height: 300px; /* Specify the desired height */
@@ -33,4 +32,10 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+.map {
+  width: 85%;
+  height: 400px;
+  margin: auto;
 }
