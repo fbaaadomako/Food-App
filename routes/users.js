@@ -4,6 +4,10 @@ const db = require("../model/helper");
 require("dotenv").config();
 const fetch = require("node-fetch");
 const apiKey = process.env.API_KEY;
+// const emailKey = process.env.EMAIL_KEY;
+// const { Resend } = require('resend');
+// const ReactDOMServer = require('react-dom/server');
+// const Email = require('./Email');
 // *********** ADDED axios ***********
 const axios = require('axios');
 
@@ -172,5 +176,29 @@ router.post("/login", async (req, res) => {
       res.status(500).send({ error: "Failed to add restaurant to favorites" });
     }
   });
+
+
+/* SEND EMAIL */
+// localhost:4000/users/about
+
+// const emailContent = ReactDOMServer.renderToString(<Email />);
+
+// const resend = new Resend(`${emailKey}`);
+
+// router.post("/about", async (req, res) => {
+//   try {
+//     const data = await resend.sendEmail({
+//       from: 'you@example.com',
+//       to: 'julichow94@gmail.com',
+//       subject: 'Thanks for subscribing',
+//       react: emailContent,
+//     });
+
+//     return res.json(data);
+//   } catch (error) {
+//     console.error("Error:", error);
+//     return res.status(500).json({ error: "Failed to send email" });
+//   }
+// });
 
   module.exports = router;
