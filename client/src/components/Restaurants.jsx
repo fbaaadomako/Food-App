@@ -55,6 +55,7 @@ function Restaurants() {
     },
   ];
 
+
   const [favoriteRestaurants, setFavoriteRestaurants] = useState({});
 
   // Restaurant Search

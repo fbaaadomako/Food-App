@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "./NavBar";
 import "./css/index.css";
 import { FaLinkedin } from "react-icons/fa";
@@ -6,8 +6,21 @@ import JuLi from "../assets/JuLi.jpg";
 import Felicia from "../assets/Felicia.jpg";
 import Serena from "../assets/Serena.jpg";
 import Footer from "./Footer";
+import axios from "axios";
 
 function About() {
+
+  const [email, setEmail] = useState("");
+
+  const subscribeNewsletter = async () => {
+    try {
+      await axios.post("/users/about", { email });
+      alert("Subscribed to newsletter successfully!");
+    } catch (error) {
+      alert("Failed to subscribe to newsletter.");
+    }
+  };
+  
   return (
     <div>
       <NavBar />
@@ -17,7 +30,7 @@ function About() {
         <div className="row mt-4 mb-5">
           <div className="col-md-3 col-xs-6 profile-card">
             <div className="profile">
-              <img src={JuLi} />
+              <img src={JuLi} alt="JuLi" />
             </div>
           </div>
 
@@ -43,14 +56,14 @@ function About() {
               a friend from CodeOp, who shared her own experience of a career
               change, which inspired Ju Li. Apart from coding, Ju Li also enjoys
               engaging in adrenaline-pumping activities such as paragliding,
-              flying helicopters, and scuba diving.
+              kayaking and scuba diving.
             </p>
           </div>
         </div>
         <div className="row mt-4 mb-5">
           <div className="col-md-3 col-xs-6 profile-card">
             <div className="profile">
-              <img src={Serena} />
+              <img src={Serena} alt="Serena" />
             </div>
           </div>
 
@@ -69,18 +82,18 @@ function About() {
             </div>
             <p>
               Before creating the food finder App, Serena worked in childcare
-              since she moved in England in 2019. She started being interested
-              in coding by hearing stories from other people that switched their
-              career with coding and got inspired by how their life changed.
+              since she moved to England in 2019. She started being interested
+              in coding by hearing stories from other people who switched their
+              career to coding and got inspired by how their lives changed.
               Apart from coding, Serena enjoys watching history documentaries,
-              swimming and discovering and tasting other countries cuisine
+              swimming, and discovering and tasting cuisine from different countries.
             </p>
           </div>
         </div>
         <div className="row mt-4 mb-5">
           <div className="col-md-3 col-xs-6 profile-card">
             <div className="profile">
-              <img src={Felicia} />
+              <img src={Felicia} alt="Felicia" />
             </div>
           </div>
 
@@ -99,16 +112,30 @@ function About() {
             </div>
             <p>
               Felicia is currently a social worker living and working in
-              Philadelphia, that has always had an interest in tech and
-              web-development. With a background in graphic design, she hopes to
-              be able to combine her skills into a full stack role. When not
-              coding, she enjoyes volunteering, spending time hiking and
+              Philadelphia, who has always had an interest in tech and
+              web development. With a background in graphic design, she hopes to
+              be able to combine her skills into a full-stack role. When not
+              coding, she enjoys volunteering, spending time hiking, and
               reading.
             </p>
           </div>
         </div>
       </div>
-
+      <div className="newsletter-container">
+        <h2>Subscribe to our Newsletter</h2>
+        <div className="input-group">
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button className="btn btn-primary" onClick={subscribeNewsletter}>
+            Subscribe
+          </button>
+        </div>
+      </div>
       <Footer />
     </div>
   );
