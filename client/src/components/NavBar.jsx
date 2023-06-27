@@ -21,7 +21,7 @@ function NavBar() {
         <button className="btn btn-outline-secondary nav-btn">Home</button>
       </Link>
       <Link to="/about">
-        <button className="btn btn-outline-secondary nav-btn">About</button>
+        <button className="btn btn-outline-secondary nav-btn">About Us</button>
       </Link>
       {!auth.isLoggedIn && (
         <>
