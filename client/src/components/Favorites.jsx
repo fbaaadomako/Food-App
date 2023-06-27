@@ -19,7 +19,8 @@ function Favorites() {
         margin: 0.1,
         filename: "favorites.pdf",
         image: { type: "webp", quality: 0.98 },
-        html2canvas: "html2canvas",
+        // html2canvas: "html2canvas",
+        html2canvas: { width: "1000" },
         jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
       })
       .from(element)
@@ -49,40 +50,49 @@ function Favorites() {
   return (
     <div>
       {auth.user && <NavBar />}
-      <div id="pdf-container">
-        <h1>Here is your saved restaurants, {auth.user.name}</h1>
-        <div className="favorites-container">
-          {favRestaurants &&
-            favRestaurants.map((restaurant) => (
-              <div className="favorites-card" key={restaurant.id}>
-                <h5>{restaurant.restaurant_id}</h5>
-                {restaurant.photos && (
-                  <img
-                    src={restaurant.photos}
-                    alt="Restaurant"
-                    className="favorites-image"
-                  />
-                )}
-                <p>Name: {restaurant.name}</p>
-                <p>Address: {restaurant.address}</p>
-                <p>Phone: {restaurant.phone}</p>
-                <Star rating={restaurant.rating} />
-                <p>
-                  Website:{" "}
-                  <a
-                    href={restaurant.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {restaurant.website}
-                  </a>
-                </p>
-              </div>
-            ))}
+      <div className="favorites-container">
+        <div id="pdf-container">
+          <h1>Here is your saved restaurants, {auth.user.name}</h1>
+          <div className="favorites-grid">
+            {favRestaurants &&
+              favRestaurants.map((restaurant) => (
+                // <div className="col-3">
+                <div className="favorites-card" key={restaurant.id}>
+                  <h5>{restaurant.restaurant_id}</h5>
+                  {restaurant.photos && (
+                    <img
+                      src={restaurant.photos}
+                      alt="Restaurant"
+                      className="favorites-image"
+                    />
+                  )}
+                  <div className="favorites-text">
+                    <p>Name: {restaurant.name}</p>
+                    <p>Address: {restaurant.address}</p>
+                    <p>Phone: {restaurant.phone}</p>
+                    <Star rating={restaurant.rating} />
+                    <p>
+                      View the{" "}
+                      <a
+                        href={restaurant.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {" "}
+                        menu
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                // </div>
+              ))}
+          </div>
         </div>
+        <p>Share your favorites with friends & family in a PDF</p>
+        <button className="btn btn-dark" onClick={onButtonClick}>
+          Download
+        </button>
       </div>
-      <p>Share your favorites with friends & family in a PDF</p>
-      <button onClick={onButtonClick}>Download</button>
       <Footer />
     </div>
   );

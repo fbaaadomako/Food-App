@@ -2,19 +2,18 @@
 
 /* FAVORITES */
 
-/* .favorites-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-bottom: 20px;
+.favorites-container {
+  width: 90%;
+  margin: auto;
 }
 
-.favorites-card {
+/* .favorites-card {
   width: 25%;
   margin: 10px;
   border: 1px solid #ccc;
   padding: 10px;
-}
+  background-color: red;
+} */
 
 .favorites-card h5 {
   margin-bottom: 5px;
@@ -22,26 +21,26 @@
 
 .favorites-card p {
   margin-bottom: 5px;
-} */
+}
 
-.res-grid {
+.favorites-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   aspect-ratio: 1/1;
   align-items: baseline;
 }
 
-.restaurant-card {
+.favorites-card {
   border: 1px solid rgb(112, 111, 111);
   scale: 80%;
   border-radius: 20px;
   list-style-type: none;
   text-align: center;
-  box-shadow: 1px 1px 10px 1px rgba(41, 41, 41, 0.208);
+  /* box-shadow: 1px 1px 10px 1px rgba(41, 41, 41, 0.208); */
   height: 100%;
 }
 
-.res-text {
+.favorites-text {
   padding: 10px;
 }
 
@@ -52,8 +51,8 @@
   border-radius: 30px;
 }
 
-html,
+/* html,
 body {
   height: 100%;
   overflow-y: scroll;
-}
+} */

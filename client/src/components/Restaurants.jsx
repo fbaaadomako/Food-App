@@ -184,11 +184,12 @@ function Restaurants() {
           </div>
         </div>
       </form>
-      <br />
-      <br />
+
       {/* FILTER */}
       {restaurants.length > 0 && (
         <div className="filter-by-preference">
+          <br />
+          <br />
           <h3 className="filter-pref-title">Filter by preference</h3>
           <label className="gluten" name="gluten-free">
             <input
@@ -261,32 +262,29 @@ function Restaurants() {
               <li key={restaurant.id} className="restaurant-card">
                 <img src={restaurant.photos} className="restaurant-image" />
                 <div className="res-text">
-                  <h3>
-                    <FontAwesomeIcon
-                      size="xs"
-                      icon={faHeart}
-                      style={{
-                        color: favoriteRestaurants[restaurant.id]
-                          ? "#eb0a15"
-                          : "#272525",
-                      }}
-                      onClick={() => handleHeartClick(restaurant.id)}
-                    />
-                    <img
-                      src={map}
-                      alt="map"
-                      className="map-icon"
-                      onClick={() =>
-                        handleMapIconClick(
-                          restaurant.longitude,
-                          restaurant.latitude
-                        )
-                      }
-                    />
-                    {restaurant.name}
-                  </h3>
+                  <FontAwesomeIcon
+                    font-size="1.5em"
+                    icon={faHeart}
+                    style={{
+                      color: favoriteRestaurants[restaurant.id]
+                        ? "#eb0a15"
+                        : "#272525",
+                    }}
+                    onClick={() => handleHeartClick(restaurant.id)}
+                  />
+                  <img
+                    src={map}
+                    alt="map"
+                    className="card-icon"
+                    onClick={() =>
+                      handleMapIconClick(
+                        restaurant.longitude,
+                        restaurant.latitude
+                      )
+                    }
+                  />
+                  <h3>{restaurant.name}</h3>
                   <p>
-                    {/* {restaurant.rating} */}
                     <Star rating={restaurant.rating} />
                   </p>
                   <p>Address: {restaurant.address}</p>

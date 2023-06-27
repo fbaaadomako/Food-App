@@ -29,9 +29,9 @@
   color: rgb(37, 36, 36);
 }
 
-.map-icon {
-  width: 20px;
-  height: 20px;
+.card-icon {
+  width: 30px;
+  height: 30px;
   cursor: pointer;
 }
 
