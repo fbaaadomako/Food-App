@@ -24,7 +24,7 @@ function About() {
   return (
     <div>
       <NavBar />
-      <div className="about-header">{/* <img src={foodimage} /> */}</div>
+      <div className="about-header"></div>
       <div className="team-container">
         <h2 className="pb-3">Meet the Team</h2>
         <div className="row mt-4 mb-5">

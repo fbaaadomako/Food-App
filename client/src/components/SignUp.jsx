@@ -61,6 +61,7 @@ function SignUp() {
       <form onSubmit={signup}>
         <img className="registerlogo" src={whitelogo} />
         <Helmet>
+          {/* <meta name="google" content="notranslate" /> */}
           <script
             src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
             async

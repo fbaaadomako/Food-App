@@ -16,7 +16,7 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #87a3be;
     background-color: #ffffff;
   }
   button {
@@ -59,7 +59,7 @@
 }
 
 .linkedin-logo:hover {
-  color: #007bb5;
+  color: #28aef1;
   cursor: pointer;
 }
 
@@ -93,7 +93,7 @@
 
 .footerlinks a,
 .footerlinks a:hover {
-  color: white;
+  color: rgb(247, 242, 242);
   cursor: pointer;
   font-size: 13px;
   line-height: 2;
