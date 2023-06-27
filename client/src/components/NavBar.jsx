@@ -41,6 +41,7 @@ function NavBar() {
               Your Favorites
             </button>
           </Link>
+
           <button
             className="btn btn-outline-secondary nav-btn"
             onClick={logout}
