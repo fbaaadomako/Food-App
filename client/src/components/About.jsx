@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "./NavBar";
 import "./css/index.css";
 import { FaLinkedin } from "react-icons/fa";
@@ -6,21 +6,19 @@ import JuLi from "../assets/JuLi.jpg";
 import Felicia from "../assets/Felicia.jpg";
 import Serena from "../assets/Serena.jpg";
 import Footer from "./Footer";
-import { Resend } from 'resend';
-import Email from "./Email";
 import axios from "axios";
 
 function About() {
 
-  const handleSubscribe = () => {
-    const resend = new Resend('re_123456789');
+  const [email, setEmail] = useState("");
 
-    resend.sendEmail({
-      from: 'you@example.com',
-      to: 'julichow94@gmail.com',
-      subject: 'Thanks for subscribing',
-      react: Email(),
-    });
+  const subscribeNewsletter = async () => {
+    try {
+      await axios.post("/users/about", { email });
+      alert("Subscribed to newsletter successfully!");
+    } catch (error) {
+      alert("Failed to subscribe to newsletter.");
+    }
   };
   
   return (
@@ -122,10 +120,21 @@ function About() {
             </p>
           </div>
         </div>
-        <p>Subscribe to our newsletter</p>
-        <p>Name: <input type="text" /></p>
-        <p>Email: <input type="text" /></p>
-        <button onClick={handleSubscribe}>Subscribe</button>
+      </div>
+      <div className="newsletter-container">
+        <h2>Subscribe to our Newsletter</h2>
+        <div className="input-group">
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button className="btn btn-primary" onClick={subscribeNewsletter}>
+            Subscribe
+          </button>
+        </div>
       </div>
       <Footer />
     </div>
