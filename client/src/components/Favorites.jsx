@@ -45,35 +45,40 @@ function Favorites() {
   useEffect(() => {
     requestData();
   }, []);
-  
+
   return (
     <div>
-      {auth.user && <NavBar/>}
-        <div id="pdf-container">
+      {auth.user && <NavBar />}
+      <div id="pdf-container">
         <h1>Here is your saved restaurants, {auth.user.name}</h1>
         <div className="favorites-container">
-          {favRestaurants && favRestaurants.map((restaurant) => (
-            <div className="favorites-card" key={restaurant.id}>
-              <h5>{restaurant.restaurant_id}</h5>
-              {restaurant.photos && (
-                <img src={restaurant.photos} alt="Restaurant" />
-              )}
-              <p>Name: {restaurant.name}</p>
-              <p>Address: {restaurant.address}</p>
-              <p>Phone: {restaurant.phone}</p>
-              <Star rating={restaurant.rating} />
-              <p>
-              Website:{" "}
-              <a
-                href={restaurant.website}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {restaurant.website}
-                </a>
+          {favRestaurants &&
+            favRestaurants.map((restaurant) => (
+              <div className="favorites-card" key={restaurant.id}>
+                <h5>{restaurant.restaurant_id}</h5>
+                {restaurant.photos && (
+                  <img
+                    src={restaurant.photos}
+                    alt="Restaurant"
+                    className="favorites-image"
+                  />
+                )}
+                <p>Name: {restaurant.name}</p>
+                <p>Address: {restaurant.address}</p>
+                <p>Phone: {restaurant.phone}</p>
+                <Star rating={restaurant.rating} />
+                <p>
+                  Website:{" "}
+                  <a
+                    href={restaurant.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {restaurant.website}
+                  </a>
                 </p>
-            </div>
-          ))}
+              </div>
+            ))}
         </div>
       </div>
       <p>Share your favorites with friends & family in a PDF</p>

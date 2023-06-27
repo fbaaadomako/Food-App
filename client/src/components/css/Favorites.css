@@ -2,7 +2,7 @@
 
 /* FAVORITES */
 
-.favorites-container {
+/* .favorites-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -22,11 +22,34 @@
 
 .favorites-card p {
   margin-bottom: 5px;
+} */
+
+.res-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  aspect-ratio: 1/1;
+  align-items: baseline;
 }
 
-.favorites-card img {
-  width: 100%;
-  height: 40%;
+.restaurant-card {
+  border: 1px solid rgb(112, 111, 111);
+  scale: 80%;
+  border-radius: 20px;
+  list-style-type: none;
+  text-align: center;
+  box-shadow: 1px 1px 10px 1px rgba(41, 41, 41, 0.208);
+  height: 100%;
+}
+
+.res-text {
+  padding: 10px;
+}
+
+.favorites-image {
+  width: 420px;
+  height: 300px;
+  padding: 20px;
+  border-radius: 30px;
 }
 
 html,

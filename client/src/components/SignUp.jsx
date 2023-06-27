@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./css/login_signup.css";
 import whitelogo from "../assets/logo-white.png";
 import { Helmet } from "react-helmet";
+import Footer from "./Footer";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -123,6 +124,7 @@ function SignUp() {
         </Link>{" "}
         to see your favorites
       </p>
+      <Footer />
     </div>
   );
 }

@@ -22,12 +22,7 @@ export const Star = ({ rating }) => {
     );
   });
 
-  return (
-    <div>
-      {ratingStar}
-      <p>({rating} customer review)</p>
-    </div>
-  );
+  return <div>{ratingStar}</div>;
 };
 
 export default Star;
