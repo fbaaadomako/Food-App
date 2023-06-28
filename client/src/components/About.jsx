@@ -12,12 +12,12 @@ function About() {
   const [email, setEmail] = useState("");
 
   const subscribeNewsletter = async () => {
-    // try {
-    //   await axios.post("/users/about", { email });
-    //   alert("Subscribed to newsletter successfully!");
-    // } catch (error) {
-    //   alert("Failed to subscribe to newsletter.");
-    // }
+    try {
+      await axios.post("/users/about", { email });
+      alert("Subscribed to newsletter successfully!");
+    } catch (error) {
+      alert("Failed to subscribe to newsletter.");
+    }
   };
 
   return (
@@ -137,7 +137,6 @@ function About() {
           </p>
         </div>
       </div>
-      <div></div>
       <header className="newsletter-container">
         <div className="section">
           <h2>Subscribe to our Newsletter</h2>
@@ -153,9 +152,9 @@ function About() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {/* <button className="subscribe-button" onClick={subscribeNewsletter}>
+            <button className="subscribe-button" onClick={subscribeNewsletter}>
               Subscribe
-            </button> */}
+            </button>
           </div>
         </div>
       </header>
