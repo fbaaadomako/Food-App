@@ -1,4 +1,4 @@
- :root {
+:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -41,7 +41,7 @@
 .about-header {
   height: 400px;
   object-fit: cover;
-  background-image: url("../../assets/About-food-image.jpg");
+  background-image: url("../../assets/About-us-image.jpg");
   margin-top: 30px;
 }
 
@@ -113,6 +113,7 @@ font-weight: bold;
 .footersection {
   position: relative;
   bottom: 0px;
+  top: 0;
   background: #e71212;
   width: 100%;
   height: 250px;
