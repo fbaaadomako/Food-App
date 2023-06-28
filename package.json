@@ -26,6 +26,7 @@
     "nodemon": "^1.14.9",
     "process": "^0.11.10",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^6.12.1"
+    "react-router-dom": "^6.12.1",
+    "resend": "^0.15.3"
   }
 }
