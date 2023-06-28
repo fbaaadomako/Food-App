@@ -61,21 +61,12 @@ function Restaurants() {
     },
   ];
 
-
   const [favoriteRestaurants, setFavoriteRestaurants] = useState({});
 
   // Restaurant Search
   const handleInputChange = (e) => {
     setCity(e.target.value);
   };
-
-  // for (let i = 0; i < view.length; i++) {
-  //   // console.log("cityview", view[i].cityName);
-  //   // console.log("city", city);
-  //   if (city === view[i].cityName) {
-  //     setViewport("updatedViewport", view[i].cityName);
-  //   }
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -144,24 +135,9 @@ function Restaurants() {
     );
   }, []);
 
-  // Pop up on Mapbox when marker is clicked
-  // useEffect(() => {
-  //   const listener = (e) => {
-  //     if (e.key === "Escape") {
-  //       setSelectedRestaurant(null);
-  //     }
-  //   };
-  //   window.addEventListener("keydown", listener);
-
-  //   return () => {
-  //     window.removeEventListener("keydown", listener);
-  //   };
-  // }, []);
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
-
         <div className="home-img-container mb-5">
           <div className="home-img">
             <div className="slides slowFade">
@@ -193,75 +169,6 @@ function Restaurants() {
           </div>
           <div className="home-searchbar-wrapper">
             <div className="home-searchbar">
-
-        <div
-          className="home-img"
-          style={{
-            height: "500px",
-            width: "2000px",
-           /* backgroundImage:
-              'url("https://www.bing.com/images/blob?bcid=qLH-KIUcj8AFcsXkvMWW5NKjnp53.....xg")',*/
-            backgroundSize: "cover", 
-            backgroundRepeat: "no-repeat",
-            /*alignItems: "center",
-            alignContent: "center", */
-          }}
-  
-        > 
-         <div className="home-searchbar">
-          <input
-            className="home-input"
-            type="text"
-            value={city}
-            onChange={handleInputChange}
-            placeholder="Enter city"
-          />
-          <button className="home-btn" type="submit">
-            Get Restaurants
-          </button>
-        </div>
-        </div>
-       
-         {/* FILTER */}
-         {restaurants.length > 0 && (
-          <div className="filter-by-preference">
-            <h3 className="filter-pref-title">Filter by preference</h3>
-            <label className="gluten" name="gluten-free">
-              <input 
-                type="checkbox"
-                onChange={() => setIsCheckedGF(!isCheckedGF)}
-                checked={isCheckedGF}
-                // value={allergen}
-                id="gluten free"
-              />{" "}
-              Gluten Free
-            </label>
-
-            <h3></h3>
-            <label  className="dairy" name="dairy-free">
-              <input
-                type="checkbox"
-                onChange={() => setIsCheckedDF(!isCheckedDF)}
-                checked={isCheckedDF}
-                // value={allergen}
-                id="dairy free"
-              />
-              Dairy free
-            </label>
-            <h3></h3>
-            <label className="vegetarian" name="vegetarian">
-              <input
-                type="checkbox"
-                onChange={() => setIsCheckedVeg(!isCheckedVeg)}
-                checked={isCheckedVeg}
-                // value={allergen}
-                id="vegetarian"
-              />
-              Vegetarian
-            </label>
-            <h3></h3>
-            <label className="vegan" name="vegan">
-
               <input
                 className="home-input"
                 type="text"
@@ -276,6 +183,20 @@ function Restaurants() {
           </div>
         </div>
       </form>
+
+      {/* <div
+          className="home-img"
+          style={{
+            height: "500px",
+            width: "2000px",
+           backgroundImage:
+              'url("https://www.bing.com/images/blob?bcid=qLH-KIUcj8AFcsXkvMWW5NKjnp53.....xg")',
+            backgroundSize: "cover", 
+            backgroundRepeat: "no-repeat",
+            alignItems: "center",
+            alignContent: "center", 
+          }}
+        >  */}
 
       {/* FILTER */}
       {restaurants.length > 0 && (
@@ -378,7 +299,6 @@ function Restaurants() {
                   <h3>{restaurant.name}</h3>
                   <p>
                     <Star rating={restaurant.rating} />
-
                   </p>
                   <p>Address: {restaurant.address}</p>
                   <p>Phone: {restaurant.phone}</p>
@@ -466,78 +386,6 @@ function Restaurants() {
       ) : (
         <p></p>
       )}
-
-                    <p>Address: {restaurant.address}</p>
-                    <p>Phone: {restaurant.phone}</p>
-                    <p>
-                      Website:{" "}
-                      <a
-                        href={restaurant.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {restaurant.website}
-                      </a>
-                    </p>
-                  </div>
-                </li>
-              ))}
-          </ol>
-        ) : (
-          <p></p>
-        )}
-
-       {/* MAP */}
-       <div style={{ width: "auto", height: "400px" }}>
-          {/* <ReactMapGl
-            //   {viewport.map((view) => (
-            // setViewport={setViewport}
-            // }
-            {...viewport}
-            // ))}
-            mapboxAccessToken="pk.eyJ1IjoianVqdWJlYXIiLCJhIjoiY2xpc3V6ZDQ1MDAwMjNkcGRpb29vczkwbCJ9.ynb8k6DPxCinQvBLKXIFqg"
-            width="100%"
-            height="100%"
-            transitionDuration="200"
-            mapStyle="mapbox://styles/mapbox/streets-v12"
-            onMove={(evt) => setViewport(evt.viewport)}
-          >
-            {restaurants.map((restaurant) => (
-              <Marker
-                key={restaurant.id}
-                latitude={restaurant.latitude}
-                longitude={restaurant.longitude}
-              >
-                <FaMapMarkerAlt
-                  className="marker"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log("clicked");
-                    setSelectedRestaurant(restaurant);
-                    console.log(selectedRestaurant);
-                  }}
-                />
-              </Marker>
-            ))}
-
-            {selectedRestaurant ? (
-              <Popup
-                latitude={selectedRestaurant.latitude}
-                longitude={selectedRestaurant.longitude}
-                onClose={() => {
-                  setSelectedRestaurant(null);
-                }}
-              >
-                <div>
-                  <h2>{selectedRestaurant.name}</h2>
-                  <p>{selectedRestaurant.address}</p>
-                </div>
-              </Popup>
-            ) : null}
-          </ReactMapGl> */}
-        </div>
-      </form>
-
     </div>
   );
 }
