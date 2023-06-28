@@ -33,8 +33,8 @@
 }
 
 .loginpage {
-  margin: 0;
-  padding: 50px;
+  margin-bottom: 40px;
+  padding-top: 40px;
   width: 100vw;
   height: 100vh;
 }
@@ -42,8 +42,8 @@
 /* SIGN UP Page */
 .signuppage {
   background-color: #e71212;
-  margin: 0;
-  padding: 50px;
+  margin-bottom: 40px;
+  padding-top: 40px;
   width: 100vw;
   height: 100vh;
 }

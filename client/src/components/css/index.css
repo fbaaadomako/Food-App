@@ -1,4 +1,4 @@
- :root {
+:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -41,7 +41,7 @@
 .about-header {
   height: 400px;
   object-fit: cover;
-  background-image: url("../../assets/About-food-image.jpg");
+  background-image: url("../../assets/About-us-image.jpg");
   margin-top: 30px;
 }
 
@@ -72,10 +72,48 @@
   object-fit: cover;
 }
 
+.about-what {
+font-weight: bold; 
+}
+
+.newsletter-container{
+  font-family: Arial, sans-serif;
+  width: 100%;
+  height: 500px;
+  background-image: 
+  url('https://png.pngtree.com/background/20210710/original/pngtree-517-eating-festival-whole-grains-chinese-food-chinese-style-gray-background-picture-image_994466.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.section {
+  position: relative;
+  height: 60vh;
+  color:black;
+  text-align: center;
+  margin-top: 200px;
+  padding: 7%;
+}
+
+.input-group{
+  max-width:600px;
+  padding: 0.75rem;
+  margin-top: 10px;
+  margin:0 auto
+}
+
+.subscribe-button{
+  cursor: pointer;
+  background-color: #009688;
+  color: #fff;
+}
+
 /* FOOTER */
 .footersection {
   position: relative;
   bottom: 0px;
+  top: 0;
   background: #e71212;
   width: 100%;
   height: 250px;
