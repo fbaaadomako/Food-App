@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./css/login_signup.css";
 import redlogo from "../assets/logo-red.png";
+import Footer from "./Footer";
 
 function LogIn() {
   const [credentials, setCredentials] = useState({
@@ -47,44 +48,47 @@ function LogIn() {
   };
 
   return (
-    <div className="loginpage">
-      <img className="registerlogo" src={redlogo} />
-      <div className="logincontainer">
-        <div className="row pb-3">
-          <div className="col-12">
-            <h1 className="registerheading">Log In</h1>
-            Username:
-            <input
-              value={credentials.username}
-              onChange={handleChange}
-              name="username"
-              type="text"
-              className="form-control mb-2"
-            />
-            Password:
-            <input
-              value={credentials.password}
-              onChange={handleChange}
-              name="password"
-              type="password"
-              className="form-control mb-2"
-            />
-            <button
-              className="btn btn-dark d-flex mx-auto mt-3"
-              onClick={login}
-            >
-              Log in
-            </button>
+    <div>
+      <div className="loginpage">
+        <img className="registerlogo" src={redlogo} />
+        <div className="logincontainer">
+          <div className="row pb-3">
+            <div className="col-12">
+              <h1 className="registerheading">Log In</h1>
+              Username:
+              <input
+                value={credentials.username}
+                onChange={handleChange}
+                name="username"
+                type="text"
+                className="form-control mb-2"
+              />
+              Password:
+              <input
+                value={credentials.password}
+                onChange={handleChange}
+                name="password"
+                type="password"
+                className="form-control mb-2"
+              />
+              <button
+                className="btn btn-dark d-flex mx-auto mt-3"
+                onClick={login}
+              >
+                Log in
+              </button>
+            </div>
           </div>
         </div>
+        <p className="logintext">
+          <Link to="/signup" className="font-weight-bold">
+            {" "}
+            Register
+          </Link>{" "}
+          to start saving your favorite restaurants
+        </p>
       </div>
-      <p className="logintext">
-        <Link to="/signup" className="font-weight-bold">
-          {" "}
-          Register
-        </Link>{" "}
-        to start saving your favorite restaurants
-      </p>
+      <Footer />
     </div>
   );
 }

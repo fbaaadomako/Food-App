@@ -1,19 +1,19 @@
 /* CSS FOR RESTAURANTS pages */
 
 /* RESTAURANTS */
-.heart-icon {
-  position: absolute;
-  top: 87%;
-  right: 6%;
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+.restaurant-image {
+  width: 420px;
+  height: 300px;
+  padding: 20px;
+  border-radius: 30px;
 }
 
-
-.restaurant-image {
-  width: 420px; /* Specify the desired width */
-  height: 300px; /* Specify the desired height */
+.restaurant-popup-image {
+  width: 60%;
+  height: auto;
+  margin: auto;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 /* MAP */
@@ -29,8 +29,19 @@
   color: rgb(37, 36, 36);
 }
 
-.map-icon {
-  width: 20px;
-  height: 20px;
+.card-icon {
+  width: 30px;
+  height: 30px;
   cursor: pointer;
+}
+
+.map {
+  width: 90%;
+  height: 400px;
+  margin: auto;
+}
+
+.map-text-container {
+  width: 90%;
+  margin: auto;
 }

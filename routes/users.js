@@ -4,6 +4,8 @@ const db = require("../model/helper");
 require("dotenv").config();
 const fetch = require("node-fetch");
 const apiKey = process.env.API_KEY;
+const emailKey = process.env.EMAIL_KEY;
+const { Resend } = require('resend');
 // *********** ADDED axios ***********
 const axios = require('axios');
 
@@ -172,5 +174,52 @@ router.post("/login", async (req, res) => {
       res.status(500).send({ error: "Failed to add restaurant to favorites" });
     }
   });
+
+
+/* SEND EMAIL */
+//localhost:4000/users/about
+
+const resend = new Resend(`${emailKey}`);
+
+router.post("/about", async (req, res) => {
+
+  const { email } = req.body;
+  
+  try {
+    const htmlContent = `
+      <Container>
+        <Heading> Hello there👋 </Heading>
+        <Text>
+          Thank you for joining us on this exciting journey at Food Friendly App! We are thrilled to have you as part of our community and look forward to sharing the latest news, updates, and allergen-friendly recipes with you.
+          <br />
+          <br />
+          In this newsletter, we aim to keep you informed about everything happening in the world of allergen-friendly cuisine, including:
+          <br />
+          <br />
+          1. Special Events and Promotions
+          <br />
+          2. Allergen-Friendly Tips and Resources
+          <br />
+          3. User Spotlight
+          <br />
+          4. App Updates
+          <br />
+          <br />
+        </Text>
+        <Button className="bg-purple-700 text-white font-bold px-4 py-6 rounded-md">Link to further information</Button>
+      </Container>
+    `;
+
+    const data = await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: `${email}`,
+      subject: "Join Our Newsletter for Insider Insights and Updates",
+      html: htmlContent,
+    });
+    res.status(200).json({ data });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+});
 
   module.exports = router;
