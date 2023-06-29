@@ -73,15 +73,14 @@
 }
 
 .about-what {
-font-weight: bold; 
+  font-weight: bold;
 }
 
-.newsletter-container{
+.newsletter-container {
   font-family: Arial, sans-serif;
   width: 100%;
   height: 500px;
-  background-image: 
-  url('https://png.pngtree.com/background/20210710/original/pngtree-517-eating-festival-whole-grains-chinese-food-chinese-style-gray-background-picture-image_994466.jpg');
+  background-image: url("https://png.pngtree.com/background/20210710/original/pngtree-517-eating-festival-whole-grains-chinese-food-chinese-style-gray-background-picture-image_994466.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -90,20 +89,20 @@ font-weight: bold;
 .section {
   position: relative;
   height: 60vh;
-  color:black;
+  color: black;
   text-align: center;
-  margin-top: 200px;
+  /* margin-top: 200px; */
   padding: 7%;
 }
 
-.input-group{
-  max-width:600px;
+.input-group {
+  max-width: 600px;
   padding: 0.75rem;
   margin-top: 10px;
-  margin:0 auto
+  margin: 0 auto;
 }
 
-.subscribe-button{
+.subscribe-button {
   cursor: pointer;
   background-color: #009688;
   color: #fff;

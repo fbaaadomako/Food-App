@@ -9,7 +9,6 @@ import Footer from "./Footer";
 import axios from "axios";
 
 function About() {
-
   const [email, setEmail] = useState("");
 
   const subscribeNewsletter = async () => {
@@ -20,7 +19,7 @@ function About() {
       alert("Failed to subscribe to newsletter.");
     }
   };
-  
+
   return (
     <div>
       <NavBar />
@@ -48,13 +47,15 @@ function About() {
               </a>
             </div>
             <p>
-              Ju Li worked as a consultant at KPMG in Malaysia after completing her
-              Degree and Masters in the United States. She also gained work experience
-              in the US. Although she had always been interested in coding, she never
-              pursued it due to fear. However, one day she came across a Medium post
-              shared by a friend from CodeOp, who shared her own experience of a career
-              change, which inspired Ju Li. Apart from coding, Ju Li also enjoys engaging
-              in adrenaline-pumping activities such as paragliding, kayaking and scuba diving.
+              Ju Li worked as a consultant at KPMG in Malaysia after completing
+              her Degree and Masters in the United States. She also gained work
+              experience in the US. Although she had always been interested in
+              coding, she never pursued it due to fear. However, one day she
+              came across a Medium post shared by a friend from CodeOp, who
+              shared her own experience of a career change, which inspired Ju
+              Li. Apart from coding, Ju Li also enjoys engaging in
+              adrenaline-pumping activities such as paragliding, kayaking and
+              scuba diving.
             </p>
           </div>
         </div>
@@ -84,7 +85,8 @@ function About() {
               in coding by hearing stories from other people who switched their
               career to coding and got inspired by how their lives changed.
               Apart from coding, Serena enjoys watching history documentaries,
-              swimming, and discovering and tasting cuisine from different countries.
+              swimming, and discovering and tasting cuisine from different
+              countries.
             </p>
           </div>
         </div>
@@ -110,39 +112,51 @@ function About() {
             </div>
             <p>
               Felicia is currently a social worker living and working in
-              Philadelphia, who has always had an interest in tech and
-              web development. With a background in graphic design, she hopes to
-              be able to combine her skills into a full-stack role. When not
+              Philadelphia, who has always had an interest in tech and web
+              development. With a background in graphic design, she hopes to be
+              able to combine her skills into a full-stack role. When not
               coding, she enjoys volunteering, spending time hiking, and
               reading.
             </p>
           </div>
-        <h2 className="pb-3 mt-5 mb-6">What is Friendly FoodFinder?</h2><br></br>
-        <p>Our app offers a user-friendly interface, allowing you to quickly discover allergen-friendly options in any location. From gluten-free to vegan, nut-free to dairy-free, we have a wide range of filters to customize your search. No more scrolling through endless menus or calling restaurants to inquire about allergens - we've simplified the process for you.
-          <br></br><br></br>Whether you're traveling to a new city or exploring your local area, FriendlyFood Finder empowers you to make informed dining choices. Join our community today and experience the convenience and peace of mind that comes with finding allergen-friendly restaurants worldwide. Your food adventure awaits!
-        </p>
+          <h2 className="pb-3 mt-5 mb-6">What is Friendly FoodFinder?</h2>
+          <br></br>
+          <p>
+            Our app offers a user-friendly interface, allowing you to quickly
+            discover allergen-friendly options in any location. From gluten-free
+            to vegan, nut-free to dairy-free, we have a wide range of filters to
+            customize your search. No more scrolling through endless menus or
+            calling restaurants to inquire about allergens - we've simplified
+            the process for you.
+            <br></br>
+            <br></br>Whether you're traveling to a new city or exploring your
+            local area, FriendlyFood Finder empowers you to make informed dining
+            choices. Join our community today and experience the convenience and
+            peace of mind that comes with finding allergen-friendly restaurants
+            worldwide. Your food adventure awaits!
+          </p>
         </div>
-      </div>
-      <div>
-        
       </div>
       <header className="newsletter-container">
         <div className="section">
-        <h2>Subscribe to our Newsletter</h2>
-        <p>Subscribe to our newsletter to receive valuable content, exclusive offers, and more!</p>
-        <div className="input-group">
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button className="subscribe-button" onClick={subscribeNewsletter}>
-            Subscribe
-          </button>
+          <h2>Subscribe to our Newsletter</h2>
+          <p>
+            Subscribe to our newsletter to receive valuable content, exclusive
+            offers, and more!
+          </p>
+          <div className="input-group">
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button className="subscribe-button" onClick={subscribeNewsletter}>
+              Subscribe
+            </button>
           </div>
-          </div>
+        </div>
       </header>
       <Footer />
     </div>
